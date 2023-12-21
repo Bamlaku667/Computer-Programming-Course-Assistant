@@ -1,10 +1,10 @@
 import './App.css';
+import RegistrationForm from './components/RegistrationForm';
 
 function App() {
   return (
-
-    <div className='bg-red-300'>
-      Hello dev opes
+    <div className='main'>
+      <RegistrationForm/>
     </div>
   );
 }
