@@ -10,12 +10,34 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EditProfile = exports.GetProfile = void 0;
+const Student_1 = require("../models/Student");
+const http_status_codes_1 = require("http-status-codes");
 const GetProfile = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    return res.send('student profile');
+    const student = req.student;
+    if (student) {
+        const profile = yield Student_1.Student.findById(student._id);
+        if (profile) {
+            return res.status(http_status_codes_1.StatusCodes.OK).json(profile);
+        }
+    }
+    return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({ msg: 'student not found' });
 });
 exports.GetProfile = GetProfile;
 const EditProfile = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    return res.send('edit student profile');
+    const student = req.student;
+    const { firstName, lastName, phone, address } = req.body;
+    if (student) {
+        const profile = yield Student_1.Student.findById(student._id);
+        if (profile) {
+            profile.firstName = firstName;
+            profile.lastName = lastName;
+            profile.address = address;
+            profile.phone = phone;
+            const updatedProfile = yield profile.save();
+            return res.status(http_status_codes_1.StatusCodes.OK).json(updatedProfile);
+        }
+    }
+    return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({ msg: 'student not found' });
 });
 exports.EditProfile = EditProfile;
 //# sourceMappingURL=StudentController.js.map
