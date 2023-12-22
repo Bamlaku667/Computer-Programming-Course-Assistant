@@ -4,7 +4,7 @@ import { AuthRoutes, StudentRoutes } from "../routes";
 import cors from 'cors';
 const App = async (app: Application) => {
     app.get('/', (req, res) => {
-        res.send('hello students!');
+        res.send('courses-api!');
     })
     app.use(cors())
     app.use(express.json());
