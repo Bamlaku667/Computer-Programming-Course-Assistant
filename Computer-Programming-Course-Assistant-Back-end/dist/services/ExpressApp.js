@@ -17,7 +17,7 @@ const routes_1 = require("../routes");
 const cors_1 = __importDefault(require("cors"));
 const App = (app) => __awaiter(void 0, void 0, void 0, function* () {
     app.get('/', (req, res) => {
-        res.send('hello express');
+        res.send('courses-api!');
     });
     app.use((0, cors_1.default)());
     app.use(express_1.default.json());
