@@ -16,6 +16,15 @@ export class StudentRegisterInputs {
     password: string
 }
 
+export interface EditProfileInputs {
+
+    firstName: string
+    lastName: string
+    address: string
+    phone: string,
+
+}
+
 export class StudentLoginInputs {
     @IsEmail()
     email: string
