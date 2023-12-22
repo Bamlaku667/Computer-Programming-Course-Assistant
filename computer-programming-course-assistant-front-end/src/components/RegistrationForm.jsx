@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import register from "../assets/register.svg";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import axios from 'axios'
+import { gapi } from 'gapi-script'
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
-// import { GithubLoginButton } from 'react-github-login'
+// import { GoogleLogin } from 'react-google-login'
+import { Link } from "react-router-dom";
 
 export default function RegistrationForm() {
   const [name, setName] = useState("");
@@ -11,7 +13,6 @@ export default function RegistrationForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(true);
-  const clientId = '138178679163-i2g2io24rchh1tsafcapp76viof1d5t8.apps.googleusercontent.com'
   useEffect(() => {
     setError('')
   }, [name, email, password])
@@ -33,19 +34,9 @@ export default function RegistrationForm() {
     }
   };
 
-  const responseGoogle = (response) => {
-    console.log(response);
-    // Add your Google sign-up logic here
-  };
-
-  const responseGithub = (response) => {
-    console.log(response);
-    // Add your github sign-up logic here
-  };
   return (
     <div className="bg-[#2196F3] h-screen p-8 border rounded-3xl">
       <div className="flex flex-col lg:flex-row bg-white border rounded-3xl">
-        {/* Image on the left */}
         <div className="flex-1 px-8 py-4">
           <img
             src={register}
@@ -53,30 +44,19 @@ export default function RegistrationForm() {
             className="w-full h-auto"
           />
         </div>
-
-        {/* Form on the right */}
         <div className="flex-1 p-8">
           <h2 className="flex justify-center sm:justify-start text-2xl font-bold mb-8">Create Account</h2>
           <form onSubmit={onSubmit} className="max-w-md">
             <div className="flex flex-col gap-5 md:flex-row mt-4 mb-8 justify-between">
-              {/* Google Sign Up Button */}
-              <GoogleOAuthProvider
-                clientId={clientId}
-                onScriptLoadError={responseGoogle}
-                onScriptLoadSuccess={responseGoogle}
-              >
-                <GoogleLogin className="flex items-center justify-center text-gray-500 px-4 py-2 border rounded-full shadow-sm text-sm md:text-md" onSuccess={responseGoogle} onError={responseGoogle}></GoogleLogin>
-              </GoogleOAuthProvider>
-              {/* Github Sign Up Button */}
-              {/* <GithubLoginButton
-                clientId="477927f422e46fdc23a5"
-                onSuccess={responseGithub}
-                onFailure={responseGithub}
-              >
-                Login with GitHub
-              </GithubLoginButton> */}
+            <GoogleLogin
+              onSuccess={credentialResponse => {
+                console.log(credentialResponse);
+              }}
+              onError={() => {
+                console.log('Login Failed');
+              }}
+            />;
             </div>
-            {/* divider */}
             <div className="flex mt-8 justify-center text-gray-500">----or sign up with email----</div>
             <div className="mt-8 mb-4">
               <input
@@ -130,13 +110,10 @@ export default function RegistrationForm() {
 
             {error && <p className="text-red-500 mt-2">{error}</p>}
           </form>
-          {/* Already have an account? Sign in section */}
           <div className="mt-8">
             <p className="text-gray-600">
               Already have an account?{" "}
-              <a href="#" className="text-blue-600 hover:text-lg">
-                Sign in
-              </a>
+              <Link to='/login'><span className="text-blue-600 hover:text-lg">Sign in</span></Link>
             </p>
           </div>
         </div>
