@@ -1,19 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import register from "../assets/register.svg";
-import { FaGoogle, FaFacebook, FaEyeSlash, FaEye } from "react-icons/fa";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
+import axios from 'axios'
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
+// import { GithubLoginButton } from 'react-github-login'
 
 export default function RegistrationForm() {
-  const [fullName, setFullName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(true);
+  const clientId = '138178679163-i2g2io24rchh1tsafcapp76viof1d5t8.apps.googleusercontent.com'
+  useEffect(() => {
+    setError('')
+  }, [name, email, password])
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-
-    // Add your registration logic here
-    console.log("Form submitted:", { fullName, email, password });
+    const registerdUser = {name, email, password}
+    console.log("Form submitted:", registerdUser);
+    try {
+      const response = await axios.post('https://my-jobs-api.cyclic.app/api/v1/auth/register', {
+        name,
+        email,
+        password,
+      });
+      console.log('Registration successful:', response.data);
+    } catch (error) {
+      console.error('Registration failed:', error.response?.data || 'Unexpected error');
+      setError('Registration failed. Please try again.');
+    }
   };
 
   const responseGoogle = (response) => {
@@ -21,9 +38,9 @@ export default function RegistrationForm() {
     // Add your Google sign-up logic here
   };
 
-  const responseFacebook = (response) => {
+  const responseGithub = (response) => {
     console.log(response);
-    // Add your Facebook sign-up logic here
+    // Add your github sign-up logic here
   };
   return (
     <div className="bg-[#2196F3] h-screen p-8 border rounded-3xl">
@@ -43,26 +60,32 @@ export default function RegistrationForm() {
           <form onSubmit={onSubmit} className="max-w-md">
             <div className="flex flex-col gap-5 md:flex-row mt-4 mb-8 justify-between">
               {/* Google Sign Up Button */}
-              <button className="flex items-center justify-center text-gray-500 px-4 py-2 border rounded-full shadow-sm text-sm md:text-md">
-                <FaGoogle className="mr-2" style={{ color: "green" }} /> Sign Up
-                with Google
-              </button>
-              {/* Facebook Sign Up Button */}
-              <button className="flex items-center justify-center text-gray-600 px-4 py-2 border rounded-full shadow-sm text-sm md:text-md">
-                <FaFacebook className="mr-2" style={{ color: "blue" }} /> Sign
-                Up with Facebook
-              </button>
+              <GoogleOAuthProvider
+                clientId={clientId}
+                onScriptLoadError={responseGoogle}
+                onScriptLoadSuccess={responseGoogle}
+              >
+                <GoogleLogin className="flex items-center justify-center text-gray-500 px-4 py-2 border rounded-full shadow-sm text-sm md:text-md" onSuccess={responseGoogle} onError={responseGoogle}></GoogleLogin>
+              </GoogleOAuthProvider>
+              {/* Github Sign Up Button */}
+              {/* <GithubLoginButton
+                clientId="477927f422e46fdc23a5"
+                onSuccess={responseGithub}
+                onFailure={responseGithub}
+              >
+                Login with GitHub
+              </GithubLoginButton> */}
             </div>
             {/* divider */}
             <div className="flex mt-8 justify-center text-gray-500">----or sign up with email----</div>
             <div className="mt-8 mb-4">
               <input
                 type="text"
-                id="fullName"
-                name="fullName"
+                id="name"
+                name="name"
                 placeholder="Full Name"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="form-input mt-1 block w-full py-2 focus:outline-none border-0 border-b-2"
               />
             </div>
