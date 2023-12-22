@@ -15,3 +15,10 @@ export class StudentRegisterInputs {
     @Length(6, 12)
     password: string
 }
+
+export class StudentLoginInputs {
+    @IsEmail()
+    email: string
+    @Length(6, 12)
+    password: string
+}
