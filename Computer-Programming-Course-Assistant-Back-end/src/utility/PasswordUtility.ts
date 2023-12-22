@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs'
 import jwt, { sign } from 'jsonwebtoken'
 import { StudentTokenPayload } from '../dto/Student.dto';
 import { TOKEN_EXPIRY, TOKEN_KEY } from '../config';
@@ -8,7 +8,7 @@ const GenerateSalt = async () => {
     return await bcrypt.genSalt();
 }
 
-const GeneratePassword = async (password: string, salt: string) =>{
+const GeneratePassword = async (password: string, salt: string) => {
     return await bcrypt.hash(password, salt);
 }
 
@@ -21,12 +21,12 @@ const GenerateJWT = async (tokenData: StudentTokenPayload) => {
     return signature;
 }
 
-const ValidateJwt =  async (req: Request) => {
+const ValidateJwt = async (req: Request) => {
     const authHeader = req.get('authorization');
     if (authHeader && authHeader.startsWith('Bearer')) {
         const token = authHeader.split(' ')[1];
         try {
-            const payload = jwt.verify(token, TOKEN_KEY) ;
+            const payload = jwt.verify(token, TOKEN_KEY);
             return payload
         }
         catch (err) {
