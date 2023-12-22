@@ -1,3 +1,4 @@
+import { max, min } from "class-validator";
 import mongoose, { Schema } from "mongoose";
 
 
@@ -23,8 +24,8 @@ const studentSchema = new Schema({
     password: { type: String, required: true },
     salt: { type: String, required: true },
     address: { type: String, required: true },
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
+    firstName: { type: String, required: true, min: 3, max: 10 },
+    lastName: { type: String, required: true, min: 3, max: 10 },
     studentId: { type: String, required: true },
     img: { type: String },
     phone: { type: String, required: true }

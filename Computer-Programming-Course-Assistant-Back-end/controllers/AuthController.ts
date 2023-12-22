@@ -46,7 +46,7 @@ const StudentRegister = async (req: Request, res: Response, next: NextFunction) 
                 email: email
             }
             const jwt = await GenerateJWT(tokenData)
-            return res.status(StatusCodes.OK).json({ token: jwt, userName, email })
+            return res.status(StatusCodes.OK).json({ student : result, token: jwt })
         }
     }
     catch (err) {
@@ -61,7 +61,6 @@ const StudentLogin = async (req: Request, res: Response, next: NextFunction) => 
     if (loginError.length > 0) {
         return res.status(StatusCodes.BAD_REQUEST).json(loginError);
     }
-
     const { email, password } = newLoginInstance;
     const student = await Student.findOne({ email });
     if (student) {
