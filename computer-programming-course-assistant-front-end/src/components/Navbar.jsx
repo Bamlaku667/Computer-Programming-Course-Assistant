@@ -12,7 +12,7 @@ export default function Navbar() {
   };
   const auth = useAuth();
   return (
-    <nav className="flex justify-between py-4 px-16 items-center border border-b-2">
+    <nav className="flex justify-between py-4 px-16 items-center border border-b-2 sticky top-0 z-50">
       <div className="">
         <img src={logo} alt="App Logo" />
       </div>
