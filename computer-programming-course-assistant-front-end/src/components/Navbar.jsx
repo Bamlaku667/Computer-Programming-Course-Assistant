@@ -12,7 +12,7 @@ export default function Navbar() {
   };
   const auth = useAuth();
   return (
-    <nav className="flex justify-between py-6 px-16 items-center border border-b-2">
+    <nav className="flex justify-between py-4 px-16 items-center border border-b-2">
       <div className="">
         <img src={logo} alt="App Logo" />
       </div>
@@ -35,18 +35,16 @@ export default function Navbar() {
             </NavLink>
         )}
       </div>
-      <div className="flex gap-10 items-center">
-        {!auth.user && (
-            <NavLink style={navLinkStyles} className='flex gap-2 items-center' to={"/login"}>
-            <FaLock/> Login
-            </NavLink>
-        )}
-        {!auth.user && (
-            <NavLink to={"/register"}>
-            <button className="text-white bg-[#66C5DB] py-2 px-4 rounded-lg">Sign up</button>
-            </NavLink>
-        )}
-      </div>
+      {!auth.user && (
+        <div className="flex gap-10 items-center">
+          <NavLink style={navLinkStyles} className='flex gap-2 items-center' to={"/login"}>
+          <FaLock/> Login
+          </NavLink>
+          <NavLink to={"/register"}>
+          <button className="text-white bg-[#66C5DB] py-2 px-4 rounded-lg">Sign up</button>
+          </NavLink>
+        </div>
+      )}
     </nav>
   );
 }

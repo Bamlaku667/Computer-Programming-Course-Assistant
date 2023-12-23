@@ -53,7 +53,15 @@ export default function RegistrationForm() {
               onError={() => {
                 console.log('Login Failed');
               }}
-            />;
+            />
+            <GoogleLogin
+              onSuccess={credentialResponse => {
+                console.log(credentialResponse);
+              }}
+              onError={() => {
+                console.log('Login Failed');
+              }}
+            />
             </div>
             <div className="flex mt-8 justify-center text-gray-500">----or sign up with email----</div>
             <div className="mt-8 mb-4">
