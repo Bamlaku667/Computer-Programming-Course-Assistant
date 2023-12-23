@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import register from "../assets/register.svg";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import axios from 'axios'
-import { gapi } from 'gapi-script'
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
-// import { GoogleLogin } from 'react-google-login'
+import { GoogleLogin } from '@react-oauth/google'
 import { Link } from "react-router-dom";
 
 export default function RegistrationForm() {

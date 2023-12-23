@@ -1,11 +1,11 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './components/Auth';
-import Home from './components/Home';
-import RegistrationForm from './components/RegistrationForm';
-import { Login } from './components/Login';
-import { RequireAuth } from './components/RequireAuth';
-import { Profile } from './components/Profile';
+import { AuthProvider } from './authentication/Auth';
+import Home from './pages/Home';
+import RegistrationForm from './pages/Registration';
+import { Login } from './pages/Login';
+import { RequireAuth } from './authentication/RequireAuth';
+import { Profile } from './pages/Profile';
 import { GoogleOAuthProvider } from '@react-oauth/google'
 
 function App() {

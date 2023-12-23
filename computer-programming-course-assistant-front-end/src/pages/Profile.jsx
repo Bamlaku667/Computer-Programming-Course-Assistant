@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useAuth } from './Auth'
+import { useAuth } from '../authentication/Auth'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
