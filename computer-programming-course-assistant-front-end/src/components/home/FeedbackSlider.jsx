@@ -1,88 +1,53 @@
-import React, { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import FeedbackCard from "./FeedbackCard";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { useRef } from "react";
 
 function NextArrow({ className, style, onClick }) {
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", background: "#66C5DB", borderRadius: "50%" }}
-        onClick={onClick}
-      />
-    );
-  }
-  
-  function PrevArrow({ className, style, onClick }) {
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", background: "#66C5DB", borderRadius: "50%" }}
-        onClick={onClick}
-      />
-    );
-  }
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "block",
+        background: "#66C5DB",
+        borderRadius: "50%",
+      }}
+      onClick={onClick}
+    />
+  );
+}
 
-  const CustomPaging = ({ onClick, index, active }) => {
-    const buttonId = `dot-${index}`;
-  
-    const handleMouseOver = () => {
-      if (!active) {
-        const dotElement = document.getElementById(buttonId);
-        if (dotElement) {
-          dotElement.style.backgroundColor = '#388e3c';
-        }
-      }
-    };
-  
-    const handleMouseLeave = () => {
-      if (!active) {
-        const dotElement = document.getElementById(buttonId);
-        if (dotElement) {
-          dotElement.style.backgroundColor = '#ccc';
-        }
-      }
-    };
-  
-    const handleFocus = () => {
-      const dotElement = document.getElementById(buttonId);
-      if (dotElement) {
-        dotElement.style.backgroundColor = '#388e3c';
-      }
-    };
-  
-    const handleBlur = () => {
-      const dotElement = document.getElementById(buttonId);
-      if (dotElement) {
-        dotElement.style.backgroundColor = active ? '#4caf50' : '#ccc';
-      }
-    };
-  
-    return (
-      <button
-        id={buttonId}
-        style={{
-          width: '10px',
-          height: '10px',
-          margin: '5px',
-          backgroundColor: active ? '#4caf50' : '#ccc',
-          borderRadius: '50%',
-          border: 'none',
-          cursor: 'pointer',
-          transition: 'background-color 0.3s ease',
-        }}
-        onClick={onClick}
-        onMouseOver={handleMouseOver}
-        onMouseLeave={handleMouseLeave}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-      >
-      </button>
-    );
+function PrevArrow({ className, style, onClick }) {
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        display: "block",
+        background: "#66C5DB",
+        borderRadius: "50%",
+      }}
+      onClick={onClick}
+    />
+  );
+}
+
+export default function FeedbackSlider({ feedbacks }) {
+  const sliderRef = useRef(null);
+  const next = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
   };
 
-export default function FeedbackSlider({feedbacks}) {
+  const previous = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+    }
+  };
   const settings = {
     dots: true,
     infinite: true,
@@ -91,38 +56,48 @@ export default function FeedbackSlider({feedbacks}) {
     slidesToScroll: 1,
     prevArrow: <PrevArrow />,
     nextArrow: <NextArrow />,
-    appendDots: (dots) => (
-        <div style={{ marginTop: '10px' }}>n0-zz[=]
-          {dots}
-        </div>
-      ),
-    customPaging: (i) => <CustomPaging index={i} />,
     responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1,
-            infinite: true,
-            dots: true,
-          },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
         },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-          },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
         },
-      ],
+      },
+    ],
   };
   return (
-    <Slider {...settings}>
-        {feedbacks.map(feedback => (
-        <div key={feedback.id}>
-          <FeedbackCard feedback={feedback} />
-        </div>
-      ))}
-    </Slider>
+    <div className="flex flex-col gap-16">
+      <Slider ref={sliderRef} {...settings}>
+        {feedbacks.map((feedback) => (
+          <div key={feedback.id}>
+            <FeedbackCard feedback={feedback} />
+          </div>
+        ))}
+      </Slider>
+      <div className="flex gap-2 justify-end mr-5">
+        <button
+          className="cursor-pointer bg-white hover:bg-[#66C5DB] p-1 border shadow-sm rounded-md"
+          onClick={() => previous()}
+        >
+          <IoIosArrowForward />
+        </button>
+        <button
+          className="cursor-pointer bg-white hover:bg-[#66C5DB] p-1 border shadow-sm rounded-md"
+          onClick={() => next()}
+        >
+          <IoIosArrowBack />
+        </button>
+      </div>
+    </div>
   );
 }
