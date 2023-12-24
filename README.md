@@ -1,1 +1,1 @@
-# Computer-Programming-Course-Assistantss
+# Computer-Programming-Course-Assistant

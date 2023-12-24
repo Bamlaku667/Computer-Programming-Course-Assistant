@@ -11,7 +11,7 @@ export default function Navbar() {
     { name: "Courses", link: "/courses" },
     { name: "Contact", link: "/contact" },
   ];
-
+  
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#66C5DB" : "gray",
@@ -20,26 +20,24 @@ export default function Navbar() {
 
   const auth = useAuth();
   return (
-    <nav className="flex justify-between py-6 px-16 items-center border border-b-2">
+    <nav className="flex justify-between py-4 px-16 items-center border border-b-2 sticky top-0 z-50 bg-white">
       <div className="">
         <img src={images.Logo} alt="App Logo" />
       </div>
       <div className="flex gap-10 items-center">
-        
         {NavItemsElmts.map((item, index) => (
           <NavLink  style={navLinkStyles} to={item.link}>
             {item.name}
           </NavLink>
         ))}
-      
         {auth.user && (
           <NavLink style={navLinkStyles} to={"/profile"}>
             Profile
           </NavLink>
         )}
       </div>
-      <div className="flex gap-10 items-center">
-        {!auth.user && (
+      {!auth.user && (
+        <div className="flex gap-10 items-center">
           <NavLink
             style={navLinkStyles}
             className="flex gap-2 items-center"
@@ -47,15 +45,13 @@ export default function Navbar() {
           >
             <FaLock /> Login
           </NavLink>
-        )}
-        {!auth.user && (
           <NavLink to={"/register"}>
             <button className="text-white bg-[#66C5DB] py-2 px-4 rounded-lg">
               Sign up
             </button>
           </NavLink>
-        )}
-      </div>
+        </div>
+      )}
     </nav>
   );
 }
