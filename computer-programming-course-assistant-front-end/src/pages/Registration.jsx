@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import register from "../assets/register.svg";
+
 import { FaEyeSlash, FaEye } from "react-icons/fa";
-import axios from 'axios'
-import { GoogleLogin } from '@react-oauth/google'
+import axios from "axios";
+import { GoogleLogin } from "@react-oauth/google";
 import { Link } from "react-router-dom";
+import { images } from "../constants";
 
 export default function RegistrationForm() {
   const [name, setName] = useState("");
@@ -12,23 +13,29 @@ export default function RegistrationForm() {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(true);
   useEffect(() => {
-    setError('')
-  }, [name, email, password])
+    setError("");
+  }, [name, email, password]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const registerdUser = {name, email, password}
+    const registerdUser = { name, email, password };
     console.log("Form submitted:", registerdUser);
     try {
-      const response = await axios.post('https://my-jobs-api.cyclic.app/api/v1/auth/register', {
-        name,
-        email,
-        password,
-      });
-      console.log('Registration successful:', response.data);
+      const response = await axios.post(
+        "https://my-jobs-api.cyclic.app/api/v1/auth/register",
+        {
+          name,
+          email,
+          password,
+        }
+      );
+      console.log("Registration successful:", response.data);
     } catch (error) {
-      console.error('Registration failed:', error.response?.data || 'Unexpected error');
-      setError('Registration failed. Please try again.');
+      console.error(
+        "Registration failed:",
+        error.response?.data || "Unexpected error"
+      );
+      setError("Registration failed. Please try again.");
     }
   };
 
@@ -37,13 +44,15 @@ export default function RegistrationForm() {
       <div className="flex flex-col lg:flex-row bg-white border rounded-3xl">
         <div className="flex-1 px-8 py-4">
           <img
-            src={register}
-            alt="Registration Image"
+            src={images.RegisterImage}
+            alt="Registration "
             className="w-full h-auto"
           />
         </div>
         <div className="flex-1 p-8">
-          <h2 className="flex justify-center sm:justify-start text-2xl font-bold mb-8">Create Account</h2>
+          <h2 className="flex justify-center sm:justify-start text-2xl font-bold mb-8">
+            Create Account
+          </h2>
           <form onSubmit={onSubmit} className="max-w-md">
             <div className="flex flex-col gap-5 md:flex-row mt-4 mb-8 justify-between">
             <GoogleLogin
@@ -62,8 +71,10 @@ export default function RegistrationForm() {
                 console.log('Login Failed');
               }}
             />
+
+            <div className="flex mt-8 justify-center text-gray-500">
+              ----or sign up with email----
             </div>
-            <div className="flex mt-8 justify-center text-gray-500">----or sign up with email----</div>
             <div className="mt-8 mb-4">
               <input
                 type="text"
@@ -119,7 +130,9 @@ export default function RegistrationForm() {
           <div className="mt-8">
             <p className="text-gray-600">
               Already have an account?{" "}
-              <Link to='/login'><span className="text-blue-600 hover:text-lg">Sign in</span></Link>
+              <Link to="/login">
+                <span className="text-blue-600 hover:text-lg">Sign in</span>
+              </Link>
             </p>
           </div>
         </div>

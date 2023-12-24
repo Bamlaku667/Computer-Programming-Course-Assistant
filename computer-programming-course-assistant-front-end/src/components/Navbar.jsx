@@ -2,42 +2,32 @@ import React from "react";
 import { useAuth } from "../authentication/Auth";
 import { NavLink } from "react-router-dom";
 import { FaLock } from "react-icons/fa";
-import logo from "../assets/logo.svg";
+import { images } from "../constants";
 
 export default function Navbar() {
-  const pages = [
-    {
-      name: 'Home',
-      link: '/'
-    },
-    {
-      name: 'About',
-      link: '/about'
-    },
-    {
-      name: 'Courses',
-      link: '/courses'
-    },
-    {
-      name: 'Contact',
-      link: '/contact'
-    },
-  ]
+  const NavItemsElmts = [
+    { name: "Home", link: "/" },
+    { name: "About", link: "/about" },
+    { name: "Courses", link: "/courses" },
+    { name: "Contact", link: "/contact" },
+  ];
+  
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#66C5DB" : "gray",
     };
   };
+
   const auth = useAuth();
   return (
     <nav className="flex justify-between py-4 px-16 items-center border border-b-2 sticky top-0 z-50 bg-white">
-      <NavLink to={"/"}>
-        <img src={logo} alt="App Logo" />
-      </NavLink>
+      <div className="">
+        <img src={images.Logo} alt="App Logo" />
+      </div>
       <div className="flex gap-10 items-center">
-        {pages.map(page => (
-          <NavLink style={navLinkStyles} to={page.link}>
-            {page.name}
+        {NavItemsElmts.map((item, index) => (
+          <NavLink style={navLinkStyles} to={item.link}>
+            {item.name}
           </NavLink>
         ))}
         {auth.user && (
