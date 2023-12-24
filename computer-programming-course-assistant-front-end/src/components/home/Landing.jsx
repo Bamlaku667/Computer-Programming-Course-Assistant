@@ -7,7 +7,7 @@ import image4 from '../../assets/landing/image4.svg'
 
 function Landing() {
   return (
-    <div className='grid grid-cols-2 items-center h-[87vh] px-8'>
+    <div className='grid grid-cols-2 items-center h-screen px-8'>
         <div className='flex flex-col gap-10'>
             <h1 className='text-[#66C5DB] text-2xl'>Start to success</h1>
             <p className='text-black text-4xl font-bold'>Access to online courses <br /> and labs with greate assistance</p>
