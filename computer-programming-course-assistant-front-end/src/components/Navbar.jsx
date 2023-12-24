@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth } from "../authentication/Auth";
 import { NavLink } from "react-router-dom";
 import { FaLock } from 'react-icons/fa';
-import logo from '../assets/logo.svg'
+import { images } from "../constants";
 
 export default function Navbar() {
   const navLinkStyles = ({ isActive }) => {
@@ -10,11 +10,12 @@ export default function Navbar() {
       color: isActive ? "#66C5DB" : "gray",
     };
   };
+  
   const auth = useAuth();
   return (
     <nav className="flex justify-between py-6 px-16 items-center border border-b-2">
       <div className="">
-        <img src={logo} alt="App Logo" />
+        <img src={images.Logo} alt="App Logo" />
       </div>
       <div className="flex gap-10 items-center">
         <NavLink style={navLinkStyles} to={"/"}>
