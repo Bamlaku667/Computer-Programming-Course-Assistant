@@ -55,16 +55,23 @@ export default function RegistrationForm() {
           </h2>
           <form onSubmit={onSubmit} className="max-w-md">
             <div className="flex flex-col gap-5 md:flex-row mt-4 mb-8 justify-between">
-              <GoogleLogin
-                onSuccess={(credentialResponse) => {
-                  console.log(credentialResponse);
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-              />
-              ;
-            </div>
+            <GoogleLogin
+              onSuccess={credentialResponse => {
+                console.log(credentialResponse);
+              }}
+              onError={() => {
+                console.log('Login Failed');
+              }}
+            />
+            <GoogleLogin
+              onSuccess={credentialResponse => {
+                console.log(credentialResponse);
+              }}
+              onError={() => {
+                console.log('Login Failed');
+              }}
+            />
+
             <div className="flex mt-8 justify-center text-gray-500">
               ----or sign up with email----
             </div>
