@@ -77,7 +77,7 @@ const StudentLogin = async (req: Request, res: Response, next: NextFunction) => 
             return res.status(StatusCodes.OK).json({ token: jwt, email })
         }
 
-        return res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Invalid credentials' })
+        return res.status(StatusCodes.BAD_REQUEST).json({ msg: 'Invalid password' })
 
     }
 
