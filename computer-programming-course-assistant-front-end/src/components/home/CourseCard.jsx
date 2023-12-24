@@ -4,7 +4,7 @@ import redirect from '../../assets/coursecard/arrow.svg'
 export default function CourseCard({course}) {
   const {name, image, description, rating} = course;
   return (
-    <div className="relative w-72 bg-white shadow-md rounded-md overflow-hidden p-2">
+    <div className="relative w-72 bg-white shadow-md rounded-md overflow-hidden p-2 mb-4">
       <img
         src={image}
         alt="Course"
