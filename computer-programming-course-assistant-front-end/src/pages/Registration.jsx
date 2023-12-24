@@ -71,7 +71,7 @@ export default function RegistrationForm() {
                 console.log('Login Failed');
               }}
             />
-
+            </div>
             <div className="flex mt-8 justify-center text-gray-500">
               ----or sign up with email----
             </div>
