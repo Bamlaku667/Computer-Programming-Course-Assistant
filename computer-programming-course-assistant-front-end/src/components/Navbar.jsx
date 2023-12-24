@@ -27,7 +27,7 @@ export default function Navbar() {
       <div className="flex gap-10 items-center">
         
         {NavItemsElmts.map((item, index) => (
-          <NavLink style={navLinkStyles} to={item.link}>
+          <NavLink  style={navLinkStyles} to={item.link}>
             {item.name}
           </NavLink>
         ))}
