@@ -1,10 +1,28 @@
 import React from "react";
 import { useAuth } from "../authentication/Auth";
 import { NavLink } from "react-router-dom";
-import { FaLock } from 'react-icons/fa';
-import logo from '../assets/logo.svg'
+import { FaLock } from "react-icons/fa";
+import logo from "../assets/logo.svg";
 
 export default function Navbar() {
+  const pages = [
+    {
+      name: 'Home',
+      link: '/'
+    },
+    {
+      name: 'About',
+      link: '/about'
+    },
+    {
+      name: 'Courses',
+      link: '/courses'
+    },
+    {
+      name: 'Contact',
+      link: '/contact'
+    },
+  ]
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#66C5DB" : "gray",
@@ -12,36 +30,35 @@ export default function Navbar() {
   };
   const auth = useAuth();
   return (
-    <nav className="flex justify-between py-4 px-16 items-center border border-b-2 sticky top-0 z-50">
-      <div className="">
+    <nav className="flex justify-between py-4 px-16 items-center border border-b-2 sticky top-0 z-50 bg-white">
+      <NavLink to={"/"}>
         <img src={logo} alt="App Logo" />
-      </div>
+      </NavLink>
       <div className="flex gap-10 items-center">
-        <NavLink style={navLinkStyles} to={"/"}>
-            Home
-        </NavLink>
-        <NavLink style={navLinkStyles} to={"/about"}>
-            About
-        </NavLink>
-        <NavLink style={navLinkStyles} to={"/courses"}>
-            Courses
-        </NavLink>
-        <NavLink style={navLinkStyles} to={"/contact"}>
-            Contact
-        </NavLink>
+        {pages.map(page => (
+          <NavLink style={navLinkStyles} to={page.link}>
+            {page.name}
+          </NavLink>
+        ))}
         {auth.user && (
-            <NavLink style={navLinkStyles} to={"/profile"}>
+          <NavLink style={navLinkStyles} to={"/profile"}>
             Profile
-            </NavLink>
+          </NavLink>
         )}
       </div>
       {!auth.user && (
         <div className="flex gap-10 items-center">
-          <NavLink style={navLinkStyles} className='flex gap-2 items-center' to={"/login"}>
-          <FaLock/> Login
+          <NavLink
+            style={navLinkStyles}
+            className="flex gap-2 items-center"
+            to={"/login"}
+          >
+            <FaLock /> Login
           </NavLink>
           <NavLink to={"/register"}>
-          <button className="text-white bg-[#66C5DB] py-2 px-4 rounded-lg">Sign up</button>
+            <button className="text-white bg-[#66C5DB] py-2 px-4 rounded-lg">
+              Sign up
+            </button>
           </NavLink>
         </div>
       )}

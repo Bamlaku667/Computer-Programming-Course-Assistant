@@ -4,6 +4,7 @@ import Landing from '../components/home/Landing'
 import PopularCourses from '../components/home/PopularCourses'
 import Footer from '../components/Footer'
 import Feedback from '../components/home/Feedback'
+import JoinUs from '../components/home/JoinUs'
 
 function Home() {
   return (
@@ -12,6 +13,7 @@ function Home() {
       <Landing/>
       <PopularCourses/>
       <Feedback/>
+      <JoinUs/>
       <Footer/>
     </div>
   )

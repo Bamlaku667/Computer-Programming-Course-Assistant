@@ -6,9 +6,7 @@ import logo from '../assets/logo.svg'
 function Footer() {
   return (
     <div className='flex flex-col gap-5 p-16'>
-      <div className="">
-        <img src={logo} alt="App Logo" />
-      </div>
+      <Link to={'/'}><img src={logo} alt="App Logo" /></Link>
       <div className='grid grid-cols-4 gap-10'>
         <div className='flex flex-col gap-5'>
           <h1 className='text-lg font-bold'>Contact us</h1>
@@ -18,10 +16,10 @@ function Footer() {
             <p>Email: <span>example@gmail.com</span></p>
           </div>
           <div className='flex gap-2'>
-            <div className='p-1 border shadow-sm rounded-md'><FaFacebook className='text-[#66C5DB]'/></div>
-            <div className='p-1 border shadow-sm rounded-md'><FaLinkedin className='text-[#66C5DB]'/></div>
-            <div className='p-1 border shadow-sm rounded-md'><FaInstagram className='text-[#66C5DB]'/></div>
-            <div className='p-1 border shadow-sm rounded-md'><FaTelegram className='text-[#66C5DB]'/></div>
+            <Link to={'/'} className='p-1 border shadow-sm rounded-md'><FaFacebook className='text-[#66C5DB]'/></Link>
+            <Link to={'/'} className='p-1 border shadow-sm rounded-md'><FaLinkedin className='text-[#66C5DB]'/></Link>
+            <Link to={'/'} className='p-1 border shadow-sm rounded-md'><FaInstagram className='text-[#66C5DB]'/></Link>
+            <Link to={'/'} className='p-1 border shadow-sm rounded-md'><FaTelegram className='text-[#66C5DB]'/></Link>
           </div>
         </div>
         <div className='flex flex-col gap-5'>
