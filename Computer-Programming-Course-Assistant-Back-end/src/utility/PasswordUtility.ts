@@ -1,8 +1,9 @@
 import bcrypt from 'bcryptjs'
 import jwt, { sign } from 'jsonwebtoken'
-import { StudentTokenPayload } from '../dto/Student.dto';
 import { TOKEN_EXPIRY, TOKEN_KEY } from '../config';
 import { Request } from 'express';
+import { AuthPayload } from '../dto/Auth.dto';
+import { UnauthorizedError } from '../errors';
 
 const GenerateSalt = async () => {
     return await bcrypt.genSalt();
@@ -16,7 +17,7 @@ const ValidatePassword = async (unHashedPassword: string, hashedPassword: string
     return await GeneratePassword(unHashedPassword, salt) == hashedPassword
 }
 
-const GenerateJWT = async (tokenData: StudentTokenPayload) => {
+const GenerateJWT = async (tokenData: AuthPayload) => {
     const signature = await jwt.sign(tokenData, TOKEN_KEY, { expiresIn: TOKEN_EXPIRY })
     return signature;
 }
@@ -33,6 +34,6 @@ const ValidateJwt = async (req: Request) => {
             throw new Error('Not Authorized')
         }
     }
-    throw new Error('No token')
+    throw new UnauthorizedError('No token')
 }
 export { GenerateSalt, GeneratePassword, ValidatePassword, GenerateJWT, ValidateJwt };

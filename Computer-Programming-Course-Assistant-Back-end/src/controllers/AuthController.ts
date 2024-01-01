@@ -9,7 +9,6 @@ import { BadRequestError, NotFoundError, UnauthorizedError } from "../errors";
 
 //todo student register
 const StudentRegister = async (req: Request, res: Response, next: NextFunction) => {
-
     const newStudentInstance = plainToClass(StudentRegisterInputs, req.body);
     console.log(newStudentInstance)
     // check for register errors 
