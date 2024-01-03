@@ -6,3 +6,9 @@ export interface AddCourseInput {
     modules: CourseModule[]
 }
 
+
+export interface CourseUpdateInputs {
+    title: string, 
+    description: string, 
+    modules: CourseModule[];
+}
