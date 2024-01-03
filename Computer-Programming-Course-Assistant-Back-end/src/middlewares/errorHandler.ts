@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express"
 import { CustomError } from "../errors"
 import { StatusCodes } from "http-status-codes"
 const errorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
+    console.log(err);
     if (err instanceof CustomError) {
         return res.status(err.statusCode).json({ msg: err.message })
     }
