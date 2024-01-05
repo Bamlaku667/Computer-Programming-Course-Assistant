@@ -18,7 +18,6 @@ const App = async (app: Application) => {
         fs.mkdirSync(imagesPath);
     }
     app.use('/images', express.static(imagesPath));
-
     app.use('/api/v1/auth', AuthRoutes)
     app.use('/api/v1/student', StudentRoutes)
     app.use('/api/v1/admin', AdminRoutes)
