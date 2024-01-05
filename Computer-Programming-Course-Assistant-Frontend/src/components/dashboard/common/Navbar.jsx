@@ -1,6 +1,6 @@
 // Navbar.js
 import React from "react";
-import { images } from "../../constants/images";
+import { images } from "../../../constants";
 import { FaSearch} from "react-icons/fa";
 
 const Navbar = () => {

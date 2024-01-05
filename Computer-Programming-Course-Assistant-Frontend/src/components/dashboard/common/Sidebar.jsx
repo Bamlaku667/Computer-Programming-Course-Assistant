@@ -5,7 +5,7 @@ import { MdOutlineDashboard, MdLibraryBooks } from "react-icons/md";
 import { CiStickyNote } from "react-icons/ci";
 import { TiMessages } from "react-icons/ti";
 import { IoThermometerOutline } from "react-icons/io5";
-import { images } from "../../constants/images";
+import { images } from "../../../constants";
 
 const SidebarItems = [
   { id: 1, name: "Dashboard", link: "/dashboard", icon: MdOutlineDashboard },
@@ -31,7 +31,7 @@ const Sidebar = () => {
   return (
     <div className="bg-primary text-dark-light w-60">
       <div className="flex justify-center border-b py-3">
-        <img src={images.logo} alt="App Logo" />
+        <img src={images.Logo} alt="App Logo" />
       </div>
       <div className="py-2">
         {SidebarItems.map((item) => (
