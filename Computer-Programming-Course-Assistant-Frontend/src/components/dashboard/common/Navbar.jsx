@@ -3,7 +3,7 @@ import React from "react";
 import { images } from "../../../constants";
 import { FaSearch} from "react-icons/fa";
 
-const Navbar = () => {
+const Navbar = ({image, name}) => {
   return (
     <nav className="bg-white">
       <div className="flex justify-between items-center border-y p-3">
@@ -15,8 +15,15 @@ const Navbar = () => {
         </div>
         <div className="flex gap-x-4 ">
             <div className="flex items-center gap-x-2">
-                <img src = {images.profile} className=""/>
-                <div className="text-dark-light">John Peterson</div>
+                <div className="w-10 h-10 bg-gray-300 rounded-full mr-2 overflow-hidden">
+                    {
+                      !image && (<img src={images.profilePlaceholder} className='w-10 h-10' alt="Profile" />)
+                    }
+                    {
+                      image && (<img src={image} className='w-10 h-10' alt="Profile" />)
+                    }
+                </div>
+                <div className="text-dark-light">{name}</div>
             </div>
           
         </div>
