@@ -14,6 +14,7 @@ const StudentRegister = async (req: Request, res: Response, next: NextFunction) 
     // check for register errors 
     const registerError: ValidationError[] = await validate(newStudentInstance);
     if (registerError.length > 0) {
+        console.log(registerError)
         throw new UnauthorizedError('please provide correct username, email and password')
     }
     const { userName, email, password } = newStudentInstance
