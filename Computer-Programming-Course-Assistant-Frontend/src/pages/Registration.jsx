@@ -40,7 +40,7 @@ export default function RegistrationForm() {
   };
 
   return (
-    <div className="bg-[#2196F3] h-screen p-8 border rounded-3xl">
+    <div className="bg-primary h-screen p-8 border rounded-3xl">
       <div className="flex flex-col lg:flex-row bg-white border rounded-3xl">
         <div className="flex-1 px-8 py-4">
           <img
@@ -120,7 +120,7 @@ export default function RegistrationForm() {
 
             <button
               type="submit"
-              className="bg-[#66C5DB] text-white px-4 py-2 rounded w-full"
+              className="bg-primary text-white px-4 py-2 rounded w-full"
             >
               Create Account
             </button>

@@ -46,7 +46,7 @@ export default function PopularCourses() {
       ];
   return (
     <div className='flex gap-10 h-screen bg-[#E7F6F9] rounded-tl-[50px] items-center'>
-        <p className='pl-28 text-3xl font-bold -mt-24'>Most<br /><span className='text-[#66C5DB]'>Popular<br />Courses</span></p>
+        <p className='pl-28 text-3xl font-bold -mt-24'>Most<br /><span className='text-primary'>Popular<br />Courses</span></p>
         <div className='w-[74vw]'>
           <CourseSlider courses={courses}/>
         </div>

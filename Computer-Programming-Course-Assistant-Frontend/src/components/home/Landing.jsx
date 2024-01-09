@@ -9,7 +9,7 @@ function Landing() {
   return (
     <div className='grid grid-cols-2 items-center h-screen px-8'>
         <div className='flex flex-col gap-10'>
-            <h1 className='text-[#66C5DB] text-2xl'>Start to success</h1>
+            <h1 className='text-primary text-2xl'>Start to success</h1>
             <p className='text-black text-4xl font-bold'>Access to online courses <br /> and labs with greate assistance</p>
             <div className='relative w-[28rem]'>
                 <input type="text" className='block border w-full shadow-lg p-4 rounded-md focus:outline-none' placeholder='What do you want to learn?'/>
