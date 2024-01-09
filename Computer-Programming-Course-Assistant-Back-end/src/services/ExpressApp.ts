@@ -6,11 +6,18 @@ import { AdminRoutes } from '../routes/AdminRoutes';
 import { errorHandler } from '../middlewares';
 import path from 'path';
 import fs from 'fs';
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
 
 const App = async (app: Application) => {
+  // Construct the correct path to swagger.yaml
+  const swaggerDocument = YAML.load(path.join(__dirname, '../swagger.yaml'));
+
   app.get('/', (req, res) => {
-    res.send('course-assisstant-api-works!');
+    res.send('<h1>Course Assistant API</h1><a href="/api-docs">Documentation</a>');
   });
+
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));

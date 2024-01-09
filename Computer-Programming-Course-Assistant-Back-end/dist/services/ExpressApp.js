@@ -18,11 +18,17 @@ const routes_1 = require("../routes");
 const cors_1 = __importDefault(require("cors"));
 const AdminRoutes_1 = require("../routes/AdminRoutes");
 const middlewares_1 = require("../middlewares");
+const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const yamljs_1 = __importDefault(require("yamljs"));
 const App = (app) => __awaiter(void 0, void 0, void 0, function* () {
+    // Construct the correct path to swagger.yaml
+    const swaggerDocument = yamljs_1.default.load(path_1.default.join(__dirname, '../swagger.yaml'));
     app.get('/', (req, res) => {
-        res.send('course-assisstant-api-works!');
+        res.send('<h1>Course Assistant API</h1><a href="/api-docs">Documentation</a>');
     });
+    app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
     app.use((0, cors_1.default)());
     app.use(express_1.default.json());
     app.use(express_1.default.urlencoded({ extended: true }));
