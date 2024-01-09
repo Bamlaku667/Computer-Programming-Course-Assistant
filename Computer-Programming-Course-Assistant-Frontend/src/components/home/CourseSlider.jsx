@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import CourseCard from "./CourseCard";
+import CourseCard from "../CourseCard";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
 function NextArrow({ className, style, onClick }) {

@@ -1,30 +1,31 @@
 import React from 'react'
 import profile from '../../assets/profile.svg'
 import FeedbackSlider from './FeedbackSlider'
+import { images } from '../../constants'
 
 
 function Feedback() {
   const feedbacks = [
     {
-        image: profile,
+        image: images.profile,
         name : "John Doe",
         course: "UI/UX",
         message: "Excellent service! The team was very helpful and responsive. Excellent service! The team was very helpful and responsive."
     },
     {
-        image: profile,
+        image: '',
         name : "John Doe",
         course: "UI/UX",
         message: "Excellent service! The team was very helpful and responsive. Excellent service! The team was very helpful and responsive."
     },
     {
-        image: profile,
+        image: images.profile,
         name : "John Doe",
         course: "UI/UX",
         message: "Excellent service! The team was very helpful and responsive. Excellent service! The team was very helpful and responsive."
     },
     {
-        image: profile,
+        image: images.profile,
         name : "John Doe",
         course: "UI/UX",
         message: "Excellent service! The team was very helpful and responsive. Excellent service! The team was very helpful and responsive."
