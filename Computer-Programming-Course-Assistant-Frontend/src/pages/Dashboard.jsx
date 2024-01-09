@@ -5,7 +5,7 @@ import MiniCard from '../components/dashboard/MiniCard';
 const Dashboard = () => {
   // State to store data fetched from the backend
   const [dashboardData, setDashboardData] = useState(null);
-
+    
   // useEffect to fetch data from the backend when the component mounts
   useEffect(() => {
     // Replace this with actual API calls to fetch dashboard data
@@ -16,7 +16,7 @@ const Dashboard = () => {
       otherAttribute: 8,
     };
     setDashboardData(mockData);
-  }, [dashboardData]);
+  }, []);
 
   return (
     <div className="container mx-auto">

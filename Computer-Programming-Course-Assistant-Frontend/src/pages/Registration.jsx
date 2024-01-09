@@ -7,24 +7,24 @@ import { Link } from "react-router-dom";
 import { images } from "../constants";
 
 export default function RegistrationForm() {
-  const [name, setName] = useState("");
+  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(true);
   useEffect(() => {
     setError("");
-  }, [name, email, password]);
+  }, [userName, email, password]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const registerdUser = { name, email, password };
+    const registerdUser = { userName, email, password };
     console.log("Form submitted:", registerdUser);
     try {
       const response = await axios.post(
-        "https://my-jobs-api.cyclic.app/api/v1/auth/register",
+        "http://localhost:5000/api/v1/auth/register",
         {
-          name,
+          userName,
           email,
           password,
         }
@@ -81,8 +81,8 @@ export default function RegistrationForm() {
                 id="name"
                 name="name"
                 placeholder="Full Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
                 className="form-input mt-1 block w-full py-2 focus:outline-none border-0 border-b-2"
               />
             </div>

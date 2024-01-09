@@ -1,8 +1,8 @@
 import React from "react";
-import { useAuth } from "../authentication/Auth";
 import { NavLink } from "react-router-dom";
 import { FaLock } from "react-icons/fa";
 import { images } from "../constants";
+import { useAuth } from "../hooks/useAuthContex";
 
 export default function Navbar() {
   const NavItemsElmts = [
@@ -11,14 +11,16 @@ export default function Navbar() {
     { name: "Courses", link: "/courses" },
     { name: "Contact", link: "/contact" },
   ];
-  
+  const { user } = useAuth();
+
+  console.log("User:", user);
+
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#66C5DB" : "gray",
     };
   };
 
-  const auth = useAuth();
   return (
     <nav className="flex justify-between py-4 px-16 items-center border border-b-2 sticky top-0 z-50 bg-white">
       <div className="">
@@ -26,17 +28,17 @@ export default function Navbar() {
       </div>
       <div className="flex gap-10 items-center">
         {NavItemsElmts.map((item, index) => (
-          <NavLink  style={navLinkStyles} to={item.link}>
+          <NavLink style={navLinkStyles} to={item.link}>
             {item.name}
           </NavLink>
         ))}
-        {auth.user && (
-          <NavLink style={navLinkStyles} to={"/profile"}>
-            Profile
+        {user && (
+          <NavLink style={navLinkStyles} to={"/dashboard"}>
+            {user.email}
           </NavLink>
         )}
       </div>
-      {!auth.user && (
+      {!user && (
         <div className="flex gap-10 items-center">
           <NavLink
             style={navLinkStyles}

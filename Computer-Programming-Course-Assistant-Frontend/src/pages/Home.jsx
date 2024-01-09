@@ -6,7 +6,7 @@ import Footer from '../components/Footer'
 import Feedback from '../components/home/Feedback'
 import JoinUs from '../components/home/JoinUs'
 
-function Home() {
+function  Home() {
   return (
     <div>
       <Navbar/>

@@ -1,40 +1,15 @@
-import React, { useState } from 'react';
-import { useAuth } from '../authentication/Auth';
-import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import useLogin from "../hooks/useLogin";
 export const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const auth = useAuth();
-  const location = useLocation();
-  const redirectPath = location.state?.path || '/profile';
-  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { login, error } = useLogin();
 
   const handleClick = async (e) => {
     e.preventDefault();
-    const loggingUser = { email, password };
-    console.log('Form submitted:', loggingUser);
-    try {
-      const response = await axios.post(
-        'https://my-jobs-api.cyclic.app/api/v1/auth/login',
-        {
-          email,
-          password,
-        }
-      );
-      console.log('Login successful:', response.data);
-      auth.login(response.data);
-      navigate(redirectPath, { replace: true });
-    } catch (error) {
-      console.error(
-        'Login failed:',
-        error.response?.data || 'Unexpected error'
-      );
-      setError('Login failed. Please try again.');
-    }
+    await login(email, password);
+    console.log("Form submitted:", { email, password });
   };
-
   return (
     <div className="max-w-md mx-auto mt-8 p-4 bg-primary text-white rounded-md">
       <label className="block mb-2">Email:</label>
@@ -59,4 +34,3 @@ export const Login = () => {
     </div>
   );
 };
-
