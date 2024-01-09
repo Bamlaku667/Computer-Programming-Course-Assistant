@@ -12,19 +12,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EditProfile = exports.GetProfile = void 0;
 const Student_1 = require("../models/Student");
 const http_status_codes_1 = require("http-status-codes");
+const errors_1 = require("../errors");
+// profiles 
 const GetProfile = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const student = req.student;
+    const student = req.user;
     if (student) {
         const profile = yield Student_1.Student.findById(student._id);
         if (profile) {
             return res.status(http_status_codes_1.StatusCodes.OK).json(profile);
         }
     }
-    return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({ msg: 'student not found' });
+    throw new errors_1.NotFoundError('Student not found');
 });
 exports.GetProfile = GetProfile;
 const EditProfile = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const student = req.student;
+    const student = req.user;
     const { firstName, lastName, phone, address } = req.body;
     if (student) {
         const profile = yield Student_1.Student.findById(student._id);
@@ -37,7 +39,7 @@ const EditProfile = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
             return res.status(http_status_codes_1.StatusCodes.OK).json(updatedProfile);
         }
     }
-    return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({ msg: 'student not found' });
+    throw new errors_1.NotFoundError('student not found');
 });
 exports.EditProfile = EditProfile;
 //# sourceMappingURL=StudentController.js.map

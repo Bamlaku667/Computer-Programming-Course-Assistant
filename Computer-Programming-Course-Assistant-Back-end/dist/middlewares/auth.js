@@ -11,16 +11,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authenticate = void 0;
 const PasswordUtility_1 = require("../utility/PasswordUtility");
-const http_status_codes_1 = require("http-status-codes");
 const authenticate = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const payload = yield (0, PasswordUtility_1.ValidateJwt)(req);
-        req.student = payload;
-        next();
-    }
-    catch (error) {
-        return res.status(http_status_codes_1.StatusCodes.UNAUTHORIZED).json({ msg: error.message });
-    }
+    const payload = yield (0, PasswordUtility_1.ValidateJwt)(req);
+    req.user = payload;
+    next();
 });
 exports.authenticate = authenticate;
 //# sourceMappingURL=auth.js.map

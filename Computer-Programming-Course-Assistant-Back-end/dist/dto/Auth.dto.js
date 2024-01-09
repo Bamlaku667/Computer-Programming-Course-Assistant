@@ -1,3 +1,3 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-//# sourceMappingURL=Course.dto.js.map
+//# sourceMappingURL=Auth.dto.js.map

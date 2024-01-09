@@ -16,6 +16,7 @@ exports.ValidateJwt = exports.GenerateJWT = exports.ValidatePassword = exports.G
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const config_1 = require("../config");
+const errors_1 = require("../errors");
 const GenerateSalt = () => __awaiter(void 0, void 0, void 0, function* () {
     return yield bcryptjs_1.default.genSalt();
 });
@@ -45,7 +46,7 @@ const ValidateJwt = (req) => __awaiter(void 0, void 0, void 0, function* () {
             throw new Error('Not Authorized');
         }
     }
-    throw new Error('No token');
+    throw new errors_1.UnauthorizedError('No token');
 });
 exports.ValidateJwt = ValidateJwt;
 //# sourceMappingURL=PasswordUtility.js.map
