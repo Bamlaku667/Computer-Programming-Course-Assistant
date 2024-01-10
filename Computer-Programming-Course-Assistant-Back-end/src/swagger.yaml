@@ -62,7 +62,7 @@ paths:
       operationId: Admin-GetInstructors
       parameters:
         - in: path
-          name: instructorId   # Note the name is the same as in the path
+          name: instructorId 
           required: true
           schema:
             type: string

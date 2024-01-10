@@ -13,21 +13,22 @@ const App = async (app: Application) => {
   // Construct the correct path to swagger.yaml
   const swaggerDocument = YAML.load(path.join(__dirname, '../swagger.yaml'));
 
-  app.get('/', (req, res) => {
-    res.send('<h1>Course Assistant API</h1><a href="/api-docs">Documentation</a>');
-  });
-
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  // app.get('/', (req, res) => {
+  //   res.send('<h1>Course Assistant API</h1><a href="/api-docs">Documentation</a>');
+  // });
+  app.use(express.static(path.join(__dirname, "../public")));  
   app.use(cors());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-
+  
+  
   // Use /tmp directory for temporary image storage
   const imagesPath = '/tmp/images';
   if (!fs.existsSync(imagesPath)) {
     fs.mkdirSync(imagesPath);
   }
-
+  
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   app.use('/images', express.static(imagesPath));
   app.use('/api/v1/auth', AuthRoutes);
   app.use('/api/v1/student', StudentRoutes);
