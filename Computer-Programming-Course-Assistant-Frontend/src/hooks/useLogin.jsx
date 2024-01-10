@@ -14,7 +14,7 @@ const useLogin = () => {
   const login = async (email, password) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/auth/login",
+        "https://courseassistant.vercel.app/api/v1/auth/login",
         {
           email,
           password,
