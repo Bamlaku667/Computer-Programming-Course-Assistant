@@ -19,12 +19,12 @@ function App() {
       <GoogleOAuthProvider clientId={clientId}>
         <>
           <Routes>
-            <Route path='/' element={ <Home/>} /> 
-            <Route path='/dashboard' element={<MainLayout><Dashboard /></MainLayout>} /> 
+            <Route path='/' element={ <Home/>} />
             <Route path='/register' element={<RegistrationForm/>} />
             <Route path='/login' element={<Login/>} />
-            <Route path='/profile' element={<RequireAuth><Profile/></RequireAuth>} />
+            <Route path='/dashboard' element={<MainLayout><Dashboard /></MainLayout>} />
             <Route path='/myCourses' element={<MainLayout><Courses /></MainLayout>} />
+            <Route path='/profile' element={<MainLayout><Profile/></MainLayout>}/>
             <Route path="*" element={<NoMatch />} />
           </Routes>
         </>

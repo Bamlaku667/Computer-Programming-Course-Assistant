@@ -63,13 +63,10 @@ const Sidebar = () => {
             </NavLink>
           </div>
         ))}
-        <IoIosLogOut />
-        <button
-          className=" p-3  py-2 flex gap-x-3 items-center hover:bg-secondary hover:text-white"
-          onClick={handleClick}
-        >
-          Logout
-        </button>
+        <div className=" p-3  py-2 flex gap-x-3 items-center hover:bg-secondary hover:text-white">
+          <IoIosLogOut />
+          <button onClick={handleClick}>Logout</button>
+        </div>
       </div>
     </div>
   );
