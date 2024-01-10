@@ -4,20 +4,8 @@ import { images } from "../../../constants";
 import { FaSearch } from "react-icons/fa";
 import { useAuth } from "../../../hooks/useAuthContex";
 
-const Navbar = ({ image, name }) => {
+const Navbar = ({ image }) => {
   const { user } = useAuth();
-  console.log("user", user);
-  // const [email, setEmail] = useState("");
-
-  // useEffect(() => {
-  //   if (user) {
-  //     setEmail(user.email);
-  //   }
-  // }, [user]);
-
-  // useEffect(() => {
-  //   console.log('email', email);
-  // }, [email]);
 
   return (
     <nav className="bg-white">
@@ -32,19 +20,19 @@ const Navbar = ({ image, name }) => {
             <FaSearch className="" />
           </button>
         </div>
-        <div className="flex gap-x-4 ">
-          <div className="flex items-center gap-x-2">
+        <div className="flex">
+          <div className="flex items-center">
             <div className="w-10 h-10 bg-gray-300 rounded-full mr-2 overflow-hidden">
-              {!image && (
+              {!image ? (
                 <img
                   src={images.profilePlaceholder}
                   className="w-10 h-10"
                   alt="Profile"
                 />
-              )}
-              {image && <img src={image} className="w-10 h-10" alt="Profile" />}
+              ) :
+              (<img src={image} className="w-10 h-10" alt="Profile" />)}
             </div>
-            {user && <div className="ml-2">{user.email}</div>}
+            {user && <div className="">{user.email}</div>}
           </div>
         </div>
       </div>

@@ -16,21 +16,21 @@ const SidebarItems = [
   { id: 4, name: "Messages", link: "/messages", icon: TiMessages },
   {
     id: 5,
-    name: "Other attributes",
-    link: "/otherAttributes",
-    icon: IoThermometerOutline,
-  },
-  {
-    id: 6,
     name: "Profile",
     link: "/profile",
     icon: MdOutlineDashboard,
   },
+  {
+    id: 6,
+    name: "Other attributes",
+    link: "/otherAttributes",
+    icon: IoThermometerOutline,
+  },
 ];
 
 const Sidebar = () => {
-  const {dispatch} = useAuth();
-  const navigate = useNavigate()
+  const { dispatch } = useAuth();
+  const navigate = useNavigate();
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#66C5DB" : "",
@@ -40,7 +40,7 @@ const Sidebar = () => {
   };
 
   const handleClick = () => {
-    dispatch({type: 'LOGOUT'})
+    dispatch({ type: "LOGOUT" });
     navigate("/");
   };
 
@@ -63,9 +63,10 @@ const Sidebar = () => {
             </NavLink>
           </div>
         ))}
-        <IoIosLogOut/>
-        <button className=" p-3  py-2 flex gap-x-3 items-center hover:bg-secondary hover:text-white"
-onClick={handleClick}>Logout</button>
+        <div className=" p-3  py-2 flex gap-x-3 items-center hover:bg-secondary hover:text-white">
+          <IoIosLogOut />
+          <button onClick={handleClick}>Logout</button>
+        </div>
       </div>
     </div>
   );

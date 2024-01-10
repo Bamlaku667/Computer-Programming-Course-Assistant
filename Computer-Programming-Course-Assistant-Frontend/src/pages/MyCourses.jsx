@@ -79,7 +79,7 @@ const Courses = () => {
 
   return (
     <div className="container mx-auto">
-      <h1 className="text-3xl font-bold mb-4">My Courses</h1>
+      <h1 className="text-2xl font-bold mb-4">My Courses</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {courses.map(course => (
           <CourseCard key={course._id} course={course} />
