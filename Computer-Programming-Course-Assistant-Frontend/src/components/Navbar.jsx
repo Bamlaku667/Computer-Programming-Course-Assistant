@@ -4,7 +4,7 @@ import { FaLock } from "react-icons/fa";
 import { images } from "../constants";
 import { useAuth } from "../hooks/useAuthContex";
 
-export default function Navbar() {
+export default function Navbar({image}) {
   const NavItemsElmts = [
     { name: "Home", link: "/" },
     { name: "About", link: "/about" },
@@ -28,13 +28,25 @@ export default function Navbar() {
       </div>
       <div className="flex gap-10 items-center">
         {NavItemsElmts.map((item, index) => (
-          <NavLink style={navLinkStyles} to={item.link}>
+          <NavLink key={index} style={navLinkStyles} to={item.link}>
             {item.name}
           </NavLink>
         ))}
         {user && (
           <NavLink style={navLinkStyles} to={"/dashboard"}>
-            {user.email}
+            <div className="flex items-center">
+              <div className="w-10 h-10 bg-gray-300 rounded-full mr-2 overflow-hidden">
+                {!image ? (
+                  <img
+                    src={images.profilePlaceholder}
+                    className="w-10 h-10"
+                    alt="Profile"
+                  />
+                ) :
+                (<img src={image} className="w-10 h-10" alt="Profile" />)}
+              </div>
+              <div className="">{user.email}</div>
+            </div>
           </NavLink>
         )}
       </div>
