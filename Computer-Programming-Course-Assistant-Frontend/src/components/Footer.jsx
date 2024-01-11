@@ -11,9 +11,9 @@ function Footer() {
         <div className='flex flex-col gap-5'>
           <h1 className='text-lg font-bold'>Contact us</h1>
           <div className='flex flex-col text-gray-500 gap-2'>
-            <p>Address: <span>Addis Ababa, Ethiopia</span></p>
-            <p>Call: <span>+251000000000</span></p>
-            <p>Email: <span>example@gmail.com</span></p>
+            <p>Address: <span className='font-bold'>Addis Ababa, Ethiopia</span></p>
+            <p>Call: <span className='font-bold'>+251000000000</span></p>
+            <p>Email: <span className='font-bold'>example@gmail.com</span></p>
           </div>
           <div className='flex gap-2'>
             <Link to={'/'} className='p-1 border shadow-sm rounded-md'><FaFacebook className='text-[#66C5DB]'/></Link>
