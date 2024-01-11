@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import MiniCard from '../components/dashboard/MiniCard';
+import MainLayout from '../components/dashboard/common/MainLayout'
 
 
 const Dashboard = () => {
@@ -19,32 +20,30 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="container mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Overview</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* MiniCard for Completed Courses */}
-        
-        <MiniCard
-          title="Completed Courses"
-          value={dashboardData?.completedCourses || 0}
-          color="green" // You can customize colors based on your theme
-        />
-
-        {/* MiniCard for Courses in Progress */}
-        <MiniCard
-          title="Courses in Progress"
-          value={dashboardData?.coursesInProgress || 0}
-          color="blue"
-        />
-
-        {/* MiniCard for Other Attribute */}
-        <MiniCard
-          title="Other Attribute"
-          value={dashboardData?.otherAttribute || 0}
-          color="orange"
-        />
+    <MainLayout>
+      <div className="container mx-auto">
+        <h1 className="text-2xl font-bold mb-4">Overview</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* MiniCard for Completed Courses */}
+          
+          <MiniCard
+            title="Completed Courses"
+            value={dashboardData?.completedCourses || 0}
+            color="green"
+          />
+          <MiniCard
+            title="Courses in Progress"
+            value={dashboardData?.coursesInProgress || 0}
+            color="blue"
+          />
+          <MiniCard
+            title="Other Attribute"
+            value={dashboardData?.otherAttribute || 0}
+            color="orange"
+          />
+        </div>
       </div>
-    </div>
+    </MainLayout>
   );
 };
 
