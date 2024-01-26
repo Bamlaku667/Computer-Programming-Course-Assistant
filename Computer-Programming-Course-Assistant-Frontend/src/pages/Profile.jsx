@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../hooks/useAuthContex";
@@ -6,13 +6,78 @@ import { images } from "../constants";
 import MainLayout from "../components/dashboard/common/MainLayout";
 
 export const Profile = ({image}) => {
-  const { dispatch } = useAuth();
+  const { user, dispatch } = useAuth();
   const [error, setError] = useState("");
+  const [userData, setUserData] = useState({
+    firstName: '',
+    lastName: '',
+    address: '',
+    phone: '',
+    password: '',
+  })
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        if (user.token) {
+          const response = await axios.get('https://courseassistant.vercel.app/api/v1/student/profile', {
+            headers: {
+              'Authorization': `Bearer ${user.token}`
+            }
+          });
+          setUserData(response.data)
+          console.log(response.data)
+        }
+      } catch (error) {
+        setError(error)
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, [user.token]);
+
   const logout = () => {
     dispatch({type: 'LOGOUT'})
-    navigate("/login");
+    navigate("/");
   };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const updateUser = () => {
+    console.log(userData)
+    const updateUserData = async () => {
+      try {
+        if (user.token) {
+          const response = await axios.put('https://courseassistant.vercel.app/api/v1/student/profile',
+          userData,
+          {
+            headers: {
+              'Authorization': `Bearer ${user.token}`
+            },
+          });
+          console.log('Update successfull', response.data)
+        }
+      } catch (error) {
+        setError(error)
+        console.error('Error updating data:', error);
+      }
+    }
+    updateUserData();
+  }
+
+  const deleteUser = () => {
+    const deleteUser = async () =>{
+
+    }
+  }
 
   return (
     <MainLayout>
@@ -22,7 +87,7 @@ export const Profile = ({image}) => {
             <h1 className="text-2xl font-bold">Account</h1>
             <span className="text-base text-gray-400">Real time informations and activities of your properties.</span>
           </div>
-          <button className="px-4 py-2 shadow-md rounded-md bg-blue-500 text-white">Save changes</button>
+          <button className="px-4 py-2 shadow-md rounded-md bg-blue-500 text-white" onClick={updateUser}>Save changes</button>
         </div>
         <form action="">
           <div className="flex items-center justify-between mb-6">
@@ -52,26 +117,27 @@ export const Profile = ({image}) => {
             <div className="flex item-center justify-between">
               <div className="flex flex-col gap-2">
                 <label htmlFor="" className="text-base text-gray-500">First name</label>
-                <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" />
+                <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" name="firstName" value={userData.firstName} onChange={handleInputChange} />
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="" className="text-base text-gray-500">Last name</label>
-                <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" />
+                <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" name="lastName" value={userData.lastName} onChange={handleInputChange}/>
               </div>
             </div>
           </div>
           <div className="pb-4 border-b mb-4">
             <div className="mb-4">
-              <h1 className="text-xxl font-semibold">Contact email</h1>
-              <span className="text-base text-gray-400">Manage your accounts email address.</span>
+              <h1 className="text-xxl font-semibold">User address</h1>
+              <span className="text-base text-gray-400">Manage your address.</span>
             </div>
             <div className="flex item-center justify-between">
               <div className="flex flex-col gap-2">
-                <label htmlFor="" className="text-base text-gray-500">Email</label>
-                <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" />
+                <label htmlFor="" className="text-base text-gray-500">Address</label>
+                <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" name="address" value={userData.address} onChange={handleInputChange}/>
               </div>
-              <div>
-                <button className="px-4 py-2 shadow-md rounded-md ">Add new email</button>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="" className="text-base text-gray-500" >Phone</label>
+                <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" name="phone" value={userData.phone} onChange={handleInputChange}/>
               </div>
             </div>
           </div>
@@ -83,7 +149,7 @@ export const Profile = ({image}) => {
             <div className="flex item-center justify-between">
               <div className="flex flex-col gap-2">
                 <label htmlFor="" className="text-base text-gray-500">Current password</label>
-                <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" />
+                <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" value={userData.password} readOnly/>
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="" className="text-base text-gray-500">New password</label>
@@ -99,7 +165,7 @@ export const Profile = ({image}) => {
             </div>
             <div className="flex item-center justify-start gap-4">
               <button onClick={logout} className="px-4 py-2 shadow-md rounded-md ">Logout</button>
-              <button className="px-4 py-2 shadow-md rounded-md text-red-500">Delete account</button>
+              <button className="px-4 py-2 shadow-md rounded-md text-red-500" onClick={deleteUser}>Delete account</button>
             </div>
           </div>
       </div>
