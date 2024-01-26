@@ -81,7 +81,7 @@ export default function CourseSlider({ courses }) {
     <div className="flex flex-col gap-16">
       <Slider ref={sliderRef} {...settings}>
         {courses.map((course) => (
-          <div key={course.id}>
+          <div key={course._id}>
             <CourseCard course={course} />
           </div>
         ))}

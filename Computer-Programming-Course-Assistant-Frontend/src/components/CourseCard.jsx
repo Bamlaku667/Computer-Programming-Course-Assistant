@@ -25,7 +25,7 @@ export default function CourseCard({course}) {
         <span className="text-gray-700">{rating.value} ({rating.reviews} reviews)</span>
       </div>
       <div className="flex justify-center pt-2">
-        <button onClick={''} className="p-1 border shadow-md rounded-md"> <img src={images.redirect} alt="redirect" /> </button>
+        <button className="p-1 border shadow-md rounded-md"> <img src={images.redirect} alt="redirect" /> </button>
       </div>
     </div>
   );

@@ -21,7 +21,6 @@ const useLogin = () => {
         }
       );
       console.log("Login successful:", response.data);
-      // auth.login(response.data);
       localStorage.setItem("user", JSON.stringify(response.data));
       dispatch({ type: "LOGIN", payload: response.data });
       navigate(redirectPath, { replace: true });
