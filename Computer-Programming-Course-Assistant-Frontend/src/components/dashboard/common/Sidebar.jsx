@@ -28,8 +28,8 @@ const SidebarItems = [
   },
 ];
 
-const Sidebar = () => {
-  const { dispatch } = useAuth();
+const Sidebar = ({image}) => {
+  const { user, dispatch } = useAuth();
   const navigate = useNavigate();
   const navLinkStyles = ({ isActive }) => {
     return {
@@ -45,29 +45,40 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="bg-primary text-dark-light w-60">
+    <div className="bg-white text-dark-light w-60 border-r">
       <div className="flex justify-center border-b py-3">
-        <img src={images.Logo} alt="App Logo" />
+        <div className="flex flex-col items-center gap-2">
+          <div className="w-36 h-36 bg-gray-300 rounded-full mr-2 overflow-hidden">
+            {!image ? (
+              <img
+                src={images.profilePlaceholder}
+                className="w-36 h-36"
+                alt="Profile"
+              />
+            ) :
+            (<img src={image} className="w-36 h-36" alt="Profile" />)}
+          </div>
+          <div className="">{user.email}</div>
+        </div>
       </div>
-      <div className="py-2">
+      <div className="py-2 border-b">
         {SidebarItems.map((item) => (
           <div key={item.id}>
             <NavLink
               style={navLinkStyles}
-              className=" p-3  py-2 flex gap-x-3 items-center hover:bg-secondary hover:text-white"
+              className="p-3 py-2 flex gap-x-3 items-center hover:text-xl"
               to={item.link}
             >
               {React.createElement(item.icon)}{" "}
-              {/* Render the icon dynamically */}
               {item.name}
             </NavLink>
           </div>
         ))}
-        <div className=" p-3  py-2 flex gap-x-3 items-center hover:bg-secondary hover:text-white">
+      </div>
+      <div className="p-3 py-2 flex gap-x-3 items-center hover:text-xl">
           <IoIosLogOut />
           <button onClick={handleClick}>Logout</button>
         </div>
-      </div>
     </div>
   );
 };

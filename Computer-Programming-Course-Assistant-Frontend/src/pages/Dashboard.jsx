@@ -1,68 +1,56 @@
 import React, { useContext, useEffect, useState } from 'react';
 import MiniCard from '../components/dashboard/MiniCard';
-import axios from "axios";
-import { useAuth } from '../hooks/useAuthContex';
+import MainLayout from '../components/dashboard/common/MainLayout'
+import { NavLink } from 'react-router-dom';
+
 
 const Dashboard = () => {
-  // State to store data fetched from the backend
   const [dashboardData, setDashboardData] = useState(null);
-  const {user} = useAuth();
-    
-  // useEffect to fetch data from the backend when the component mounts
   useEffect(() => {
-    // Replace this with actual API calls to fetch dashboard data
-    // For simplicity, I'll use mock data
-    // const mockData = {
-    //   completedCourses: 10,
-    //   coursesInProgress: 5,
-    //   otherAttribute: 8,
-    // };
-
-    console.log(user);
-    const fetchData = async () => {
-      try {
-        // Replace 'your-api-endpoint' with the actual endpoint to fetch dashboard data
-        const response = await axios.get('http://localhost:5000/api/v1/student/courses', {
-          headers: {'Authorization': `Bearer ${user.token}`}
-        });
-
-        const data = response.data;
-        console.log('data', data); 
-        setDashboardData(data);
-      } catch (error) {
-        console.error('Error fetching data:', error.message);
-      }
+    const mockData = {
+      completedCourses: 10,
+      coursesInProgress: 5,
+      otherAttribute: 8,
     };
     fetchData();
   }, []);
 
+  const navLinkStyles = ({ isActive }) => {
+    return {
+      borderBottom: isActive ? "#66C5DB" : "gray",
+    };
+  };
+
   return (
-    <div className="container mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Overview</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* MiniCard for Completed Courses */}
-        
-        <MiniCard
-          title="Completed Courses"
-          value={dashboardData?.completedCourses || 0}
-          color="green" // You can customize colors based on your theme
-        />
-
-        {/* MiniCard for Courses in Progress */}
-        <MiniCard
-          title="Courses in Progress"
-          value={dashboardData?.coursesInProgress || 0}
-          color="blue"
-        />
-
-        {/* MiniCard for Other Attribute */}
-        <MiniCard
-          title="Other Attribute"
-          value={dashboardData?.otherAttribute || 0}
-          color="orange"
-        />
+    <MainLayout>
+      <div className="container mx-auto">
+        <div className='bg-gradient-to-r from-white to-[#66C5DB]'>
+          <h1 className='p-12 text-4xl'>Ysihak's Dashboard - let's jump back in.</h1>
+          <div className='px-8 text-gray-700'>
+            <NavLink to={''} style={navLinkStyles}>
+              <button className="text-2xl font-bold border-b-2 border-[#66C5DB]">Overview</button>
+            </NavLink>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+          <MiniCard
+            title="Completed Courses"
+            value={dashboardData?.completedCourses || 0}
+            color="green"
+          />
+          <MiniCard
+            title="Courses in Progress"
+            value={dashboardData?.coursesInProgress || 0}
+            color="blue"
+          />
+          <MiniCard
+            title="Other Attribute"
+            value={dashboardData?.otherAttribute || 0}
+            color="orange"
+          />
+        </div>
       </div>
-    </div>
+    </MainLayout>
   );
 };
 
