@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CourseCard from '../components/CourseCard';
 import { images } from '../constants';
 import MainLayout from '../components/dashboard/common/MainLayout';
+import { NavLink } from 'react-router-dom';
 
 const Courses = () => {
   // State to store the list of courses
@@ -72,17 +73,29 @@ const Courses = () => {
           reviews: 150
         }
       },
-      // Add more courses as needed
     ];
 
     setCourses(courses);
   }, []);
 
+  const navLinkStyles = ({ isActive }) => {
+    return {
+      borderBottom: isActive ? "#66C5DB" : "gray",
+    };
+  };
+
   return (
     <MainLayout>
       <div className="container mx-auto">
-        <h1 className="text-2xl font-bold mb-4">My Courses</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className='bg-gradient-to-r from-white to-[#66C5DB]'>
+          <h1 className='p-12 text-4xl'>Ysihak's Courses</h1>
+          <div className='px-8 text-gray-700'>
+            <NavLink to={''} style={navLinkStyles}>
+              <button className="text-2xl font-bold border-b-2 border-[#66C5DB]">Recently Watched</button>
+            </NavLink>
+          </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
           {courses.map(course => (
             <CourseCard key={course._id} course={course} />
           ))}
