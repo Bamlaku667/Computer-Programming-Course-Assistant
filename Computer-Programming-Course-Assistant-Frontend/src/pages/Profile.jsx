@@ -56,7 +56,7 @@ export const Profile = ({image}) => {
     const updateUserData = async () => {
       try {
         if (user.token) {
-          const response = await axios.put('https://courseassistant.vercel.app/api/v1/student/profile',
+          const response = await axios.patch('https://courseassistant.vercel.app/api/v1/student/profile',
           userData,
           {
             headers: {
@@ -67,7 +67,7 @@ export const Profile = ({image}) => {
         }
       } catch (error) {
         setError(error)
-        console.error('Error updating data:', error);
+        console.error('Error updating data:', error.response.data);
       }
     }
     updateUserData();

@@ -3,13 +3,12 @@ import { NavLink } from "react-router-dom";
 import { FaLock } from "react-icons/fa";
 import { images } from "../constants";
 import { useAuth } from "../hooks/useAuthContex";
+import { FaSearch } from "react-icons/fa";
 
 export default function Navbar({image}) {
   const NavItemsElmts = [
     { name: "Home", link: "/" },
-    { name: "About", link: "/about" },
-    { name: "Courses", link: "/courses" },
-    { name: "Contact", link: "/contact" },
+    { name: "Explore Courses", link: "/courses" },
   ];
   const { user } = useAuth();
 
@@ -22,9 +21,19 @@ export default function Navbar({image}) {
   };
 
   return (
-    <nav className="flex justify-between py-4 px-16 items-center border border-b-2 sticky top-0 z-50 bg-white">
+    <nav className="flex justify-between py-4 pl-16 pr-4 items-center border border-b-2 sticky top-0 z-50 bg-white">
       <div className="">
         <img src={images.Logo} alt="App Logo" />
+      </div>
+      <div className="relative">
+        <input
+          type="text"
+          className="text-base focus:outline-none border py-2 pl-4 min-w-60"
+          placeholder="What do you want to learn?"
+        />
+        <button className="absolute top-1/2 -right-8 transform -translate-y-1/2 text-gray-500 cursor-pointer border py-3 px-2">
+          <FaSearch className="" />
+        </button>
       </div>
       <div className="flex gap-10 items-center">
         {NavItemsElmts.map((item, index) => (
