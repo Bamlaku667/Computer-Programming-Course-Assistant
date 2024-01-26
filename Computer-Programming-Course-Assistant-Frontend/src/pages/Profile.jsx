@@ -5,13 +5,8 @@ import { useAuth } from "../hooks/useAuthContex";
 import { images } from "../constants";
 
 export const Profile = ({image}) => {
-  const { user, dispatch } = useAuth();
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
-  const handleClick = () => {
-    dispatch({type: 'LOGOUT'})
-    navigate("/login");
-  };
+  
+ 
 
   return (
     <div className="container mx-auto bg-white px-4 py-8 rounded-md shadow-sm">

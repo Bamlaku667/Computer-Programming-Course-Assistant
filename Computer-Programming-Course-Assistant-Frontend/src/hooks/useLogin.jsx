@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuthContex";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
 const useLogin = () => {
   const [error, setError] = useState("");
   const { dispatch, user } = useAuth();
-  const location = useLocation();
   const redirectPath = "/dashboard";
   const navigate = useNavigate();
 
