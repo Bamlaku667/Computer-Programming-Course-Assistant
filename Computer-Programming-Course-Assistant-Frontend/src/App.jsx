@@ -11,6 +11,7 @@ import Dashboard from './pages/Dashboard';
 import Courses from './pages/MyCourses';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import { CourseDetails } from './pages/CourseDetails';
 
 function App() {
   const clientId = '138178679163-i2g2io24rchh1tsafcapp76viof1d5t8.apps.googleusercontent.com'
@@ -26,10 +27,11 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>} />
             <Route path='/myCourses' element={<RequireAuth><Courses /></RequireAuth>} />
+            <Route path='/course/detail' element={<CourseDetails />} />
             <Route path='/profile' element={<RequireAuth><Profile /></RequireAuth>}/>
             <Route path="*" element={<NoMatch />} />
           </Routes>
-          <Footer/>
+          {/* <Footer/> */}
         </>
       </GoogleOAuthProvider>
     </div>
