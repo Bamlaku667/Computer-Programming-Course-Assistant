@@ -5,17 +5,15 @@ import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
 import { Link } from "react-router-dom";
 import { images } from "../constants";
+import { useAuth } from "../hooks/useAuthContex";
 
 export default function RegistrationForm() {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(true);
-  useEffect(() => {
-    setError("");
-  }, [userName, email, password]);
-
+ 
   const onSubmit = async (e) => {
     e.preventDefault();
     const registerdUser = { userName, email, password };
@@ -30,6 +28,8 @@ export default function RegistrationForm() {
         }
       );
       console.log("Registration successful:", response.data);
+      localStorage.setItem("user", JSON.stringify(response.data));
+      console.log(user); 
     } catch (error) {
       console.error(
         "Registration failed:",

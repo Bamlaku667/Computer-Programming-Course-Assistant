@@ -1,11 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
-import MiniCard from '../components/dashboard/MiniCard';
-import MainLayout from '../components/dashboard/common/MainLayout'
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import MainLayout from "../components/dashboard/common/MainLayout";
+import { NavLink } from "react-router-dom";
+import MiniCard from "../components/dashboard/MiniCard";
+import { useAuth } from "../hooks/useAuthContex";
 
-
-const Dashboard = () => {
+const InstructorDashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);
+//   const { user } = useAuth();
+  console.log("user", user);
   useEffect(() => {
     const mockData = {
       completedCourses: 10,
@@ -13,21 +15,23 @@ const Dashboard = () => {
       otherAttribute: 8,
     };
   }, []);
-
   const navLinkStyles = ({ isActive }) => {
     return {
       borderBottom: isActive ? "#66C5DB" : "gray",
     };
   };
-
   return (
     <MainLayout>
       <div className="container mx-auto">
-        <div className='bg-gradient-to-r from-white to-[#66C5DB]'>
-          <h1 className='p-12 text-4xl'>Ysihak's Dashboard - let's jump back in.</h1>
-          <div className='px-8 text-gray-700'>
-            <NavLink to={''} style={navLinkStyles}>
-              <button className="text-2xl font-bold border-b-2 border-[#66C5DB]">Overview</button>
+        <div className="bg-gradient-to-r from-white to-[#66C5DB]">
+          <h1 className="p-12 text-4xl">
+            Ysihak's Dashboard - let's jump back in.
+          </h1>
+          <div className="px-8 text-gray-700">
+            <NavLink to={""} style={navLinkStyles}>
+              <button className="text-2xl font-bold border-b-2 border-[#66C5DB]">
+                Overview
+              </button>
             </NavLink>
           </div>
         </div>
@@ -53,4 +57,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default InstructorDashboard;
