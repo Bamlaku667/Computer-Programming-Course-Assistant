@@ -2,7 +2,7 @@ import React from "react";
 import { images } from "../constants";
 
 export default function CourseCard({course}) {
-  const {title, image, description, rating, modules, enrolledStudents} = course;
+  const {title, image, description, rating, views, moduleNo, enrolledStudents} = course;
   return (
     <div className="relative w-72 bg-white shadow-md rounded-md overflow-hidden p-2 mb-4">
       <img
@@ -17,12 +17,12 @@ export default function CourseCard({course}) {
         {description}
       </p>
       <div className="flex justify-between text-gray-600">
-        <p>Modules: <span>{modules}</span></p>
+        <p>Modules: <span>{moduleNo}</span></p>
         <p>Enrolled Students: <span>{enrolledStudents}</span></p>
       </div>
       <div className="flex items-center pb-2 border-b">
         <span className="mr-2">⭐️</span>
-        <span className="text-gray-700">{rating.value} ({rating.reviews} reviews)</span>
+        <span className="text-gray-700">{rating} ({views} views)</span>
       </div>
       <div className="flex justify-center pt-2">
         <button className="p-1 border shadow-md rounded-md"> <img src={images.redirect} alt="redirect" /> </button>

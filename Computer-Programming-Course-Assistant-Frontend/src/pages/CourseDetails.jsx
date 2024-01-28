@@ -7,8 +7,13 @@ import { MdTitle } from 'react-icons/md';
 
 const courseData = [
     {
+      _id: '1',
       title: 'Web Development Fundamentals',
       instructor: 'John Doe',
+      description: 'Learn the basics of HTML,CSS and Javascript',
+      modules: 10,
+      enrolledStudents: 50,
+      image: images.jsImage,
       views: 2500,
       level: 'Beginner',
       rating: 4.2,
