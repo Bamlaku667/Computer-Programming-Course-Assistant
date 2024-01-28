@@ -28,11 +28,11 @@ export default function Navbar({image}) {
       <div className="relative">
         <input
           type="text"
-          className="text-base focus:outline-none border py-2 pl-4 min-w-60"
+          className="text-base focus:outline-none border py-2 pl-4 w-96"
           placeholder="What do you want to learn?"
         />
-        <button className="absolute top-1/2 -right-8 transform -translate-y-1/2 text-gray-500 cursor-pointer border py-3 px-2">
-          <FaSearch className="" />
+        <button className="absolute top-1/2 -right-8 transform -translate-y-1/2 text-gray-500 cursor-pointer border py-3 px-2 bg-black">
+          <FaSearch className="text-white" />
         </button>
       </div>
       <div className="flex gap-10 items-center">

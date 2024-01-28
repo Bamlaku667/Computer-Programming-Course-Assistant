@@ -27,37 +27,13 @@ function App() {
         <>
           <Navbar />
           <Routes>
-            <Route
-              path="/"
-              element={user ? <Home /> : <Navigate to="/" />}
-            />
-            <Route path="/register" element={!user ? <RegistrationForm /> : <Navigate to='/'/>} />
-            <Route path="/login" element={<StudentLogin />} />
-            <Route
-              path="/dashboard"
-              element={
-                <RequireAuth>
-                  <Dashboard />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="/myCourses"
-              element={
-                <RequireAuth>
-                  <Courses />
-                </RequireAuth>
-              }
-            />
-            <Route path="/course/detail" element={<CourseDetails />} />
-            <Route
-              path="/profile"
-              element={
-                <RequireAuth>
-                  <Profile />
-                </RequireAuth>
-              }
-            />
+            <Route path='/' element={<Home />} />
+            <Route path='/register' element={<RegistrationForm />} />
+            <Route path='/login' element={<StudentLogin />} />
+            <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>} />
+            <Route path='/myCourses' element={<RequireAuth><Courses /></RequireAuth>} />
+            <Route path='/myCourses/:_id' element={<RequireAuth><CourseDetails /></RequireAuth>} />
+            <Route path='/profile' element={<RequireAuth><Profile /></RequireAuth>}/>
             <Route path="*" element={<NoMatch />} />
           </Routes>
           {/* <Footer/> */}
