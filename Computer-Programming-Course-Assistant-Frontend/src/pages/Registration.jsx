@@ -6,37 +6,20 @@ import { GoogleLogin } from "@react-oauth/google";
 import { Link } from "react-router-dom";
 import { images, url } from "../constants";
 import { useAuth } from "../hooks/useAuthContex";
+import useSignUp from "../hooks/useSignup";
 
 export default function RegistrationForm() {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(true);
-  const {user, dispatch} = useAuth();
+  const {signup, error}  = useSignUp()
  
   const onSubmit = async (e) => {
     e.preventDefault();
     const registerdUser = { userName, email, password };
     console.log("Form submitted:", registerdUser);
-    try {
-      const response = await axios.post(
-        'http://localhost:5000/api/v1/auth/register',
-        {
-          userName,
-          email,
-          password,
-        }
-      );
-      console.log("Registration successful:", response.data);
-      localStorage.setItem("user", JSON.stringify(response.data));
-      dispatch({type: 'LOGIN', payload: response.data}); 
-      setError(null)
-      console.log(user); 
-    } catch (error) {
-      console.error("Registration failed:", error);
-      setError("Registration failed. Please try again.");
-    }
+    await signup(userName, email, password); 
   };
 
   return (
@@ -55,14 +38,7 @@ export default function RegistrationForm() {
           </h2>
           <form onSubmit={onSubmit} className="max-w-md">
             <div className="flex flex-col gap-5 md:flex-row mt-4 mb-8 justify-between">
-            <GoogleLogin
-              onSuccess={credentialResponse => {
-                console.log(credentialResponse);
-              }}
-              onError={() => {
-                console.log('Login Failed');
-              }}
-            />
+          
             <GoogleLogin
               onSuccess={credentialResponse => {
                 console.log(credentialResponse);

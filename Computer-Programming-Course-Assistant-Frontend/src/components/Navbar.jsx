@@ -11,7 +11,6 @@ export default function Navbar({image}) {
     { name: "Explore Courses", link: "/courses" },
   ];
   const { user } = useAuth();
-
   console.log("User:", user);
 
   const navLinkStyles = ({ isActive }) => {
