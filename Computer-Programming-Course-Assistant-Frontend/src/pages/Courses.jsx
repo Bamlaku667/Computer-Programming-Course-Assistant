@@ -1,83 +1,62 @@
-import React, { useEffect, useState } from 'react'
-import { images } from '../constants'
-import CourseCard from '../components/CourseCard';
+import React, { useEffect, useState } from "react";
+import { images, url } from "../constants";
+// import CourseCard from "../components/CourseCard";
+import axios from "axios";
+import { useCoursesContext } from "../hooks/useCoursesContext";
 
 export const Courses = () => {
-  const [courses, setCourses] = useState([]);
+  // const [courses, setCourses] = useState([]);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
+  const { dispatch, courses } = useCoursesContext();
+
+  console.log("courses page");
   useEffect(() => {
-    const courses = [
-      {
-        _id: '1',
-        title: 'Web Development Fundamentals',
-        instructor: 'John Doe',
-        description: 'Learn the basics of HTML,CSS and Javascript',
-        moduleNo: 8,
-        enrolledStudents: 50,
-        image: images.jsImage,
-        views: 2500,
-        level: 'Beginner',
-        rating: 4.2,
-        modules: [
-          {
-            title: 'HTML Basics',
-            lessons: [
-              { title: 'Introduction to HTML', imageUrl: images.jsImage },
-              { title: 'HTML Elements and Tags', imageUrl: images.jsImage },
-              { title: 'Structuring HTML Documents', imageUrl: images.jsImage },
-            ],
-          },
-          {
-            title: 'CSS Styling',
-            lessons: [
-              { title: 'Introduction to CSS', imageUrl: images.jsImage },
-              { title: 'CSS Selectors and Properties', imageUrl: images.jsImage },
-              { title: 'Styling Layouts with CSS', imageUrl: images.jsImage },
-            ],
-          },
-          {
-            title: 'JavaScript Basics',
-            lessons: [
-              { title: 'Introduction to JavaScript', imageUrl: images.jsImage },
-              { title: 'JavaScript Variables and Data Types', imageUrl: images.jsImage },
-              { title: 'Control Flow and Functions in JavaScript', imageUrl: images.jsImage },
-            ],
-          },
-          {
-            title: 'Responsive Web Design',
-            lessons: [
-              { title: 'Introduction to Responsive Design', imageUrl: images.jsImage },
-              { title: 'Media Queries and Flexbox', imageUrl: images.jsImage },
-              { title: 'Building a Responsive Website', imageUrl: images.jsImage },
-            ],
-          },
-          {
-            title: 'Introduction to Frontend Frameworks',
-            lessons: [
-              { title: 'Overview of Frontend Frameworks', imageUrl: images.jsImage },
-              { title: 'React.js Fundamentals', imageUrl: images.jsImage },
-              { title: 'Vue.js Basics', imageUrl: images.jsImage },
-            ],
-          },
-        ],
-      },
-    ];
-
-    setCourses(courses);
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get(`${url}/courses`);
+        console.log(response.data);
+        dispatch({ type: "SET_COURSES", payload: response.data });
+      } catch (error) {
+        console.error("error in fetching", error);
+      }
+    };
+    fetchCourses();
   }, []);
-  return (
-    <div className=''>
-        <div className="relative h-[50vh] bg-cover bg-center" style={{ backgroundImage: `url(${images.jsImage})` }}>
-            <div className="absolute inset-0 flex items-center justify-center">
-                <h1 className="text-4xl font-bold text-white">Biginner to Advance Course</h1>
-            </div>
-        </div>
-        <div className='m-10'>
-            <h1 className='text-2xl mb-10'>All Courses</h1>
-            {courses.map(course => (
-                <CourseCard key={course._id} course={course} />
-            ))}
-        </div>
 
+  return (
+    <div className=" mt-4 mx-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {courses && courses.map((course) => (
+        <CourseCard key={course._id} course={course} />
+      ))}
     </div>
-  )
-}
+  );
+
+};
+
+const CourseCard = ({ course }) => {
+  const { title, description, images, _id } = course;
+
+  const handleEnroll = () => {
+    // Add your enrollment logic here
+    console.log(`Enrolling to course: ${title}`);
+  };
+
+  return (
+    <div className="bg-white p-6 mb-4 rounded-md shadow-md">
+      <img
+        src={images.length > 0 ? `${url}/${images[0]}` : images.jsImage}
+        alt={title}
+        className="w-full h-40 object-cover mb-4 rounded-md"
+      />
+      <h2 className="text-xl font-semibold mb-2">{title}</h2>
+      <p className="text-gray-600">{description}</p>
+      <button
+        onClick={handleEnroll}
+        className="bg-primary text-white px-4 py-2 rounded mt-4 hover:bg-blue-600"
+      >
+        Get Course
+      </button>
+    </div>
+  );
+};
