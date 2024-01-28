@@ -2,7 +2,7 @@
 import React from "react";
 import Sidebar from "./Sidebar";
 
-const MainLayout = ({ children }) => {
+export const MainLayout = ({ children }) => {
   return (
     <div className="flex min-h-screen bg-gray-50">
       <Sidebar />

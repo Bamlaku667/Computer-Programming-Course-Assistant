@@ -48,11 +48,11 @@ const Sidebar = ({image}) => {
     <div className="bg-white text-dark-light w-60 border-r">
       <div className="flex justify-center border-b py-3">
         <div className="flex flex-col items-center gap-2">
-          <div className="w-36 h-36 bg-gray-300 rounded-full mr-2 overflow-hidden">
+          <div className="w-20 h-20 bg-gray-300 rounded-full mr-2 overflow-hidden">
             {!image ? (
               <img
                 src={images.profilePlaceholder}
-                className="w-36 h-36"
+                className="w-20 h-20"
                 alt="Profile"
               />
             ) :

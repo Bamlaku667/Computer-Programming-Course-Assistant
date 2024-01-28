@@ -12,6 +12,8 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { StudentLogin } from './pages/StudentLogin';
 import { CourseDetails } from './pages/CourseDetails';
+import AdminDashboard from './components/adminDashboard/AdminDashboard';
+import InstructorDashboard from './pages/InstructorDashboard';
 
 function App() {
   const clientId = '138178679163-i2g2io24rchh1tsafcapp76viof1d5t8.apps.googleusercontent.com'
@@ -29,6 +31,7 @@ function App() {
             <Route path='/myCourses' element={<RequireAuth><Courses /></RequireAuth>} />
             <Route path='/course/detail' element={<CourseDetails />} />
             <Route path='/profile' element={<RequireAuth><Profile /></RequireAuth>}/>
+            <Route path='/admin-dashboard' element={<AdminDashboard />}/>
             <Route path="*" element={<NoMatch />} />
           </Routes>
           {/* <Footer/> */}
