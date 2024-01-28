@@ -37,11 +37,7 @@ const EditProfile = async (req: Request, res: Response, next: NextFunction) => {
 }
 
 
-
 /** ----------------------courses -------------------*/
-
-
-
 
 const GetCourses = async (req: Request, res: Response, next: NextFunction) => {
     const student = req.user;
