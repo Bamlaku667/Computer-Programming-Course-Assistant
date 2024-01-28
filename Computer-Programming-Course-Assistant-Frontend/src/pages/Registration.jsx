@@ -4,7 +4,7 @@ import { FaEyeSlash, FaEye } from "react-icons/fa";
 import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
 import { Link } from "react-router-dom";
-import { images } from "../constants";
+import { images, url } from "../constants";
 import { useAuth } from "../hooks/useAuthContex";
 
 export default function RegistrationForm() {
@@ -13,6 +13,7 @@ export default function RegistrationForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(true);
+  const {user, dispatch} = useAuth();
  
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +21,7 @@ export default function RegistrationForm() {
     console.log("Form submitted:", registerdUser);
     try {
       const response = await axios.post(
-        "https://courseassistant.vercel.app/api/v1/auth/register",
+        'http://localhost:5000/api/v1/auth/register',
         {
           userName,
           email,
@@ -29,12 +30,11 @@ export default function RegistrationForm() {
       );
       console.log("Registration successful:", response.data);
       localStorage.setItem("user", JSON.stringify(response.data));
+      dispatch({type: 'LOGIN', payload: response.data}); 
+      setError(null)
       console.log(user); 
     } catch (error) {
-      console.error(
-        "Registration failed:",
-        error.response?.data || "Unexpected error"
-      );
+      console.error("Registration failed:", error);
       setError("Registration failed. Please try again.");
     }
   };
