@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { IoIosArrowDown, IoIosArrowForward } from 'react-icons/io';
 import { images } from '../constants';
 import { AiFillEye } from 'react-icons/ai';
+import { FaGlobe, FaGraduationCap, FaMapMarker, FaStar } from 'react-icons/fa';
+import { MdTitle } from 'react-icons/md';
 
 const courseData = [
     {
@@ -15,45 +17,102 @@ const courseData = [
           title: 'HTML Basics',
           lessons: [
             { title: 'Introduction to HTML', imageUrl: images.jsImage },
-            { title: 'HTML Elements and Tags', imageUrl: 'https://example.com/html2.jpg' },
-            { title: 'Structuring HTML Documents', imageUrl: 'https://example.com/html3.jpg' },
+            { title: 'HTML Elements and Tags', imageUrl: images.jsImage },
+            { title: 'Structuring HTML Documents', imageUrl: images.jsImage },
           ],
         },
         {
           title: 'CSS Styling',
           lessons: [
-            { title: 'Introduction to CSS', imageUrl: 'https://example.com/css1.jpg' },
-            { title: 'CSS Selectors and Properties', imageUrl: 'https://example.com/css2.jpg' },
-            { title: 'Styling Layouts with CSS', imageUrl: 'https://example.com/css3.jpg' },
+            { title: 'Introduction to CSS', imageUrl: images.jsImage },
+            { title: 'CSS Selectors and Properties', imageUrl: images.jsImage },
+            { title: 'Styling Layouts with CSS', imageUrl: images.jsImage },
           ],
         },
         {
           title: 'JavaScript Basics',
           lessons: [
-            { title: 'Introduction to JavaScript', imageUrl: 'https://example.com/js1.jpg' },
-            { title: 'JavaScript Variables and Data Types', imageUrl: 'https://example.com/js2.jpg' },
-            { title: 'Control Flow and Functions in JavaScript', imageUrl: 'https://example.com/js3.jpg' },
+            { title: 'Introduction to JavaScript', imageUrl: images.jsImage },
+            { title: 'JavaScript Variables and Data Types', imageUrl: images.jsImage },
+            { title: 'Control Flow and Functions in JavaScript', imageUrl: images.jsImage },
           ],
         },
         {
           title: 'Responsive Web Design',
           lessons: [
-            { title: 'Introduction to Responsive Design', imageUrl: 'https://example.com/responsive1.jpg' },
-            { title: 'Media Queries and Flexbox', imageUrl: 'https://example.com/responsive2.jpg' },
-            { title: 'Building a Responsive Website', imageUrl: 'https://example.com/responsive3.jpg' },
+            { title: 'Introduction to Responsive Design', imageUrl: images.jsImage },
+            { title: 'Media Queries and Flexbox', imageUrl: images.jsImage },
+            { title: 'Building a Responsive Website', imageUrl: images.jsImage },
           ],
         },
         {
           title: 'Introduction to Frontend Frameworks',
           lessons: [
-            { title: 'Overview of Frontend Frameworks', imageUrl: 'https://example.com/frameworks1.jpg' },
-            { title: 'React.js Fundamentals', imageUrl: 'https://example.com/frameworks2.jpg' },
-            { title: 'Vue.js Basics', imageUrl: 'https://example.com/frameworks3.jpg' },
+            { title: 'Overview of Frontend Frameworks', imageUrl: images.jsImage },
+            { title: 'React.js Fundamentals', imageUrl: images.jsImage },
+            { title: 'Vue.js Basics', imageUrl: images.jsImage },
           ],
         },
       ],
     },
   ];
+
+  const tabs = [
+    {
+      id: 1,
+      label: 'About Course',
+      content: 'Content for Tab 1',
+    },
+    {
+      id: 2,
+      label: 'Resourses',
+      content: 'Content for Tab 2',
+    },
+    {
+      id: 3,
+      label: 'Descussion',
+      content: 'Content for Tab 3',
+    },
+    {
+      id: 4,
+      label: 'Projects',
+      content: 'Content for Tab 4',
+    },
+    {
+      id: 5,
+      label: 'Reviews',
+      content: 'Content for Tab 5',
+    },
+  ];
+
+  const instructor = {
+      name: 'Ysihak Bazezew',
+      image:'',
+      Followers: 200,
+      courses: 5,
+      details:[
+        {
+          header: 'Headline',
+          desc: 'Software Developer',
+          icon: <MdTitle/>
+        },
+        {
+          header: 'Education',
+          desc: 'BBA',
+          icon: <FaGraduationCap/>
+        },
+        {
+          header: 'Languages',
+          desc: ['English', 'Amharic'],
+          icon: <FaGlobe/>
+        },
+        {
+          header: 'Country',
+          desc: 'Ethiopia',
+          icon: <FaMapMarker/>
+        },
+      ]
+    }
 
 const displayModule = ({ item, handleLessonClick }) => {
   const [moduleClicked, setModuleClicked] = useState(false);
@@ -87,6 +146,11 @@ const displayModule = ({ item, handleLessonClick }) => {
 
 export const CourseDetails = () => {
   const [selectedLesson, setSelectedLesson] = useState(null);
+  const [activeTab, setActiveTab] = useState(1);
+
+  const handleTabClick = (id) => {
+    setActiveTab(id);
+  };
 
   const handleLessonClick = (imageUrl) => {
     setSelectedLesson(imageUrl);
@@ -97,7 +161,7 @@ export const CourseDetails = () => {
         <div className='bg-[#27323d] text-white p-8 flex gap-5'>
             <div className=''>
                 <h1 className='font-bold text-xl p-4 w-60'>Course Content</h1>
-                <div className='w-60 max-h-[450px] overflow-y-auto hide-scrollbar'>
+                <div className='w-60 h-[450px] overflow-y-auto hide-scrollbar'>
                     {courseData.map((course) =>
                     course.modules.map((item) => (
                         displayModule({item, handleLessonClick})
@@ -114,23 +178,73 @@ export const CourseDetails = () => {
         </div>
         <div className='grid grid-cols-3 gap-10 mt-10 ml-10 mr-5'>
             <div className='col-span-2'>
+              <div className='flex flex-col gap-5'>
                 <div className='flex gap-6 px-6 py-4 bg-gray-200 rounded-2xl text-gray-700 text-base'>
-                    <button className='px-4 py-2 hover:text-blue-500 focus:bg-white focus:rounded-lg focus:text-blue-500'>About Course</button>
-                    <button className='px-4 py-2 hover:text-blue-500 focus:bg-white focus:rounded-lg focus:text-blue-500'>Resourses</button>
-                    <button className='px-4 py-2 hover:text-blue-500 focus:bg-white focus:rounded-lg focus:text-blue-500'>Descussion</button>
-                    <button className='px-4 py-2 hover:text-blue-500 focus:bg-white focus:rounded-lg focus:text-blue-500'>Projects</button>
-                    <button className='px-4 py-2 hover:text-blue-500 focus:bg-white focus:rounded-lg focus:text-blue-500'>Reviews</button>
+                  {tabs.map(tab => (
+                    <div key={tab.id} className={`px-4 py-2 hover:text-blue-500 cursor-pointer ${tab.id === activeTab ? 'bg-white rounded-lg text-blue-500':''}`}
+                      onClick={() => handleTabClick(tab.id)}>{tab.label}
+                    </div>
+                  ))}
                 </div>
+                {tabs.map(tab => (
+                  <div key={tab.id} className={`${tab.id === activeTab ? '':'hidden'}`}>
+                    {tab.content}
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className='flex gap-20'>
-                <div className='flex flex-col gap-2'>
-                    <div className='flex gap-2 items-center'><AiFillEye className='text-blue-500 text-4xl'/><span>{courseData[0].views}</span></div>
-                    <h2>Course view</h2>
+            <div className='flex flex-col gap-5'>
+              <div className='flex gap-10 items-center'>
+                  <div className='flex flex-col gap-2'>
+                      <div className='flex gap-2 items-center'><AiFillEye className='text-blue-500 text-4xl'/><span>{courseData[0].views}</span></div>
+                      <h2>Course view</h2>
+                  </div>
+                  <div className='flex flex-col gap-2'>
+                      <p>{courseData[0].level}</p>
+                      <h2>Course Level</h2>
+                  </div>
+                  <div className='flex flex-col gap-2'>
+                      <div className='flex gap-2 items-center'><FaStar className='text-yellow-500 text-4xl'/><span>{courseData[0].rating}</span></div>
+                      <h2>Course Rating</h2>
+                  </div>
+              </div>
+              <div className='flex flex-col border-t gap-5'>
+                <h1 className='text-dark-light'>Instructor</h1>
+                <div className="flex items-center mb-4">
+                  <div className="w-20 h-20 bg-gray-300 rounded-full mr-2 overflow-hidden">
+                      {
+                        !instructor.image ? (<img src={images.profilePlaceholder} className='w-20 h-20' alt="Profile" />)
+                        : (<img src={instructor.image} className='w-20 h-20' alt="Profile" />)
+                      }
+                  </div>
+                  <div className='text-base'>
+                    <h2 className="font-bold">Ysihak Bazezew</h2>
+                    <div className="flex items-center gap-5">
+                      <p className="text-gray-500"><span className='text-[#66C5DB]'>200</span> followers</p>
+                      <p className="text-gray-500"><span className='text-[#66C5DB]'>5</span> courses</p>
+                    </div>
+                  </div>
+                </div>
+                <div className='flex flex-col text-base gap-2'>
+                  {instructor.details && instructor.details.map(item => (
+                    <div className='flex gap-2 items-center'>
+                      <div className='text-[#66C5DB]'>{item.icon}</div>
+                      <div className='flex gap-2'>
+                        <h1 className='font-bold'>{item.header}</h1>
+                        <p className='text-gray-500'>{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
                 <div className='flex flex-col gap-2'>
-                    <h2>Level</h2>
-                    <p>{courseData[0].level}</p>
+                  <button type="submit" className="bg-[#66C5DB] text-white font-bold px-4 py-2 rounded w-full">
+                    Follow
+                  </button>
+                  <button type="submit" className="bg-gray-200 text-gray-500 px-4 py-2 rounded w-full">
+                    Report Course
+                  </button>
                 </div>
+              </div>
             </div>
         </div>
     </div>

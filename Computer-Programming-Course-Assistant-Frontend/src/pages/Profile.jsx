@@ -51,8 +51,8 @@ export const Profile = ({image}) => {
     }));
   };
 
-  const updateUser = () => {
-    console.log(userData)
+  const updateUser = (e) => {
+    e.preventDefault();
     const updateUserData = async () => {
       try {
         if (user.token) {
