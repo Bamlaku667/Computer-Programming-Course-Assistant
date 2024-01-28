@@ -23,7 +23,7 @@ export default function CourseCard({course}) {
       </div>
       <div className="flex items-center pb-2 border-b">
         <span className="mr-2">⭐️</span>
-        <span className="text-gray-700">{rating} ({views} views)</span>
+        <span className="text-gray-700">{`${rating} ${views} views`}</span>
       </div>
       <div className="flex justify-center pt-2">
         <Link to={`/myCourses/${_id}`} className="p-1 border shadow-md rounded-md"> <img src={images.redirect} alt="redirect" /> </Link>
