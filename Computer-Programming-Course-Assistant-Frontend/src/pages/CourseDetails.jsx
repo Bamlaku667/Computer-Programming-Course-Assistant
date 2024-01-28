@@ -4,14 +4,15 @@ import { images } from '../constants';
 import { AiFillEye } from 'react-icons/ai';
 import { FaGlobe, FaGraduationCap, FaMapMarker, FaStar } from 'react-icons/fa';
 import { MdTitle } from 'react-icons/md';
+import { useParams } from 'react-router-dom';
 
-const courseData = [
+const courses = [
     {
       _id: '1',
       title: 'Web Development Fundamentals',
       instructor: 'John Doe',
       description: 'Learn the basics of HTML,CSS and Javascript',
-      modules: 10,
+      moduleNo: 8,
       enrolledStudents: 50,
       image: images.jsImage,
       views: 2500,
@@ -150,6 +151,8 @@ const displayModule = ({ item, handleLessonClick }) => {
 };
 
 export const CourseDetails = () => {
+  const { _id } = useParams();
+  const courseData = courses.filter((course) => course._id === _id)
   const [selectedLesson, setSelectedLesson] = useState(null);
   const [activeTab, setActiveTab] = useState(1);
 

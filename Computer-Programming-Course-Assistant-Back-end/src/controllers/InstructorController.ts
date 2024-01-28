@@ -30,7 +30,7 @@ const InstructorLogin = async (req: Request, res: Response, next: NextFunction) 
             } as InstructorTokenPayload
 
             const jwt = await GenerateJWT(tokenData)
-            return res.status(StatusCodes.OK).json({ token: jwt, instructor })
+            return res.status(StatusCodes.OK).json({ token: jwt, instructor, role: 'Instructor' })
         }
         throw new UnauthorizedError('incorrect password');
     }

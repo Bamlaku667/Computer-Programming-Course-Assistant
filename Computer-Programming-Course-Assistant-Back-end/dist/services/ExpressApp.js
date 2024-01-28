@@ -22,26 +22,31 @@ const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const yamljs_1 = __importDefault(require("yamljs"));
+const morgan_1 = __importDefault(require("morgan"));
+const CourseRoutes_1 = require("../routes/CourseRoutes");
 const App = (app) => __awaiter(void 0, void 0, void 0, function* () {
     // Construct the correct path to swagger.yaml
-    const swaggerDocument = yamljs_1.default.load(path_1.default.join(__dirname, '../swagger.yaml'));
-    app.get('/', (req, res) => {
-        res.send('<h1>Course Assistant API</h1><a href="/api-docs">Documentation</a>');
-    });
-    app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
+    const swaggerDocument = yamljs_1.default.load(path_1.default.join(__dirname, '../../swagger.yaml'));
+    // app.get('/', (req, res) => {
+    //   res.send('<h1>Course Assistant API</h1><a href="/api-docs">Documentation</a>');
+    // });
+    app.use(express_1.default.static(path_1.default.join(__dirname, "../public")));
     app.use((0, cors_1.default)());
     app.use(express_1.default.json());
+    app.use((0, morgan_1.default)('dev'));
     app.use(express_1.default.urlencoded({ extended: true }));
     // Use /tmp directory for temporary image storage
     const imagesPath = '/tmp/images';
     if (!fs_1.default.existsSync(imagesPath)) {
         fs_1.default.mkdirSync(imagesPath);
     }
+    app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
     app.use('/images', express_1.default.static(imagesPath));
     app.use('/api/v1/auth', routes_1.AuthRoutes);
     app.use('/api/v1/student', routes_1.StudentRoutes);
     app.use('/api/v1/admin', AdminRoutes_1.AdminRoutes);
     app.use('/api/v1/instructor', routes_1.InstructorRoutes);
+    app.use('/api/v1/courses', CourseRoutes_1.CourseRoutes);
     app.use(middlewares_1.errorHandler);
     return app;
 });
