@@ -21,7 +21,6 @@ export class createInstructorInputs {
     lastName: string
     // @IsPhoneNumber()
     phone: string
-
 }
 
 export interface EditInstructorInputs {
