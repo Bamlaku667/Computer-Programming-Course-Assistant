@@ -9,13 +9,11 @@ import { NoMatch } from "./pages/NoMatch";
 import Dashboard from "./pages/Dashboard";
 import MyCourses from "./pages/MyCourses";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 import { StudentLogin } from "./pages/StudentLogin";
 import { CourseDetails } from "./pages/CourseDetails";
 import { useAuth } from "./hooks/useAuthContex";
-import InstructorDashboard from "./pages/InstructorDashboard";
 import { Courses } from "./pages/Courses";
-
+import InstructorDashboard from "./components/Instructor/Instructor";
 
 function App() {
   const clientId =
