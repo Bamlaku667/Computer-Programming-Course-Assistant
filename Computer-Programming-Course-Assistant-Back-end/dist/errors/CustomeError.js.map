@@ -1,1 +1,0 @@
-{"version":3,"file":"CustomeError.js","sourceRoot":"","sources":["../../src/errors/CustomeError.ts"],"names":[],"mappings":";;AAAA,MAAqB,WAAY,SAAQ,KAAK;IAE1C,YAAY,OAAY,EAAE,UAAe;QACrC,KAAK,CAAC,OAAO,CAAC,CAAA;QACd,IAAI,CAAC,UAAU,GAAG,UAAU,CAAA;IAChC,CAAC;CACJ;AAND,8BAMC"}
