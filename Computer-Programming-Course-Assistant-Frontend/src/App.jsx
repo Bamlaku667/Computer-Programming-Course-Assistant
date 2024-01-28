@@ -35,7 +35,7 @@ function App() {
             <Route path='/myCourses' element={ user ? <Courses /> : <StudentLogin/>} />
             <Route path='/myCourses/:_id' element={ user ? <CourseDetails /> : <StudentLogin/>} />
             <Route path='/profile' element={ user ? <Profile />: <StudentLogin/>}/>
-            <Route path='/instructor' element={ <InstructorDashboard/>}/>
+            <Route path='/instructor' element={ user ? <InstructorDashboard/> : <StudentLogin/>}/>
             
             <Route path="*" element={<NoMatch />} />
           </Routes>

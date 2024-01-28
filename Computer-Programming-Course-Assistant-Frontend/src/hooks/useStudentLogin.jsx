@@ -22,7 +22,7 @@ const useStudentLogin = () => {
       localStorage.setItem("user", JSON.stringify(response.data));
       dispatch({ type: "LOGIN", payload: response.data });
       // navigate(redirectPath, { replace: true });
-      if (userRole === "instructor") {
+      if (userRole === "Instructor") {
         navigate("/instructor", { replace: true });
       } else {
         navigate("/dashboard", { replace: true });
