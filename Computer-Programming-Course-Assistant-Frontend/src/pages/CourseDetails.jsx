@@ -15,7 +15,7 @@ const courseData = [
       enrolledStudents: 50,
       image: images.jsImage,
       views: 2500,
-      level: 'Beginner',
+      level: 'Intermediate',
       rating: 4.2,
       modules: [
         {
