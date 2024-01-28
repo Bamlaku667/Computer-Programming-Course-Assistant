@@ -16,21 +16,21 @@ const SidebarItems = [
   { id: 4, name: "Messages", link: "/messages", icon: TiMessages },
   {
     id: 5,
-    name: "Other attributes",
-    link: "/otherAttributes",
-    icon: IoThermometerOutline,
-  },
-  {
-    id: 6,
     name: "Profile",
     link: "/profile",
     icon: MdOutlineDashboard,
   },
+  {
+    id: 6,
+    name: "Other attributes",
+    link: "/otherAttributes",
+    icon: IoThermometerOutline,
+  },
 ];
 
-const Sidebar = () => {
-  const {dispatch} = useAuth();
-  const navigate = useNavigate()
+const Sidebar = ({image}) => {
+  const { user, dispatch } = useAuth();
+  const navigate = useNavigate();
   const navLinkStyles = ({ isActive }) => {
     return {
       color: isActive ? "#66C5DB" : "",
@@ -40,33 +40,45 @@ const Sidebar = () => {
   };
 
   const handleClick = () => {
-    dispatch({type: 'LOGOUT'})
+    dispatch({ type: "LOGOUT" });
     navigate("/");
   };
 
   return (
-    <div className="bg-primary text-dark-light w-60">
+    <div className="bg-white text-dark-light w-60 border-r">
       <div className="flex justify-center border-b py-3">
-        <img src={images.Logo} alt="App Logo" />
+        <div className="flex flex-col items-center gap-2">
+          <div className="w-36 h-36 bg-gray-300 rounded-full mr-2 overflow-hidden">
+            {!image ? (
+              <img
+                src={images.profilePlaceholder}
+                className="w-36 h-36"
+                alt="Profile"
+              />
+            ) :
+            (<img src={image} className="w-36 h-36" alt="Profile" />)}
+          </div>
+          <div className="">{user.email}</div>
+        </div>
       </div>
-      <div className="py-2">
+      <div className="py-2 border-b">
         {SidebarItems.map((item) => (
           <div key={item.id}>
             <NavLink
               style={navLinkStyles}
-              className=" p-3  py-2 flex gap-x-3 items-center hover:bg-secondary hover:text-white"
+              className="p-3 py-2 flex gap-x-3 items-center hover:text-xl"
               to={item.link}
             >
               {React.createElement(item.icon)}{" "}
-              {/* Render the icon dynamically */}
               {item.name}
             </NavLink>
           </div>
         ))}
-        <IoIosLogOut/>
-        <button className=" p-3  py-2 flex gap-x-3 items-center hover:bg-secondary hover:text-white"
-onClick={handleClick}>Logout</button>
       </div>
+      <div className="p-3 py-2 flex gap-x-3 items-center hover:text-xl">
+          <IoIosLogOut />
+          <button onClick={handleClick}>Logout</button>
+        </div>
     </div>
   );
 };

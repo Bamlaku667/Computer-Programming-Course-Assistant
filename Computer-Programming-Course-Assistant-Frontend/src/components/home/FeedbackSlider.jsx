@@ -78,8 +78,8 @@ export default function FeedbackSlider({ feedbacks }) {
   return (
     <div className="flex flex-col gap-16">
       <Slider ref={sliderRef} {...settings}>
-        {feedbacks.map((feedback) => (
-          <div key={feedback.id}>
+        {feedbacks.map((feedback, index) => (
+          <div key={index}>
             <FeedbackCard feedback={feedback} />
           </div>
         ))}

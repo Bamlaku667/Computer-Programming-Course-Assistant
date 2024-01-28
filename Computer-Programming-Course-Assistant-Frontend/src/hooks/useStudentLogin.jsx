@@ -1,30 +1,31 @@
 import { useState } from "react";
-import { useAuth } from "../hooks/useAuthContex";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "./useAuthContex";
+import {  useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
-const useLogin = () => {
-  const [error, setError] = useState("");
+
+const useStudentLogin = () => {
+  const [error, setError] = useState(null);
   const { dispatch, user } = useAuth();
-  const location = useLocation();
   const redirectPath = "/dashboard";
   const navigate = useNavigate();
 
-  const login = async (email, password) => {
+  const login = async (email, password, url) => {
+    setError(null); 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/auth/login",
+        url,
         {
           email,
           password,
         }
       );
       console.log("Login successful:", response.data);
-      // auth.login(response.data);
       localStorage.setItem("user", JSON.stringify(response.data));
       dispatch({ type: "LOGIN", payload: response.data });
       navigate(redirectPath, { replace: true });
+      // console.log(user); 
     } catch (error) {
       console.error(
         "Login failed:",
@@ -36,4 +37,4 @@ const useLogin = () => {
 
   return { login, error };
 };
-export default useLogin;
+export default useStudentLogin;

@@ -1,9 +1,7 @@
 import {
   createContext,
-  useContext,
   useEffect,
   useReducer,
-  useState,
 } from "react";
 
 export const AuthContext = createContext(null);
@@ -16,7 +14,7 @@ const authReducer = (state, action) => {
       };
     case "LOGOUT":
       return {
-        user: null,
+        user: localStorage.removeItem('user'),
       };
     default:
       return state;
@@ -24,19 +22,7 @@ const authReducer = (state, action) => {
 };
 
 export const AuthProvider = ({ children }) => {
-  // const [user, setUser] = useState('')
-  // const [token, setToken] = useState('')
-
-  const [state, dispatch] = useReducer(authReducer, { user: null });
-  //   const login = (data) => {
-  //     setUser(data.user);
-  //     setToken(data.token);
-  //   };
-  //   const logout = () => {
-  //     setUser(null);
-  //     setToken(null);
-  //   };
-
+  const [state, dispatch] = useReducer(authReducer, { user: null , role: 'student'});
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {

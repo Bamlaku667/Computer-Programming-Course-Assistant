@@ -11,7 +11,6 @@ const startServer = async () => {
     const app = express();
     await connectToDB();
     await App(app);
-
     app.listen(port, () => {
         console.log(`server is running on port ${port}`)
     })
