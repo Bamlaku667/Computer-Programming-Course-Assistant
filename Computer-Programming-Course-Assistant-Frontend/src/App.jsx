@@ -13,6 +13,7 @@ import Footer from "./components/Footer";
 import { StudentLogin } from "./pages/StudentLogin";
 import { CourseDetails } from "./pages/CourseDetails";
 import { useAuth } from "./hooks/useAuthContex";
+import InstructorDashboard from "./pages/InstructorDashboard";
 
 function App() {
   const clientId =
@@ -34,6 +35,8 @@ function App() {
             <Route path='/myCourses' element={ user ? <Courses /> : <StudentLogin/>} />
             <Route path='/myCourses/:_id' element={ user ? <CourseDetails /> : <StudentLogin/>} />
             <Route path='/profile' element={ user ? <Profile />: <StudentLogin/>}/>
+            <Route path='/instructor' element={ <InstructorDashboard/>}/>
+            
             <Route path="*" element={<NoMatch />} />
           </Routes>
           {/* <Footer/> */}
