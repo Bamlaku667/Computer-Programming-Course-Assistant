@@ -12,7 +12,7 @@ const Courses = () => {
   useEffect(() => {
     // Replace this with actual API calls to fetch courses
     // For simplicity, I'll use mock data
-    const courseData = [
+    const courses = [
       {
         _id: '1',
         title: 'Web Development Fundamentals',
@@ -69,7 +69,7 @@ const Courses = () => {
       },
     ];
 
-    setCourses(courseData);
+    setCourses(courses);
   }, []);
 
   const navLinkStyles = ({ isActive }) => {
