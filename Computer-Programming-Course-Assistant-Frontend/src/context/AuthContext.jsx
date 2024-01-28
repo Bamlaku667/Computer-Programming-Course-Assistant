@@ -22,7 +22,7 @@ const authReducer = (state, action) => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, { user: null , role: 'student'});
+  const [state, dispatch] = useReducer(authReducer, { user: null });
   useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {

@@ -1,0 +1,465 @@
+openapi: 3.0.0
+info:
+  title: Computer Programming Course Assisstance
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://courseassistant.vercel.app/api/v1
+  variables: {}
+paths:
+  /admin:
+    post:
+      tags:
+      - Admin
+      summary: Admin - Create Instructor
+      operationId: Admin-CreateInstructor
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/Admin-CreateInstructorRequest'
+              - example:
+                  userName: alemayehu
+                  firstName: Alemayehu
+                  lastName: Chabude
+                  email: alexx@gmail.com
+                  password: alexx123
+                  phone: '0911233456'
+            example:
+              userName: alemayehu
+              firstName: Alemayehu
+              lastName: Chabude
+              email: alexx@gmail.com
+              password: alexx123
+              phone: '0911233456'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    get:
+      tags:
+      - Admin
+      summary: Admin - Get All Instructors
+      operationId: Admin-GetInstructorById
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /admin/{instructorId}:
+    get:
+      tags:
+      - Admin
+      summary: Admin - Get Instructors
+      operationId: Admin-GetInstructors
+      parameters:
+        - in: path
+          name: instructorId 
+          required: true
+          schema:
+            type: string
+            minimum: 1
+          description: Instructor ID 
+      
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /instructor/login:
+    post:
+      tags:
+      - Instructor
+      summary: Instructor- Login
+      operationId: Instructor-Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/Instructor-LoginRequest'
+              - example:
+                  email: alexx@gmail.com
+                  password: alexx123
+            example:
+              email: alexx@gmail.com
+              password: alexx123
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /instructor/profile:
+    get:
+      tags:
+      - Instructor
+      summary: Instructor - GET profile
+      operationId: Instructor-GETprofile
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    patch:
+      tags:
+      - Instructor
+      summary: Instructor - Update Profile
+      operationId: Instructor-UpdateProfile
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/Instructor-UpdateProfileRequest'
+              - example:
+                  firstName: Alemayehu
+                  lastName: lemesa
+                  phone: '09464646445'
+            example:
+              firstName: Alemayehu
+              lastName: lemesa
+              phone: '09464646445'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /instructor/courses:
+    get:
+      tags:
+      - Instructor
+      summary: Instructor - Get Courses
+      operationId: Instructor-GetCourses
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    post:
+      tags:
+      - Instructor
+      summary: Instructor - Add Course
+      operationId: Instructor-AddCourse
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/Instructor-AddCourseRequest'
+              - example:
+                  title: Web Development Fundamentals
+                  description: Explore the fundamentals of web development.
+                  modules:
+                  - title: Module 1
+                    content: HTML and CSS Basics
+                  - title: Module 2
+                    content: JavaScript Fundamentals
+            example:
+              title: Web Development Fundamentals
+              description: Explore the fundamentals of web development.
+              modules:
+              - title: Module 1
+                content: HTML and CSS Basics
+              - title: Module 2
+                content: JavaScript Fundamentals
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /auth/register:
+    post:
+      tags:
+      - Students
+      summary: Student-Register
+      operationId: Student-Register
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/Student-Register-Request'
+              - example:
+                  userName: chaltu
+                  email: chaltu123@gmail.com
+                  password: chaltu123
+            example:
+              userName: chaltu
+              email: chaltu123@gmail.com
+              password: chaltu123
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Students
+      summary: Student - Login
+      operationId: Student-Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/Student-LoginRequest'
+              - example:
+                  email: chaltu123@gmail.com
+                  password: chaltu123
+            example:
+              email: chaltu123@gmail.com
+              password: chaltu123
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /student/profile:
+    get:
+      tags:
+      - Students
+      summary: Student - Get Profile
+      operationId: Student-GetProfile
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    patch:
+      tags:
+      - Students
+      summary: Student - Edit Profile
+      operationId: Student-EditProfile
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/Student-EditProfileRequest'
+              - example:
+                  firstName: chala
+                  lastName: kebede
+                  address: addis ababa
+                  phone: '1234567'
+            example:
+              firstName: chala
+              lastName: kebede
+              address: addis ababa
+              phone: '1234567'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    Admin-CreateInstructorRequest:
+      title: Admin-CreateInstructorRequest
+      required:
+      - userName
+      - firstName
+      - lastName
+      - email
+      - password
+      - phone
+      type: object
+      properties:
+        userName:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        phone:
+          type: string
+      example:
+        userName: alemayehu
+        firstName: Alemayehu
+        lastName: Chabude
+        email: alexx@gmail.com
+        password: alexx123
+        phone: '0911233456'
+    Instructor-LoginRequest:
+      title: Instructor-LoginRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: alexx@gmail.com
+        password: alexx123
+    Instructor-UpdateProfileRequest:
+      title: Instructor-UpdateProfileRequest
+      required:
+      - firstName
+      - lastName
+      - phone
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+      example:
+        firstName: Alemayehu
+        lastName: lemesa
+        phone: '09464646445'
+    Instructor-AddCourseRequest:
+      title: Instructor-AddCourseRequest
+      required:
+      - title
+      - description
+      - modules
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        modules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Module'
+          description: ''
+      example:
+        title: Web Development Fundamentals
+        description: Explore the fundamentals of web development.
+        modules:
+        - title: Module 1
+          content: HTML and CSS Basics
+        - title: Module 2
+          content: JavaScript Fundamentals
+    Module:
+      title: Module
+      required:
+      - title
+      - content
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+      example:
+        title: Module 1
+        content: HTML and CSS Basics
+    Student-Register-Request:
+      title: Student-Register-Request
+      required:
+      - userName
+      - email
+      - password
+      type: object
+      properties:
+        userName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        userName: chaltu
+        email: chaltu123@gmail.com
+        password: chaltu123
+    Student-LoginRequest:
+      title: Student-LoginRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: chaltu123@gmail.com
+        password: chaltu123
+    Student-EditProfileRequest:
+      title: Student-EditProfileRequest
+      required:
+      - firstName
+      - lastName
+      - address
+      - phone
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        address:
+          type: string
+        phone:
+          type: string
+      example:
+        firstName: chala
+        lastName: kebede
+        address: addis ababa
+        phone: '1234567'
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Admin
+- name: Instructor
+- name: Students

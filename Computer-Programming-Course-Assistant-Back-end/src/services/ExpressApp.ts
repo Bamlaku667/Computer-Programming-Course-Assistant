@@ -9,10 +9,11 @@ import fs from 'fs';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 import morgan from 'morgan'; 
+import { CourseRoutes } from '../routes/CourseRoutes';
 
 const App = async (app: Application) => {
   // Construct the correct path to swagger.yaml
-  const swaggerDocument = YAML.load(path.join(__dirname, '../swagger.yaml'));
+  const swaggerDocument = YAML.load(path.join(__dirname, '../../swagger.yaml'));
 
   // app.get('/', (req, res) => {
   //   res.send('<h1>Course Assistant API</h1><a href="/api-docs">Documentation</a>');
@@ -36,6 +37,8 @@ const App = async (app: Application) => {
   app.use('/api/v1/student', StudentRoutes);
   app.use('/api/v1/admin', AdminRoutes);
   app.use('/api/v1/instructor', InstructorRoutes);
+  app.use('/api/v1/courses', CourseRoutes)
+  
 
   app.use(errorHandler);
 

@@ -35,7 +35,7 @@ const InstructorLogin = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
                 email: instructor.email,
             };
             const jwt = yield (0, PasswordUtility_1.GenerateJWT)(tokenData);
-            return res.status(http_status_codes_1.StatusCodes.OK).json({ token: jwt, instructor });
+            return res.status(http_status_codes_1.StatusCodes.OK).json({ token: jwt, instructor, role: 'Instructor' });
         }
         throw new errors_1.UnauthorizedError('incorrect password');
     }

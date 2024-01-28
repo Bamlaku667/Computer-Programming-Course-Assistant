@@ -18,4 +18,5 @@ __exportStar(require("./AuthController"), exports);
 __exportStar(require("./StudentController"), exports);
 __exportStar(require("./AdminController"), exports);
 __exportStar(require("./InstructorController"), exports);
+__exportStar(require("./CourseController"), exports);
 //# sourceMappingURL=index.js.map
