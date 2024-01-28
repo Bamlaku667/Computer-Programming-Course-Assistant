@@ -8,7 +8,7 @@ import { FaSearch } from "react-icons/fa";
 export default function Navbar({image}) {
   const NavItemsElmts = [
     { name: "Home", link: "/" },
-    { name: "Explore Courses", link: "/courses" },
+    { name: "Courses", link: "/courses" },
   ];
   const { user } = useAuth();
   console.log("User:", user);

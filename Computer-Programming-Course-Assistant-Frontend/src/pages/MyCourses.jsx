@@ -22,7 +22,7 @@ const tabs = [
   },
 ];
 
-const Courses = () => {
+const MyCourses = () => {
   // State to store the list of courses
   const [courses, setCourses] = useState([]);
   const [activeTab, setActiveTab] = useState(1);
@@ -166,4 +166,4 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default MyCourses;
