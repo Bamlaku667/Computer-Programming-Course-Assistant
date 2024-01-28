@@ -23,6 +23,7 @@ const fs_1 = __importDefault(require("fs"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const yamljs_1 = __importDefault(require("yamljs"));
 const morgan_1 = __importDefault(require("morgan"));
+const CourseRoutes_1 = require("../routes/CourseRoutes");
 const App = (app) => __awaiter(void 0, void 0, void 0, function* () {
     // Construct the correct path to swagger.yaml
     const swaggerDocument = yamljs_1.default.load(path_1.default.join(__dirname, '../../swagger.yaml'));
@@ -45,6 +46,7 @@ const App = (app) => __awaiter(void 0, void 0, void 0, function* () {
     app.use('/api/v1/student', routes_1.StudentRoutes);
     app.use('/api/v1/admin', AdminRoutes_1.AdminRoutes);
     app.use('/api/v1/instructor', routes_1.InstructorRoutes);
+    app.use('/api/v1/courses', CourseRoutes_1.CourseRoutes);
     app.use(middlewares_1.errorHandler);
     return app;
 });
