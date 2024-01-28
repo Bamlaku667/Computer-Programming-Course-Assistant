@@ -16,6 +16,7 @@ import { useAuth } from "./hooks/useAuthContex";
 import InstructorDashboard from "./pages/InstructorDashboard";
 import { Courses } from "./pages/Courses";
 
+
 function App() {
   const clientId =
     "138178679163-i2g2io24rchh1tsafcapp76viof1d5t8.apps.googleusercontent.com";
@@ -37,7 +38,7 @@ function App() {
             <Route path='/myCourses' element={ user ? <MyCourses /> : <StudentLogin/>} />
             <Route path='/myCourses/:_id' element={ user ? <CourseDetails /> : <StudentLogin/>} />
             <Route path='/profile' element={ user ? <Profile />: <StudentLogin/>}/>
-            <Route path='/instructor' element={ user ? <InstructorDashboard /> : <StudentLogin/>} />
+            <Route path='/instructor' element={ user ? <InstructorDashboard/> : <StudentLogin/>}/>
             <Route path="*" element={<NoMatch />} />
           </Routes>
           {/* <Footer/> */}

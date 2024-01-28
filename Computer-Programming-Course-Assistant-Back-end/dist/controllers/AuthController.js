@@ -78,9 +78,9 @@ const StudentLogin = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
                 userName: student.userName
             };
             const jwt = yield (0, PasswordUtility_1.GenerateJWT)(tokenData);
-            return res.status(http_status_codes_1.StatusCodes.OK).json({ token: jwt, email });
+            return res.status(http_status_codes_1.StatusCodes.OK).json({ token: jwt, email, role: 'Student' });
         }
-        return new errors_1.BadRequestError('Invalic password');
+        return new errors_1.BadRequestError('Invalid password');
     }
     return new errors_1.NotFoundError(`student with email ${email} not found`);
 });

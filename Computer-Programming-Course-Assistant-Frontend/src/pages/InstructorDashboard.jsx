@@ -6,7 +6,7 @@ import { useAuth } from "../hooks/useAuthContex";
 
 const InstructorDashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);
-//   const { user } = useAuth();
+  const { user } = useAuth();
   console.log("user", user);
   useEffect(() => {
     const mockData = {

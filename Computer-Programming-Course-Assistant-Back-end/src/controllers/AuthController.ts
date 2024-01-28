@@ -70,7 +70,7 @@ const StudentLogin = async (req: Request, res: Response, next: NextFunction) => 
                 userName: student.userName
             }
             const jwt = await GenerateJWT(tokenData);
-            return res.status(StatusCodes.OK).json({ token: jwt, email })
+            return res.status(StatusCodes.OK).json({ token: jwt, email, role: 'Student' })
         }
         return new BadRequestError('Invalid password')
     }
