@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { useAuth } from "../hooks/useAuthContex";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "./useAuthContex";
+import {  useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
-const useLogin = () => {
-  const [error, setError] = useState("");
+const useStudentLogin = () => {
+  const [error, setError] = useState(null);
   const { dispatch, user } = useAuth();
-  const location = useLocation();
   const redirectPath = "/dashboard";
   const navigate = useNavigate();
 
   const login = async (email, password) => {
+    setError(null); 
     try {
       const response = await axios.post(
         "https://courseassistant.vercel.app/api/v1/auth/login",
@@ -24,6 +24,7 @@ const useLogin = () => {
       localStorage.setItem("user", JSON.stringify(response.data));
       dispatch({ type: "LOGIN", payload: response.data });
       navigate(redirectPath, { replace: true });
+      // console.log(user); 
     } catch (error) {
       console.error(
         "Login failed:",
@@ -35,4 +36,4 @@ const useLogin = () => {
 
   return { login, error };
 };
-export default useLogin;
+export default useStudentLogin;

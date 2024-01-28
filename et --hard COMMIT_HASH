@@ -1,0 +1,116 @@
+[33mcommit 4eb108689a8c9c222b62f4edeb467b8b06e3607c[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: bacf16a 01504ea
+Author: Bamlaku <bamlakhiruya@gmail.com>
+Date:   Sat Jan 27 14:47:56 2024 +0300
+
+    Merge branch 'main' of github.com:Bamlaku667/Computer-Programming-Course-Assistant
+
+[33mcommit bacf16adf03f6ee8afa82ee4b78e3bf213b8cdd3[m
+Author: Bamlaku <bamlakhiruya@gmail.com>
+Date:   Sat Jan 27 14:44:44 2024 +0300
+
+    login page && useSignup hook
+
+[33mcommit 01504ea6a6d018f17467490e00a471610a87f944[m
+Merge: b526832 9ad7f77
+Author: Ysihak Bazezew <ysihakbazezew@gmail.com>
+Date:   Sat Jan 27 10:31:12 2024 +0300
+
+    Merge pull request #15 from Bamlaku667/dev/ysihak
+    
+    adding course details
+
+[33mcommit 9ad7f7718c100f311cf3cc8c0456504ec972cef8[m
+Author: ysihak-B <ysihakbazezew@gmail.com>
+Date:   Sat Jan 27 01:35:39 2024 +0300
+
+    adding course details
+
+[33mcommit b526832a4f0c7fd81ee90c9d73a47daa2f03af9c[m
+Merge: 1af13b9 dad0a4f
+Author: Bamlaku <bamlakhiruya@gmail.com>
+Date:   Fri Jan 26 17:14:22 2024 +0300
+
+    adding student  enroll course controller
+
+[33mcommit 1af13b971e25047bb39e7edb771e1bfad9032072[m
+Author: Bamlaku <bamlakhiruya@gmail.com>
+Date:   Fri Jan 26 17:09:38 2024 +0300
+
+    removing unnecessary imports
+
+[33mcommit dad0a4f27c67a562044bf4bd63171fcf26d50f4d[m
+Merge: ca566d2 556ad54
+Author: Ysihak Bazezew <ysihakbazezew@gmail.com>
+Date:   Fri Jan 26 17:06:19 2024 +0300
+
+    Merge pull request #14 from Bamlaku667/dev/ysihak
+    
+    Dev/ysihak
+
+[33mcommit 556ad547d326e0d0c1c8b550186f53966340ca09[m
+Author: ysihak-B <ysihakbazezew@gmail.com>
+Date:   Fri Jan 26 17:05:04 2024 +0300
+
+    updating student dashboard
+
+[33mcommit ce87c82351a761f027d5a6eb1318263ee4f3a66c[m
+Author: ysihak-B <ysihakbazezew@gmail.com>
+Date:   Fri Jan 26 17:04:15 2024 +0300
+
+    updating the dashboard
+
+[33mcommit ca566d222a646598065498d3af80b9745567b43d[m
+Merge: 16467b2 529b6f8
+Author: Ysihak Bazezew <ysihakbazezew@gmail.com>
+Date:   Fri Jan 26 14:59:43 2024 +0300
+
+    Merge pull request #13 from Bamlaku667/dev/ysihak
+    
+    Dev/ysihak
+
+[33mcommit 529b6f8bd869f4d396c142f13244ca795489ff12[m
+Author: ysihak-B <ysihakbazezew@gmail.com>
+Date:   Fri Jan 26 14:58:34 2024 +0300
+
+    updating profile
+
+[33mcommit 24cf9c1256b8a4152eeb31c0679384d1f934717a[m
+Author: ysihak-B <ysihakbazezew@gmail.com>
+Date:   Thu Jan 11 20:44:11 2024 +0300
+
+    updating require authentication
+
+[33mcommit d177473a78fce3c14a6fda607b64519075756d60[m
+Author: ysihak-B <ysihakbazezew@gmail.com>
+Date:   Thu Jan 11 14:36:42 2024 +0300
+
+    update authContext
+
+[33mcommit 8c71028ca15ce9b599fa08d023259a79c1b94232[m
+Author: ysihak-B <ysihakbazezew@gmail.com>
+Date:   Thu Jan 11 14:07:50 2024 +0300
+
+    fixing key issues
+
+[33mcommit 0a25a0482ed6946acba416d346d686ec7464edfa[m
+Merge: a9f2e2f 16467b2
+Author: Bamlaku <bamlakhiruya@gmail.com>
+Date:   Wed Jan 10 10:28:10 2024 +0300
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit a9f2e2f9915cbee2a64ce49f47a5d71666077aff[m
+Author: Bamlaku <bamlakhiruya@gmail.com>
+Date:   Wed Jan 10 10:25:02 2024 +0300
+
+    vercel config
+
+[33mcommit 16467b2101cf5dccfe7b1916e2f0cbccc3d8ac30[m
+Merge: 1bfb23f 62ba399
+Author: Ysihak Bazezew <ysihakbazezew@gmail.com>
+Date:   Wed Jan 10 10:09:39 2024 +0300
+
+    Merge pull request #12 from Bamlaku667/dev/ysihak
+    
+    profile page
