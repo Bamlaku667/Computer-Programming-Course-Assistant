@@ -8,6 +8,7 @@ import path from 'path';
 import fs from 'fs';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
+import morgan from 'morgan'; 
 
 const App = async (app: Application) => {
   // Construct the correct path to swagger.yaml
@@ -19,6 +20,7 @@ const App = async (app: Application) => {
   app.use(express.static(path.join(__dirname, "../public")));  
   app.use(cors());
   app.use(express.json());
+  app.use(morgan('dev'))
   app.use(express.urlencoded({ extended: true }));
   
   
