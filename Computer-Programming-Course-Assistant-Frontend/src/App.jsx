@@ -7,12 +7,14 @@ import { Profile } from "./pages/Profile";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { NoMatch } from "./pages/NoMatch";
 import Dashboard from "./pages/Dashboard";
-import Courses from "./pages/MyCourses";
+import MyCourses from "./pages/MyCourses";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { StudentLogin } from "./pages/StudentLogin";
 import { CourseDetails } from "./pages/CourseDetails";
 import { useAuth } from "./hooks/useAuthContex";
+import InstructorDashboard from "./pages/InstructorDashboard";
+import { Courses } from "./pages/Courses";
 
 function App() {
   const clientId =
@@ -28,12 +30,14 @@ function App() {
           <Navbar />
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/courses' element={<Courses />} />
             <Route path='/register' element={<RegistrationForm />} />
             <Route path='/login' element={<StudentLogin />} />
             <Route path='/dashboard' element={ user ? <Dashboard />: <StudentLogin/>} />
-            <Route path='/myCourses' element={ user ? <Courses /> : <StudentLogin/>} />
+            <Route path='/myCourses' element={ user ? <MyCourses /> : <StudentLogin/>} />
             <Route path='/myCourses/:_id' element={ user ? <CourseDetails /> : <StudentLogin/>} />
             <Route path='/profile' element={ user ? <Profile />: <StudentLogin/>}/>
+            <Route path='/instructor' element={ user ? <InstructorDashboard /> : <StudentLogin/>} />
             <Route path="*" element={<NoMatch />} />
           </Routes>
           {/* <Footer/> */}
