@@ -1,17 +1,35 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MiniCard from '../components/dashboard/MiniCard';
 import MainLayout from '../components/dashboard/common/MainLayout'
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuthContex';
+import axios from 'axios';
 
 
 const Dashboard = () => {
-  const [dashboardData, setDashboardData] = useState(null);
+  const {user} = useAuth();
+  const [noOfCompletedCourses, setNoOfCompletedCourses] = useState(0);
+  const [noOfInProgressCourses, setNoOfInProgressCourses] = useState(0);
+  const [error, setError] = useState('')
   useEffect(() => {
-    const mockData = {
-      completedCourses: 10,
-      coursesInProgress: 5,
-      otherAttribute: 8,
+    const fetchUserData = async () => {
+      try {
+        if (user.token) {
+          const response = await axios.get('https://courseassistant.vercel.app/api/v1/student/profile', {
+            headers: {
+              'Authorization': `Bearer ${user.token}`
+            }
+          });
+          setNoOfCompletedCourses(response.data.completedCourses.length);
+          setNoOfInProgressCourses(response.data.inProgressCourses.length)
+        }
+      } catch (error) {
+        setError(error)
+        console.error('Error fetching data:', error);
+      }
     };
+
+    fetchUserData();
   }, []);
 
   const navLinkStyles = ({ isActive }) => {
@@ -34,17 +52,17 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
           <MiniCard
             title="Completed Courses"
-            value={dashboardData?.completedCourses || 0}
+            value={noOfCompletedCourses}
             color="green"
           />
           <MiniCard
             title="Courses in Progress"
-            value={dashboardData?.coursesInProgress || 0}
+            value={noOfInProgressCourses}
             color="blue"
           />
           <MiniCard
             title="Other Attribute"
-            value={dashboardData?.otherAttribute || 0}
+            value={0}
             color="orange"
           />
         </div>
