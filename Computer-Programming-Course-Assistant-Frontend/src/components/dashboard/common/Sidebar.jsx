@@ -22,6 +22,12 @@ const SidebarItems = [
   },
   {
     id: 6,
+    name: "Admin Dashboard",
+    link: "/admin-dashboard",
+    icon: IoThermometerOutline,
+  },
+  {
+    id: 7,
     name: "Other attributes",
     link: "/otherAttributes",
     icon: IoThermometerOutline,

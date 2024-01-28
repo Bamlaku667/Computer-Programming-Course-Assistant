@@ -21,9 +21,9 @@ export default function Navbar({image}) {
   };
 
   return (
-    <nav className="flex justify-between py-4 pl-16 pr-4 items-center border border-b-2 sticky top-0 z-50 bg-red">
+    <nav className="flex justify-between py-4 pl-16 pr-4 items-center border border-b-2 sticky top-0 z-30 bg-white">
       <div className="">
-        <img src="./logo-2.jpg" alt="App Logo" className="w-20 h-20 object-contain rounded-md"/>
+        <img src={images.Logo}alt="App Logo"/>
       </div>
       <div className="relative hidden lg:flex">
         <input
