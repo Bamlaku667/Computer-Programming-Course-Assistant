@@ -27,7 +27,7 @@ function App() {
             <Route path='/login' element={<StudentLogin />} />
             <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>} />
             <Route path='/myCourses' element={<RequireAuth><Courses /></RequireAuth>} />
-            <Route path='/course/detail' element={<CourseDetails />} />
+            <Route path='/myCourses/:_id' element={<RequireAuth><CourseDetails /></RequireAuth>} />
             <Route path='/profile' element={<RequireAuth><Profile /></RequireAuth>}/>
             <Route path="*" element={<NoMatch />} />
           </Routes>
