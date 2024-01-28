@@ -4,7 +4,13 @@ import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { images } from "../constants";
 
+const studentUrl = "https://courseassistant.vercel.app/api/v1/auth/login";
+const instructorUrl = "https://courseassistant.vercel.app/api/v1/instructor/login";
+
+
+
 export const StudentLogin = () => {
+  const [url, setUrl] = useState(studentUrl)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, error } = useStudentLogin();
@@ -13,7 +19,7 @@ export const StudentLogin = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    await login(email, password);
+    await login(email, password, url);
     console.log("Student Form submitted:", { email, password });
   };
 
@@ -29,11 +35,11 @@ export const StudentLogin = () => {
           />
         </div>
         <div className="flex-1 p-8">
-          <h2 className="flex justify-center sm:justify-start text-2xl font-bold mb-8">
-           
-              Student Login
-          
-          </h2>
+          <h2 className="flex justify-center sm:justify-start text-2xl font-bold mb-8">Login as</h2>
+          <div className="flex">
+            <div onClick={() => setUrl(studentUrl)} className={`border-blue-500 rounded-md px-6 py-2 cursor-pointer ${url === studentUrl ? 'border-t border-l border-r':'border-b'} `}>Student</div>
+            <div onClick={() => setUrl(instructorUrl)} className={`border-blue-500 rounded-md px-6 py-2 cursor-pointer ${url === instructorUrl ? 'border-t border-l border-r':'border-b'} `}>Instructor</div>
+          </div>
           <form onSubmit={handleClick} className="max-w-md">
             <div className="flex mt-8 justify-center text-gray-500">
               ---- Login with your credentials ----

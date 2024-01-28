@@ -4,17 +4,18 @@ import {  useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
+
 const useStudentLogin = () => {
   const [error, setError] = useState(null);
   const { dispatch, user } = useAuth();
   const redirectPath = "/dashboard";
   const navigate = useNavigate();
 
-  const login = async (email, password) => {
+  const login = async (email, password, url) => {
     setError(null); 
     try {
       const response = await axios.post(
-        "https://courseassistant.vercel.app/api/v1/auth/login",
+        url,
         {
           email,
           password,

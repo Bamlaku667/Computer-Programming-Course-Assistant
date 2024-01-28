@@ -12,70 +12,64 @@ const Courses = () => {
   useEffect(() => {
     // Replace this with actual API calls to fetch courses
     // For simplicity, I'll use mock data
-    const courses = [
+    const courseData = [
       {
         _id: '1',
-        title: 'HTML',
+        title: 'Web Development Fundamentals',
+        instructor: 'John Doe',
         description: 'Learn the basics of HTML,CSS and Javascript',
-        modules: 10,
+        moduleNo: 8,
         enrolledStudents: 50,
         image: images.jsImage,
-        rating: {
-          value: 4.8,
-          reviews: 150
-        }
-      },
-      {
-        _id: '2',
-        title: 'Python',
-        description: 'Master Python development',
-        modules: 8,
-        enrolledStudents: 30,
-        image: images.jsImage,
-        rating: {
-          value: 4.8,
-          reviews: 150
-        }
-      },
-      {
-        _id: '3',
-        title: 'React',
-        description: 'Learn the basics of React.js',
-        modules: 10,
-        enrolledStudents: 50,
-        image: images.jsImage,
-        rating: {
-          value: 4.8,
-          reviews: 150
-        }
-      },
-      {
-        _id: '4',
-        title: 'Node.js',
-        description: 'Master Node.js development',
-        modules: 8,
-        enrolledStudents: 30,
-        image: images.jsImage,
-        rating: {
-          value: 4.8,
-          reviews: 150
-        }
-      },
-      {
-        _id: '5',
-        title: 'AngularJS',
-        description: 'Learn the basics of AngularJS',
-        modules: 10,
-        enrolledStudents: 50,
-        image: images.jsImage,
-        rating: {
-          value: 4.8,
-          reviews: 150
-        }
+        views: 2500,
+        level: 'Beginner',
+        rating: 4.2,
+        modules: [
+          {
+            title: 'HTML Basics',
+            lessons: [
+              { title: 'Introduction to HTML', imageUrl: images.jsImage },
+              { title: 'HTML Elements and Tags', imageUrl: images.jsImage },
+              { title: 'Structuring HTML Documents', imageUrl: images.jsImage },
+            ],
+          },
+          {
+            title: 'CSS Styling',
+            lessons: [
+              { title: 'Introduction to CSS', imageUrl: images.jsImage },
+              { title: 'CSS Selectors and Properties', imageUrl: images.jsImage },
+              { title: 'Styling Layouts with CSS', imageUrl: images.jsImage },
+            ],
+          },
+          {
+            title: 'JavaScript Basics',
+            lessons: [
+              { title: 'Introduction to JavaScript', imageUrl: images.jsImage },
+              { title: 'JavaScript Variables and Data Types', imageUrl: images.jsImage },
+              { title: 'Control Flow and Functions in JavaScript', imageUrl: images.jsImage },
+            ],
+          },
+          {
+            title: 'Responsive Web Design',
+            lessons: [
+              { title: 'Introduction to Responsive Design', imageUrl: images.jsImage },
+              { title: 'Media Queries and Flexbox', imageUrl: images.jsImage },
+              { title: 'Building a Responsive Website', imageUrl: images.jsImage },
+            ],
+          },
+          {
+            title: 'Introduction to Frontend Frameworks',
+            lessons: [
+              { title: 'Overview of Frontend Frameworks', imageUrl: images.jsImage },
+              { title: 'React.js Fundamentals', imageUrl: images.jsImage },
+              { title: 'Vue.js Basics', imageUrl: images.jsImage },
+            ],
+          },
+        ],
       },
     ];
 
-    setCourses(courses);
+    setCourses(courseData);
   }, []);
 
   const navLinkStyles = ({ isActive }) => {
