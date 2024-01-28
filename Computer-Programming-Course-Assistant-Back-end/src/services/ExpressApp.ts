@@ -12,7 +12,7 @@ import morgan from 'morgan';
 
 const App = async (app: Application) => {
   // Construct the correct path to swagger.yaml
-  const swaggerDocument = YAML.load(path.join(__dirname, '../swagger.yaml'));
+  const swaggerDocument = YAML.load(path.join(__dirname, '../../swagger.yaml'));
 
   // app.get('/', (req, res) => {
   //   res.send('<h1>Course Assistant API</h1><a href="/api-docs">Documentation</a>');
