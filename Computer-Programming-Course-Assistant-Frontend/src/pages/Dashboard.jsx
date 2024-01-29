@@ -4,6 +4,8 @@ import MainLayout from '../components/dashboard/common/MainLayout'
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuthContex';
 import axios from 'axios';
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
 
 
 const Dashboard = () => {
@@ -41,7 +43,9 @@ const Dashboard = () => {
   };
 
   return (
-    <MainLayout>
+    <div>
+      <Navbar/>
+      <MainLayout>
       <div className="container mx-auto">
         <div className='bg-gradient-to-r from-white to-[#66C5DB]'>
           <h1 className='p-12 text-4xl'>{`${name ? name : 'Student'}'s`} Dashboard - let's jump back in.</h1>
@@ -70,6 +74,8 @@ const Dashboard = () => {
         </div>
       </div>
     </MainLayout>
+    <Footer/>
+    </div>
   );
 };
 

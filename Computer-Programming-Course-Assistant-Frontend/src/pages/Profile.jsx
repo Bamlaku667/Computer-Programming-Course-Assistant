@@ -4,6 +4,8 @@ import axios from "axios";
 import { useAuth } from "../hooks/useAuthContex";
 import { images } from "../constants";
 import MainLayout from "../components/dashboard/common/MainLayout";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export const Profile = ({image}) => {
   const { user, dispatch } = useAuth();
@@ -81,7 +83,9 @@ export const Profile = ({image}) => {
   }
 
   return (
-    <MainLayout>
+    <div>
+      <Navbar/>
+      <MainLayout>
       <div className="container mx-auto">
         <div className='p-12 bg-gradient-to-r from-white to-[#66C5DB]'>
           <h1 className="text-2xl font-bold">Account</h1>
@@ -173,5 +177,7 @@ export const Profile = ({image}) => {
         </div>
       </div>
     </MainLayout>
+    <Footer/>
+    </div>
   );
 };

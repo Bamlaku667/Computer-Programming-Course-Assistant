@@ -6,6 +6,8 @@ import { MdUploadFile } from 'react-icons/md';
 import { useAuth } from '../../hooks/useAuthContex';
 import axios from "axios";
 import { url } from '../../constants';
+import Navbar from '../Navbar';
+import Footer from '../Footer';
 const InstructorDashboard = () => {
   const [show,setShow] = useState("hidden")
   const {user,dispatch} = useAuth()
@@ -13,6 +15,7 @@ const InstructorDashboard = () => {
   // if(user.role !== "Instructor") return;
   return (
     <div>
+      <Navbar/>
       <MainLayout>
         <div className="grid grid-cols-2 grid-flow-column gap-5 md:grid-cols-2 p-5">
           <div className="grid grid-cols-1 grid-flow-row rounded-md gap-5">
@@ -40,6 +43,7 @@ const InstructorDashboard = () => {
         </div>
         <div class={`fixed inset-0 z-40 min-h-screen w-full bg-black bg-opacity-50 ${show}`} onClick={()=>setShow("hidden")}/>
       </MainLayout>
+      <Footer/>
     </div>
   )
 }

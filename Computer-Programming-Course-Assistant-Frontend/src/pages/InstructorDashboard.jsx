@@ -4,6 +4,8 @@ import { useAuth } from '../hooks/useAuthContex';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import CourseCard from '../components/CourseCard';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 export const InstructorDashboard = () => {
     const {user} = useAuth();
@@ -61,7 +63,9 @@ export const InstructorDashboard = () => {
       };
 
   return (
-    <MainLayout>
+    <div>
+      <Navbar/>
+      <MainLayout>
         <div className='container mx-auto'>
             <div className='bg-gradient-to-r from-white to-[#66C5DB]'>
                 <h1 className='p-12 text-4xl'>{`${name ? name : 'Instructor'}'s`} Dashboard - let's jump back in.</h1>
@@ -78,5 +82,7 @@ export const InstructorDashboard = () => {
             </div>
         </div>
     </MainLayout>
+    <Footer/>
+    </div>
   )
 }
