@@ -261,11 +261,25 @@ export const ImageUpload = () => {
 }
 
 
-export const TextAreaForm = () => {
+export const Form = () => {
   
-  const [isEditing, setEditing] = useState(false);
-  const [description, setDescription] = useState('');
   const [error, setError] = useState('');
+  const [userData, setUserData] = useState({
+    firstName: '',
+    lastName: '',
+    address: '',
+    phone: '',
+    password: '',
+    role: ''
+  })
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handleCreate = () => {
     const trimmedDescription = description.trim();
@@ -298,20 +312,58 @@ export const TextAreaForm = () => {
   };
 
   return (
-    <form className="flex flex-col space-y-5">
-      <div className="flex justify-between">
-        <label className="font-bold text-xl font-roboto">course description</label>
-        {!isEditing && <CiEdit className="font-bold w-6 h-6 cursor-pointer" onClick={() => setEditing(true)} />}
-      </div>
-      {isEditing && (
-        <>
-          <textarea
+    <form className="grid grid-cols-2 space-y-5">
+          <div className="flex justify-between">
+            <label className="font-bold text-xl font-roboto">Name</label>
+          </div>
+          <input
             type="text"
-            placeholder="Computer programming course ..."
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            placeholder="jhon doe"
+            value={userData.firstName}
+            onChange={(e) => setUserData(e.target.value)}
           />
           {error && <p className="text-red-500">{error}</p>}
+          <div className="flex justify-between">
+            <label className="font-bold text-xl font-roboto">Name</label>
+          </div>
+          <input
+            type="text"
+            placeholder="jhon doe"
+            value={userData.firstName}
+            onChange={(e) => setUserData(e.target.value)}
+          />
+          {error && <p className="text-red-500">{error}</p>}
+          <div className="flex justify-between">
+            <label className="font-bold text-xl font-roboto">Name</label>
+          </div>
+          <input
+            type="text"
+            placeholder="jhon doe"
+            value={userData.firstName}
+            onChange={(e) => setUserData(e.target.value)}
+          />
+          {error && <p className="text-red-500">{error}</p>}
+          <div className="flex justify-between">
+            <label className="font-bold text-xl font-roboto">Name</label>
+          </div>
+          <input
+            type="text"
+            placeholder="jhon doe"
+            value={userData.firstName}
+            onChange={(e) => setUserData(e.target.value)}
+          />
+          {error && <p className="text-red-500">{error}</p>}
+          <div className="flex justify-between">
+            <label className="font-bold text-xl font-roboto">Name</label>
+          </div>
+          <input
+            type="text"
+            placeholder="jhon doe"
+            value={userData.firstName}
+            onChange={(e) => setUserData(e.target.value)}
+          />
+          {error && <p className="text-red-500">{error}</p>}
+
           <div className="flex gap-4">
             <button className="bg-blue-500" type="button" onClick={handleCreate}>
               create
@@ -328,8 +380,6 @@ export const TextAreaForm = () => {
               cancel
             </button>
           </div>
-        </>
-      )}
     </form>
   )}
 

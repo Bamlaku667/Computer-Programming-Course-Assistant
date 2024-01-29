@@ -32,7 +32,7 @@ export const sideBarRoutes = (user) => {
         },
         {
             id: 3, name:"create Instructor",
-            link: "/admin/instructor/create", 
+            link: "/admin/instructors/create", 
             icon:IoThermometerOutline,
             show: name!== UserRole.admin ? false:true
         },
@@ -42,6 +42,7 @@ export const sideBarRoutes = (user) => {
             icon:IoThermometerOutline,
             show: name!== UserRole.admin ? false:true
         },
+        
 
 
         

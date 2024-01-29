@@ -21,6 +21,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { InstructorList } from "./components/dashboard/admin/Instructors";
 
 
 function App() {
@@ -72,9 +73,11 @@ function App() {
             <Route path='/myCourses' element={ user ? <MyCourses /> : <StudentLogin/>} />
             <Route path='/myCourses/:_id' element={ user ? <CourseDetails /> : <StudentLogin/>} />
             <Route path='/profile' element={ user ? <Profile />: <StudentLogin/>}/>
+
             <Route path='/instructor-dashboard' element={ user ? <InstructorDashboard/> : <StudentLogin/>}/>
             <Route path='/instructor/create-course' element={ user ? <CreateCourse/> : <StudentLogin/>}/>
             <Route path='/admin-dashboard' element={user ? <AdminDashboard/> : <StudentLogin/>}/>
+
 
             <Route path="*" element={<NoMatch />} />
           </Routes>
