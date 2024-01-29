@@ -20,6 +20,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { InstructorList } from "./components/dashboard/admin/Instructors";
 
 
 function App() {
@@ -73,7 +74,8 @@ function App() {
             <Route path='/profile' element={ user ? <Profile />: <StudentLogin/>}/>
 
             <Route path='/instructor' element={ user ? <InstructorDashboard/> : <StudentLogin/>}/>
-            <Route path='/admin-dashboard' element={user ? <AdminDashboard/> : <StudentLogin/>}/>
+            <Route path='/admin/instructors/create' element={user ? <AdminDashboard/> : <StudentLogin/>}/>
+            <Route path="/admin/instructors" element={user ? <InstructorList/>: <StudentLogin/>}/>
 
             <Route path="*" element={<NoMatch />} />
           </Routes>

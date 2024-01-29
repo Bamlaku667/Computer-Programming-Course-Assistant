@@ -4,16 +4,13 @@ import { Form, InputForm } from '../components/Instructor/Instructor'
 import { useAuth } from '../hooks/useAuthContex'
 import { useState } from 'react'
 import { UserRole } from '../components/dashboard/common/sidebarRoutes'
+import { useLocation } from 'react-router-dom';
+
 const AdminDashboard = () => {
     const { user } = useAuth()
     return (
         <MainLayout>
-            <AdminForm />
-            {/* <select class="">
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-        </select> */}
+            <AdminForm token={user.token}/>
         </MainLayout>
     )
 }
@@ -21,6 +18,12 @@ const AdminDashboard = () => {
 export default AdminDashboard
 
 const AdminForm = ({ token }) => {
+
+    const { search } = useLocation();
+    const searchParams = new URLSearchParams(search);
+    const paramValue = searchParams.get('id');
+    console.log(paramValue)
+
     const [error, setError] = useState({
         firstName: '',
         lastName: '',
