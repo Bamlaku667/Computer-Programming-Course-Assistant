@@ -1,35 +1,16 @@
 // Sidebar.js
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { MdOutlineDashboard, MdLibraryBooks } from "react-icons/md";
-import { CiStickyNote } from "react-icons/ci";
-import { TiMessages } from "react-icons/ti";
-import { IoThermometerOutline } from "react-icons/io5";
 import { images } from "../../../constants";
 import { useAuth } from "../../../hooks/useAuthContex";
 import { IoIosLogOut } from "react-icons/io";
+import { sideBarRoutes } from "./sidebarRoutes";
 
-const SidebarItems = [
-  { id: 1, name: "Dashboard", link: "/dashboard", icon: MdOutlineDashboard },
-  { id: 2, name: "MyCourses", link: "/myCourses", icon: MdLibraryBooks },
-  { id: 3, name: "Notes", link: "/notes", icon: CiStickyNote },
-  { id: 4, name: "Messages", link: "/messages", icon: TiMessages },
-  {
-    id: 5,
-    name: "Profile",
-    link: "/profile",
-    icon: MdOutlineDashboard,
-  },
-  {
-    id: 6,
-    name: "Other attributes",
-    link: "/otherAttributes",
-    icon: IoThermometerOutline,
-  },
-];
 
 const Sidebar = ({image}) => {
   const { user, dispatch } = useAuth();
+  console.log(user.role)
+  const SidebarItems = sideBarRoutes(user.role)
   const navigate = useNavigate();
   const navLinkStyles = ({ isActive }) => {
     return {
@@ -48,11 +29,11 @@ const Sidebar = ({image}) => {
     <div className="bg-white text-dark-light w-60 border-r">
       <div className="flex justify-center border-b py-3">
         <div className="flex flex-col items-center gap-2">
-          <div className="w-36 h-36 bg-gray-300 rounded-full mr-2 overflow-hidden">
+          <div className="w-20 h-20 bg-gray-300 rounded-full mr-2 overflow-hidden">
             {!image ? (
               <img
                 src={images.profilePlaceholder}
-                className="w-36 h-36"
+                className="w-20 h-20"
                 alt="Profile"
               />
             ) :
@@ -66,7 +47,7 @@ const Sidebar = ({image}) => {
           <div key={item.id}>
             <NavLink
               style={navLinkStyles}
-              className="p-3 py-2 flex gap-x-3 items-center hover:text-xl"
+              className="p-3 py-2 flex gap-x-3 items-center hover:bg-blue-400 hover:text-white"
               to={item.link}
             >
               {React.createElement(item.icon)}{" "}

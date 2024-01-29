@@ -26,11 +26,11 @@ export default function Navbar({image}) {
   };
 
   return (
-    <nav className="flex justify-between py-4 pl-16 pr-4 items-center border border-b-2 sticky top-0 z-50 bg-white">
+    <nav className="flex justify-between py-4 pl-16 pr-4 items-center border border-b-2 sticky top-0 z-30 bg-white">
       <div className="">
-        <img src={images.Logo} alt="App Logo" />
+        <img src={images.Logo}alt="App Logo"/>
       </div>
-      <div className="relative">
+      <div className="relative hidden lg:flex">
         <input
           type="text"
           className="text-base focus:outline-none border py-2 pl-4 w-96"
@@ -59,7 +59,6 @@ export default function Navbar({image}) {
                 ) :
                 (<img src={image} className="w-10 h-10" alt="Profile" />)}
               </div>
-              <div className="">{user.email}</div>
             </div>
           </NavLink>
         )}

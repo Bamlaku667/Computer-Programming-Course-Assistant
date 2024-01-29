@@ -9,12 +9,14 @@ import { NoMatch } from "./pages/NoMatch";
 import Dashboard from "./pages/Dashboard";
 import MyCourses from "./pages/MyCourses";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 import { StudentLogin } from "./pages/StudentLogin";
 import { CourseDetails } from "./pages/CourseDetails";
 import { useAuth } from "./hooks/useAuthContex";
-import InstructorDashboard from "./pages/InstructorDashboard";
 import { Courses } from "./pages/Courses";
+
+import InstructorDashboard from "./components/Instructor/Instructor";
+import AdminDashboard from "./pages/AdminDashboard";
+
 
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -69,7 +71,10 @@ function App() {
             <Route path='/myCourses' element={ user ? <MyCourses /> : <StudentLogin/>} />
             <Route path='/myCourses/:_id' element={ user ? <CourseDetails /> : <StudentLogin/>} />
             <Route path='/profile' element={ user ? <Profile />: <StudentLogin/>}/>
-            <Route path='/instructor' element={ user ? <InstructorDashboard userData={userData}/> : <StudentLogin/>}/>
+
+            <Route path='/instructor' element={ user ? <InstructorDashboard/> : <StudentLogin/>}/>
+            <Route path='/admin-dashboard' element={user ? <AdminDashboard/> : <StudentLogin/>}/>
+
             <Route path="*" element={<NoMatch />} />
           </Routes>
           {/* <Footer/> */}
