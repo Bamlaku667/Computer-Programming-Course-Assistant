@@ -72,7 +72,7 @@ const Sidebar = ({image}) => {
           <div key={item.id}>
             <NavLink
               style={navLinkStyles}
-              className="p-3 py-2 flex gap-x-3 items-center hover:text-xl"
+              className="p-3 py-2 flex gap-x-3 items-center hover:bg-blue-400 hover:text-white"
               to={item.link}
             >
               {React.createElement(item.icon)}{" "}

@@ -9,7 +9,8 @@ import { url } from '../../constants';
 const InstructorDashboard = () => {
   const [show,setShow] = useState("hidden")
   const {user,dispatch} = useAuth()
-  // const {data,error} = supabase.storage.getBucket("course-image");
+  console.log(user)
+  // if(user.role !== "Instructor") return;
   return (
     <div>
       <MainLayout>
@@ -45,75 +46,55 @@ const InstructorDashboard = () => {
 
 export default InstructorDashboard
 
-// export const InputForm = ({token}) => {
-//   const [isEditing,setEditing] = useState(false)
-//   const [title,setTitle] = useState("")
-  
-//   return (
-//     <form className='flex flex-col space-y-5'>
-//       <div className="flex justify-between">
-//         <label className="font-bold text-xl font-roboto">Title</label>
-//         {!isEditing && <CiEdit className='font-bold w-6 h-6 cursor-pointer' onClick={()=> setEditing(true)}/>}
-//       </div>
-//       {isEditing && <>
-//       <input type="text" placeholder='Computer programming course ...' onChange={(e)=>setTitle(e.target.value)}/>
-//       <div className="flex gap-4">
-//         <button className='bg-blue-500' type='button' onClick={()=>{}}>create</button>
-//         <button className='bg-black' type='button' onClick={() => setEditing(false)}>cancel</button>
-//       </div>
-//       </>}
-//     </form>
-//   )
-// }
 
 export const InputForm = ({ token }) => {
-  const [chapterName, setChapterName] = useState('');
-  const [chapterContent, setChapterContent] = useState('');
-  const [errorName, setErrorName] = useState('');
-  const [errorContent, setErrorContent] = useState('');
+
+  const [titleError, setTitleError] = useState('');
+  const [descriptionError, setDescriptionError] = useState('');
   const [courseData, setCourseData] = useState({
     title: '',
     description: ''
   })
 
   const handleAdd = () => {
-    console.log(chapterContent,chapterName)
-    if (!chapterName.trim()) {
-      setErrorName('Chapter Name cannot be empty');
-      return;
+    if (!courseData.title.trim()) {
+      setTitleError('Chapter Name cannot be empty');
+      return false;
     }
 
-    if (!chapterContent.trim()) {
-      setErrorContent('Chapter Content cannot be empty');
-      return;
+    if (!courseData.description.trim()) {
+      setDescriptionError('Chapter Content cannot be empty');
+      return false;
     }
 
     const minNameCharCount = 3;
     const maxNameCharCount = 50;
 
-    if (chapterName.trim().length < minNameCharCount || chapterName.trim().length > maxNameCharCount) {
-      setErrorName(`Chapter Name must be between ${minNameCharCount} and ${maxNameCharCount} characters`);
-      return;
+    if (courseData.title.trim().length < minNameCharCount || courseData.title.trim().length > maxNameCharCount) {
+      setTitleError(`Chapter Name must be between ${minNameCharCount} and ${maxNameCharCount} characters`);
+      return false;
     }
 
     const minContentCharCount = 10;
     const maxContentCharCount = 500;
 
-    if (chapterContent.trim().length < minContentCharCount || chapterContent.trim().length > maxContentCharCount) {
-      setErrorContent(`Chapter Content must be between ${minContentCharCount} and ${maxContentCharCount} characters`);
-      return;
+    if (courseData.description.trim().length < minContentCharCount || courseData.description.trim().length > maxContentCharCount) {
+      setDescriptionError(`Chapter Content must be between ${minContentCharCount} and ${maxContentCharCount} characters`);
+      return false;
     }
 
-    setChapterName('');
-    setChapterContent('');
-    setErrorName('');
-    setErrorContent('');
+    setCourseData({title:"",description:""})
+    setTitleError("")
+    setDescriptionError("")
+    console.log("data is valid")
+    return true
   };
 
 const createCourse = (e) => {
   e.preventDefault();
-  const createCourses = async () => {
-    // handleAdd()
+  const isValid = handleAdd();
+  if(isValid){
+  const course =  async () => {
     console.log(courseData)
     try {
       if (token) {
@@ -123,15 +104,15 @@ const createCourse = (e) => {
             'Authorization': `Bearer ${token}`
           }
         });
-        console.log(response.data)
+        console.log("response form api",response.data)
       }
     } catch (error) {
       console.error('Error fetching data:', error);
     }
-    console.log(token)
   }
-
-  createCourses();
+  course()
+}
+  else console.log("not created")
 
 }
 
@@ -158,7 +139,7 @@ const handleInputChange = (e) => {
         value={courseData.title}
         onChange={handleInputChange}
       />
-      {errorName && <p className="text-red-500">{errorName}</p>}
+      {titleError && <p className="text-red-500">{titleError}</p>}
 
       <div className="flex justify-between">
         <label className="font-bold text-xl font-roboto">Description</label>
@@ -170,7 +151,7 @@ const handleInputChange = (e) => {
         value={courseData.description}
         onChange={handleInputChange}
       />
-      {errorContent && <p className="text-red-500">{errorContent}</p>}
+      {descriptionError && <p className="text-red-500">{descriptionError}</p>}
 
       <button className='bg-blue-500' onClick={createCourse}>
         Add
@@ -222,7 +203,7 @@ export const ModulForm = ({ className }) => {
  
   return (
     <form
-      className={`fixed inset-0 z-50 flex flex-col space-y-5 bg-white w-[60vw] h-[70vh] m-auto p-5 md:p-8 rounded-lg shadow-sm ${className}`}
+      className={`fixed inset-0 z-50 flex flex-col space-y-5 bg-white w-[700px] h-[400px] m-auto p-5 md:p-8 rounded-lg shadow-sm ${className}`}
     >
       <div className="flex justify-between">
         <label className="font-bold text-xl font-roboto">Chapter Name</label>
