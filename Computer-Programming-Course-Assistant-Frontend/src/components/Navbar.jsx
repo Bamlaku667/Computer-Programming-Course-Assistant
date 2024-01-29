@@ -11,12 +11,12 @@ export default function Navbar({image}) {
     { name: "Courses", link: "/courses" },
   ];
   const { user } = useAuth();
-  let path = '/dashboard'
+  let path = '/student-dashboard'
 
   if (user && user.role === 'student') {
-    path = '/dashbored'
+    path = '/student-dashbored'
   } else if (user && user.role === 'Instructor'){
-    path = '/instructor'
+    path = '/instructor-dashboard'
   }
 
   const navLinkStyles = ({ isActive }) => {

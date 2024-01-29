@@ -3,7 +3,7 @@ import { images } from "../constants";
 import { Link } from "react-router-dom";
 
 export default function CourseCard({course}) {
-  const {_id, title, image, description, rating, views, moduleNo, enrolledStudents} = course;
+  const {_id, title, image, description, rating, views, moduleNo} = course;
   return (
     <div className="relative w-72 bg-white shadow-md rounded-md overflow-hidden p-2 mb-4">
       <img
@@ -19,7 +19,7 @@ export default function CourseCard({course}) {
       </p>
       <div className="flex justify-between text-gray-600">
         <p>Modules: <span>{moduleNo}</span></p>
-        <p>Enrolled Students: <span>{enrolledStudents}</span></p>
+        <p>Enrolled Students: <span></span></p>
       </div>
       <div className="flex items-center pb-2 border-b">
         <span className="mr-2">⭐️</span>
