@@ -9,6 +9,7 @@ import { GenerateJWT, ValidatePassword } from "../utility/PasswordUtility";
 import { StatusCodes } from "http-status-codes";
 import { AddCourseInput, CourseUpdateInputs } from "../dto/Course.dto";
 import { Course, CourseDoc } from "../models/Course";
+import { UploadTaskSnapshot, getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 
 const InstructorLogin = async (req: Request, res: Response, next: NextFunction) => {
     const newLoginInstance = plainToClass(InstructorLoginInputs, req.body);
@@ -169,6 +170,14 @@ const DeleteCourse = async (req: Request, res: Response, next: NextFunction) => 
     throw new Error('error during course deletion')
 }
 
+const giveCurrentDateTime = () => {
+    const today = new Date();
+    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const dateTime = date + ' ' + time;
+    return dateTime;
+}
+
 const UploadCourseImages = async (req: Request, res: Response, next: NextFunction) => {
     const courseId = req.params.courseId;
     const instructorId = req.user._id;
@@ -178,33 +187,48 @@ const UploadCourseImages = async (req: Request, res: Response, next: NextFunctio
     if (!course) {
         throw new NotFoundError('Course not found or you are not authorized to upload images for this course');
     }
-    // --> sample file
-    // fieldname: 'files',
-    // originalname: 'image1.jpeg',
-    // encoding: '7bit',
-    // mimetype: 'image/jpeg',
-    // destination: 'src/images',
-    // filename: '2024-01-03T17:24:15.952Z-image1.jpeg',
-    // path: 'src/images/2024-01-03T17:24:15.952Z-image1.jpeg',
-    // size: 6457
 
-    const files = req.files as Express.Multer.File[]
-    const images = files.map((file: Express.Multer.File) => file.filename);
+    const dateTime = giveCurrentDateTime();
+    const files = req.files as Express.Multer.File[];
 
-    // Update the course document with the new image URLs
+    const storage = getStorage();
+
+    
+    const filesPromises = files.map(async (file) => {
+        const storageRef = ref(storage, `files/${file.originalname + "       " + dateTime}`);
+
+        // Create file metadata including the content type
+        const metadata = {
+            contentType: file.mimetype,
+        };
+
+        // Upload the file in the bucket storage
+        const snapshot = await uploadBytesResumable(storageRef, file.buffer, metadata);
+
+        // Grab the public url
+        const downloadURL = await getDownloadURL(snapshot.ref);
+
+        console.log('File successfully uploaded:', file.originalname);
+        return downloadURL
+    });
+
+    const uploadedFiles = await Promise.all(filesPromises);
+
+   
     const updatedCourse = await Course.findByIdAndUpdate(
         courseId,
-        { $push: { images: { $each: images } } },
+        { $push: { images: { $each: uploadedFiles } } },
         { new: true }
     );
 
     if (updatedCourse) {
         res.json(updatedCourse);
     } else {
-        throw new NotFoundError('course not found')
+        throw new NotFoundError('Course not found');
     }
-
 };
+
+
 
 
 

@@ -26,7 +26,7 @@ const App = async (app: Application) => {
   
   
   // Use /tmp directory for temporary image storage
-  const imagesPath = '/tmp/images';
+  const imagesPath = path.join(__dirname, '../public/images');
   if (!fs.existsSync(imagesPath)) {
     fs.mkdirSync(imagesPath);
   }

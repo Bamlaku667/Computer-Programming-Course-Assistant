@@ -10,6 +10,13 @@ export interface EnrolledStudent {
     enrolledAt: Date;
 }
 
+interface Image {
+    name: string;
+    type: string;
+    downloadURL: string;
+  }
+  
+
 export interface Instructor {
     instructorId: Types.ObjectId;
 }
@@ -20,7 +27,7 @@ export interface CourseDoc {
     modules: CourseModule[];
     enrolledStudents: EnrolledStudent[];
     instructors: Instructor[];
-    images: string[]; // Array of image URLs
+    images: any[]; // Array of image URLs
 }
 
 const courseSchema = new Schema<CourseDoc>({
@@ -40,7 +47,10 @@ const courseSchema = new Schema<CourseDoc>({
         enrolledAt: { type: Date, default: Date.now },
     },
     instructors: [{ type: Schema.Types.ObjectId, ref: "Instructor", required: true }],
-    images: [{ type: String }], // Array of image URLs
+
+    images: [String],
+
+    // images: [{ type: String }], // Array of image URLs
 });
 
 export const Course = model<CourseDoc>("Course", courseSchema);

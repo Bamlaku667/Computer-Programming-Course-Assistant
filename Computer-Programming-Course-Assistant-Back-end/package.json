@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon src/index.ts",
     "build": "rimraf dist && tsc && npm run copy-swagger",
-    "copy-swagger": "copyfiles swagger.yaml dist",
+    "copy-swagger": "copyfiles src/public/* swagger.yaml dist",
     "ts:check": "tsc --project tsconfig.json",
     "add-build": "git add dist",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,11 +20,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/firebase": "^3.2.1",
     "@types/morgan": "^1.9.9",
     "@types/multer": "^1.4.11",
     "@types/swagger-ui-express": "^4.1.6",
     "@types/yamljs": "^0.2.34",
     "express-async-errors": "^3.1.1",
+    "firebase": "^10.7.2",
+    "firebase-admin": "^12.0.0",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "swagger-ui-express": "^5.0.0",

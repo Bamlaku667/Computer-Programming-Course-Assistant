@@ -36,7 +36,7 @@ const App = (app) => __awaiter(void 0, void 0, void 0, function* () {
     app.use((0, morgan_1.default)('dev'));
     app.use(express_1.default.urlencoded({ extended: true }));
     // Use /tmp directory for temporary image storage
-    const imagesPath = '/tmp/images';
+    const imagesPath = path_1.default.join(__dirname, '../public/images');
     if (!fs_1.default.existsSync(imagesPath)) {
         fs_1.default.mkdirSync(imagesPath);
     }

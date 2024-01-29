@@ -95,6 +95,7 @@ const EnrollInCourse = async (req: Request, res: Response, next: NextFunction) =
     res.status(StatusCodes.OK).json({ message: 'Student enrolled in the course successfully' });
 };
 
+
 // ... (other existing controller functions)
 
 // Export other existing controllers...

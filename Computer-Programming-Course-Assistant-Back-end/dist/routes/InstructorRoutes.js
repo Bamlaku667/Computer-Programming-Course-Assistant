@@ -8,11 +8,12 @@ const express_1 = __importDefault(require("express"));
 const middlewares_1 = require("../middlewares");
 const controllers_1 = require("../controllers");
 const multer_1 = __importDefault(require("multer"));
+const path_1 = __importDefault(require("path"));
 const router = express_1.default.Router();
 exports.InstructorRoutes = router;
 const imageStorage = multer_1.default.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, '/tmp/images');
+        cb(null, `${path_1.default.join(__dirname, '../public/images')}`);
     },
     filename: (req, file, cb) => {
         cb(null, new Date().toISOString() + '-' + file.originalname);
