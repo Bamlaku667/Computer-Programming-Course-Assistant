@@ -71,7 +71,7 @@ export const InstructorDashboard = () => {
                     </NavLink>
                 </div>
             </div>
-            <div className='m-10 grid grid-cols-3'>
+            <div className='m-10 grid grid-cols-3 gap-5'>
                 {courses && courses.map(course => (
                     <CourseCard key={course._id} course={course} />
                 ))}
