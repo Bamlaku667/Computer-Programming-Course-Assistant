@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaLock } from "react-icons/fa";
 import { images } from "../constants";
@@ -11,7 +11,13 @@ export default function Navbar({image}) {
     { name: "Courses", link: "/courses" },
   ];
   const { user } = useAuth();
-  console.log("User:", user);
+  let path = '/dashboard'
+
+  if (user && user.role === 'student') {
+    path = '/dashbored'
+  } else if (user && user.role === 'Instructor'){
+    path = '/instructor'
+  }
 
   const navLinkStyles = ({ isActive }) => {
     return {
@@ -41,7 +47,7 @@ export default function Navbar({image}) {
           </NavLink>
         ))}
         {user && (
-          <NavLink style={navLinkStyles} to={"/dashboard"}>
+          <NavLink style={navLinkStyles} to={path}>
             <div className="flex items-center">
               <div className="w-10 h-10 bg-gray-300 rounded-full mr-2 overflow-hidden">
                 {!image ? (
