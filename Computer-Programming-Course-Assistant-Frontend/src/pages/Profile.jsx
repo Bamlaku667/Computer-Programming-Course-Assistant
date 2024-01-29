@@ -5,7 +5,7 @@ import { useAuth } from "../hooks/useAuthContex";
 import { images } from "../constants";
 import MainLayout from "../components/dashboard/common/MainLayout";
 
-export const Profile = ({userData}) => {
+export const Profile = ({image}) => {
   const { user, dispatch } = useAuth();
   const [error, setError] = useState("");
   const [updatedUserData, setUpdatedUserData] = useState({
@@ -18,6 +18,7 @@ export const Profile = ({userData}) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // setUpdatedUserData(userData);
     const fetchUserData = async () => {
       try {
         if (user.token) {
@@ -94,14 +95,14 @@ export const Profile = ({userData}) => {
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center">
                 <div className="w-16 h-16 bg-gray-300 rounded-full mr-2 overflow-hidden">
-                  {!userData.image ? (
+                  {!image ? (
                     <img
                       src={images.profilePlaceholder}
                       className="w-16 h-16"
                       alt="Profile"
                     />
                   ) :
-                  (<img src={userData.image} className="w-16 h-16" alt="Profile" />)}
+                  (<img src={image} className="w-16 h-16" alt="Profile" />)}
                 </div>
                 <div className="text-sm">
                   <h1>Profile picture</h1>
