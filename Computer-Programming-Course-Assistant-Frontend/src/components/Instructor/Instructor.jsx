@@ -10,7 +10,6 @@ const InstructorDashboard = () => {
   const [show,setShow] = useState("hidden")
   const {user,dispatch} = useAuth()
   console.log(user)
-  // if(user.role !== "Instructor") return;
   return (
     <div>
       <MainLayout>
@@ -55,6 +54,10 @@ export const InputForm = ({ token }) => {
     title: '',
     description: ''
   })
+  const [data, setData] = useState({
+    title: '',
+    description: ''
+  })
 
   const handleAdd = () => {
     if (!courseData.title.trim()) {
@@ -86,7 +89,7 @@ export const InputForm = ({ token }) => {
     setCourseData({title:"",description:""})
     setTitleError("")
     setDescriptionError("")
-    console.log("data is valid")
+    
     return true
   };
 
@@ -95,7 +98,6 @@ const createCourse = (e) => {
   const isValid = handleAdd();
   if(isValid){
   const course =  async () => {
-    console.log(courseData)
     try {
       if (token) {
         const response = await axios.post(`${url}/instructor/courses`, courseData ,{
@@ -104,7 +106,11 @@ const createCourse = (e) => {
             'Authorization': `Bearer ${token}`
           }
         });
-        console.log("response form api",response.data)
+        // console.log("response form api",response.data)
+        const {title,description} = response.data
+        console.log(title,description)
+        setData({title,description})
+        
       }
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -124,14 +130,11 @@ const handleInputChange = (e) => {
   }));
 };
 
- 
   return (
     <form
       className={`flex flex-col space-y-5`}
-    >
-      <div className="flex justify-between">
-        <label className="font-bold text-xl font-roboto">Title</label>
-      </div>
+    > 
+      <FormLabel name={"Title"}/>
       <input
         type="text"
         placeholder="chapter name ..."
@@ -141,9 +144,7 @@ const handleInputChange = (e) => {
       />
       {titleError && <p className="text-red-500">{titleError}</p>}
 
-      <div className="flex justify-between">
-        <label className="font-bold text-xl font-roboto">Description</label>
-      </div>
+      <FormLabel name={"Description"}/>
       <textarea
         type="text"
         name='description'
@@ -384,3 +385,10 @@ export const Form = () => {
   )}
 
 
+  const FormLabel = ({name}) => {
+    return (
+        <div className="flex justify-between">
+            <label className="text-md font-roboto">{name}</label>
+        </div>
+    )
+}

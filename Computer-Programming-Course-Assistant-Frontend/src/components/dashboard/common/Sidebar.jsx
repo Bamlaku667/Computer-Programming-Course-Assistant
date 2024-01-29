@@ -9,7 +9,7 @@ import { sideBarRoutes } from "./sidebarRoutes";
 
 const Sidebar = ({image}) => {
   const { user, dispatch } = useAuth();
-  console.log(user.role)
+  
   const SidebarItems = sideBarRoutes(user.role)
   const navigate = useNavigate();
   const navLinkStyles = ({ isActive }) => {

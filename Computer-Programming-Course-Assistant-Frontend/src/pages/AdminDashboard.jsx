@@ -96,15 +96,13 @@ const AdminForm = ({ token }) => {
     }
 
     return (
-        <div className="grid grid-cols-2 grid-flow-column gap-5 md:grid-cols-2 p-5 bg-slate-100">
+        <div className="grid grid-cols-2 grid-flow-column gap-1 md:grid-cols-2 p-5 bg-slate-100">
             <div className="col-span-2 font-bold p-3 text-2xl">
                 Create Instructor
             </div>
-            <div className="grid grid-cols-1 grid-flow-row rounded-md gap-5 ">
+            <div className="grid grid-cols-1 grid-flow-row rounded-md gap-2">
                 <div className="flex flex-col justify-between  p-5 rounded-md gap-3">
-                    <div className="flex justify-between">
-                        <label className="font-bold text-xl font-roboto">First Name</label>
-                    </div>
+                    <FormLabel name={"FirstName"}/>
                     <input
                         type="text"
                         name='firstName'
@@ -117,9 +115,7 @@ const AdminForm = ({ token }) => {
             </div>
             <div className="grid grid-cols-1 grid-flow-row rounded-md gap-5">
                 <div className="flex flex-col justify-between  p-5 rounded-md gap-3">
-                    <div className="flex justify-between">
-                        <label className="font-bold text-xl font-roboto">Last Name</label>
-                    </div>
+                    <FormLabel name={"Last Name"}/>
                     <input
                         type="text"
                         placeholder="jhone"
@@ -132,9 +128,7 @@ const AdminForm = ({ token }) => {
             </div>
             <div className="grid grid-cols-1 grid-flow-row rounded-md gap-5">
                 <div className="flex flex-col justify-between  p-5 rounded-md gap-3">
-                    <div className="flex justify-between">
-                        <label className="font-bold text-xl font-roboto">Address</label>
-                    </div>
+                    <FormLabel name={"Address"}/>
                     <input
                         type="text"
                         placeholder="Addis Ababa"
@@ -147,9 +141,7 @@ const AdminForm = ({ token }) => {
             </div>
             <div className="grid grid-cols-1 grid-flow-row rounded-md gap-5">
                 <div className="flex flex-col justify-between  p-5 rounded-md gap-3">
-                    <div className="flex justify-between">
-                        <label className="font-bold text-xl font-roboto">Phone number</label>
-                    </div>
+                <   FormLabel name={"Phone"}/>
                     <input
                         type="text"
                         placeholder="+2519 **** ***"
@@ -160,11 +152,9 @@ const AdminForm = ({ token }) => {
                     {error.phone && <p className="text-red-500">{error.phone}</p>}
                 </div>
             </div>
-            <div className="grid grid-cols-1 grid-flow-row rounded-md gap-5 ">
+            <div className="grid grid-cols-1 grid-flow-row rounded-md gap-2">
                 <div className="flex flex-col justify-between  p-5 rounded-md gap-3">
-                    <div className="flex justify-between">
-                        <label className="font-bold text-xl font-roboto">pasasword</label>
-                    </div>
+                    <FormLabel name={"Password"}/>
                     <input
                         type="text"
                         name='password'
@@ -175,11 +165,9 @@ const AdminForm = ({ token }) => {
                     {error.password && <p className="text-red-500">{error.password}</p>}
                 </div>
             </div>
-            <div className="grid grid-cols-1 grid-flow-row rounded-md gap-5">
+            <div className="grid grid-cols-1 grid-flow-row rounded-md gap-2">
                 <div className="flex flex-col justify-between p-5 rounded-md gap-3">
-                <div className="flex justify-between">
-                        <label className="font-bold text-xl font-roboto">role</label>
-                    </div>
+                    <FormLabel name={"Role"}/>
                     <select onChange={handleInputChange}>
                         <option value={UserRole.admin} class="text-black">{UserRole.admin}</option>
                         <option value={UserRole.instructor} class="text-black">{UserRole.instructor}</option>
@@ -188,7 +176,7 @@ const AdminForm = ({ token }) => {
                 </div>
             </div>
             
-            <div className="grid grid-cols-1 grid-flow-row rounded-md gap-5">
+            <div className="grid grid-cols-1 grid-flow-row rounded-md gap-2">
                 <div className="flex flex-col justify-between p-5 rounded-md gap-3">
                     <button  className='' onClick={(e)=>createInstructor(e)}>Create</button>
                 </div>
@@ -197,4 +185,12 @@ const AdminForm = ({ token }) => {
         </div>
     )
 
+}
+
+const FormLabel = ({name}) => {
+    return (
+        <div className="flex justify-between">
+            <label className="text-md font-roboto">{name}</label>
+        </div>
+    )
 }

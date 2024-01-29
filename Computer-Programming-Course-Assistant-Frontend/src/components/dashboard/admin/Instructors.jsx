@@ -29,7 +29,7 @@ export const InstructorList = () => {
 
   const viewInstructor = (id) => {
     console.log("single user")
-    navigate(`/admin/instructors/create?id=${id}`)
+    navigate(`/admin-instructors/create?id=${id}`)
   }
   return (
     <MainLayout>

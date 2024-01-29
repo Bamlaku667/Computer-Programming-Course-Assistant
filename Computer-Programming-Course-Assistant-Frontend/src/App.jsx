@@ -74,7 +74,7 @@ function App() {
             <Route path='/profile' element={ user ? <Profile />: <StudentLogin/>}/>
 
             <Route path='/instructor' element={ user ? <InstructorDashboard/> : <StudentLogin/>}/>
-            <Route path='/admin/instructors/create' element={user ? <AdminDashboard/> : <StudentLogin/>}/>
+            <Route path='/admin-instructors/create' element={user ? <AdminDashboard/> : <StudentLogin/>}/>
             <Route path="/admin/instructors" element={user ? <InstructorList/>: <StudentLogin/>}/>
 
             <Route path="*" element={<NoMatch />} />
