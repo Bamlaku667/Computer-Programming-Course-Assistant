@@ -36,7 +36,7 @@ export const Profile = ({image}) => {
     };
 
     fetchUserData();
-  }, [user.token]);
+  }, []);
 
   const logout = () => {
     dispatch({type: 'LOGOUT'})
