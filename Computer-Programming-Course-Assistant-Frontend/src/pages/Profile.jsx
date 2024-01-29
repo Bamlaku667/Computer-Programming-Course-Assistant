@@ -5,7 +5,7 @@ import { useAuth } from "../hooks/useAuthContex";
 import { images } from "../constants";
 import MainLayout from "../components/dashboard/common/MainLayout";
 
-export const Profile = () => {
+export const Profile = ({userData}) => {
   const { user, dispatch } = useAuth();
   const [error, setError] = useState("");
   const [updatedUserData, setUpdatedUserData] = useState({
