@@ -150,7 +150,7 @@ export const Profile = ({image}) => {
               <div className="flex item-center justify-between">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="" className="text-base text-gray-500">Current password</label>
-                  <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" value={userData.password} readOnly/>
+                  <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md"/>
                 </div>
                 <div className="flex flex-col gap-2">
                   <label htmlFor="" className="text-base text-gray-500">New password</label>
