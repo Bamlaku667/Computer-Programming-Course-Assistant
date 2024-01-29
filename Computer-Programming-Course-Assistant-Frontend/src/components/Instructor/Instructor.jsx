@@ -20,9 +20,6 @@ const InstructorDashboard = () => {
               <InputForm token={user.token}/>
             </div>
             <div className="flex flex-col justify-between bg-slate-100 p-5 rounded-md">
-              <TextAreaForm />
-            </div>
-            <div className="flex flex-col justify-between bg-slate-100 p-5 rounded-md">
               <ImageUpload />
             </div>
           </div>
@@ -48,44 +45,139 @@ const InstructorDashboard = () => {
 
 export default InstructorDashboard
 
-export const InputForm = ({token}) => {
-  const [isEditing,setEditing] = useState(false)
-  const [title,setTitle] = useState("")
+// export const InputForm = ({token}) => {
+//   const [isEditing,setEditing] = useState(false)
+//   const [title,setTitle] = useState("")
   
-  const createTitle = async (title) => {
-      try {
-        if (token) {
-          const response = await axios.post(`${url}/instructor/courses`,{title:title} ,{
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-            }
-          });
-          console.log(response.data)
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
+//   return (
+//     <form className='flex flex-col space-y-5'>
+//       <div className="flex justify-between">
+//         <label className="font-bold text-xl font-roboto">Title</label>
+//         {!isEditing && <CiEdit className='font-bold w-6 h-6 cursor-pointer' onClick={()=> setEditing(true)}/>}
+//       </div>
+//       {isEditing && <>
+//       <input type="text" placeholder='Computer programming course ...' onChange={(e)=>setTitle(e.target.value)}/>
+//       <div className="flex gap-4">
+//         <button className='bg-blue-500' type='button' onClick={()=>{}}>create</button>
+//         <button className='bg-black' type='button' onClick={() => setEditing(false)}>cancel</button>
+//       </div>
+//       </>}
+//     </form>
+//   )
+// }
+
+export const InputForm = ({ token }) => {
+  const [chapterName, setChapterName] = useState('');
+  const [chapterContent, setChapterContent] = useState('');
+  const [errorName, setErrorName] = useState('');
+  const [errorContent, setErrorContent] = useState('');
+  const [courseData, setCourseData] = useState({
+    title: '',
+    description: ''
+  })
+
+  const handleAdd = () => {
+    console.log(chapterContent,chapterName)
+    if (!chapterName.trim()) {
+      setErrorName('Chapter Name cannot be empty');
+      return;
+    }
+
+    if (!chapterContent.trim()) {
+      setErrorContent('Chapter Content cannot be empty');
+      return;
+    }
+
+    const minNameCharCount = 3;
+    const maxNameCharCount = 50;
+
+    if (chapterName.trim().length < minNameCharCount || chapterName.trim().length > maxNameCharCount) {
+      setErrorName(`Chapter Name must be between ${minNameCharCount} and ${maxNameCharCount} characters`);
+      return;
+    }
+
+    const minContentCharCount = 10;
+    const maxContentCharCount = 500;
+
+    if (chapterContent.trim().length < minContentCharCount || chapterContent.trim().length > maxContentCharCount) {
+      setErrorContent(`Chapter Content must be between ${minContentCharCount} and ${maxContentCharCount} characters`);
+      return;
+    }
+
+    setChapterName('');
+    setChapterContent('');
+    setErrorName('');
+    setErrorContent('');
+  };
+
+const createCourse = (e) => {
+  e.preventDefault();
+  const createCourses = async () => {
+    // handleAdd()
+    console.log(courseData)
+    try {
+      if (token) {
+        const response = await axios.post(`${url}/instructor/courses`, courseData ,{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        console.log(response.data)
       }
-      console.log(token)
-    
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+    console.log(token)
   }
-  return (
-    <form className='flex flex-col space-y-5'>
-      <div className="flex justify-between">
-        <label className="font-bold text-xl font-roboto">Title</label>
-        {!isEditing && <CiEdit className='font-bold w-6 h-6 cursor-pointer' onClick={()=> setEditing(true)}/>}
-      </div>
-      {isEditing && <>
-      <input type="text" placeholder='Computer programming course ...' onChange={(e)=>setTitle(e.target.value)}/>
-      <div className="flex gap-4">
-        <button className='bg-blue-500' type='button' onClick={createTitle}>create</button>
-        <button className='bg-black' type='button' onClick={() => setEditing(false)}>cancel</button>
-      </div>
-      </>}
-    </form>
-  )
+
+  createCourses();
+
 }
 
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  setCourseData((prevData) => ({
+    ...prevData,
+    [name]: value,
+  }));
+};
+
+ 
+  return (
+    <form
+      className={`flex flex-col space-y-5`}
+    >
+      <div className="flex justify-between">
+        <label className="font-bold text-xl font-roboto">Title</label>
+      </div>
+      <input
+        type="text"
+        placeholder="chapter name ..."
+        name='title'
+        value={courseData.title}
+        onChange={handleInputChange}
+      />
+      {errorName && <p className="text-red-500">{errorName}</p>}
+
+      <div className="flex justify-between">
+        <label className="font-bold text-xl font-roboto">Description</label>
+      </div>
+      <textarea
+        type="text"
+        name='description'
+        placeholder="chapter contents here ..."
+        value={courseData.description}
+        onChange={handleInputChange}
+      />
+      {errorContent && <p className="text-red-500">{errorContent}</p>}
+
+      <button className='bg-blue-500' onClick={createCourse}>
+        Add
+      </button>
+    </form>
+  );
+};
 
 export const ModulForm = ({ className }) => {
   const [chapterName, setChapterName] = useState('');
@@ -94,6 +186,7 @@ export const ModulForm = ({ className }) => {
   const [errorContent, setErrorContent] = useState('');
 
   const handleAdd = () => {
+    console.log(chapterContent,chapterName)
     if (!chapterName.trim()) {
       setErrorName('Chapter Name cannot be empty');
       return;
@@ -181,7 +274,7 @@ export const ImageUpload = () => {
                 <p className="font-bold text-xl text-emerald-700 hover:underline line-clamp-1">Upload course Image</p>
             </div>}
             {file && <img src={URL.createObjectURL(file)} className="object-contain w-[200px] h-[200px]" />}
-            {file && <button > Upload </button>}
+            {file && <button type='button' className='bg-blue-500'> Upload </button>}
         </div>
     );
 }
@@ -258,3 +351,5 @@ export const TextAreaForm = () => {
       )}
     </form>
   )}
+
+
