@@ -5,6 +5,8 @@ import { AiFillEye } from 'react-icons/ai';
 import { FaGlobe, FaGraduationCap, FaMapMarker, FaStar } from 'react-icons/fa';
 import { MdTitle } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const courses = [
     {
@@ -166,6 +168,7 @@ export const CourseDetails = () => {
 
   return (
     <div className=''>
+      <Navbar/>
         <div className='bg-[#27323d] text-white p-8 flex gap-5'>
             <div className=''>
                 <h1 className='font-bold text-xl p-4 w-60'>Course Content</h1>
@@ -255,6 +258,7 @@ export const CourseDetails = () => {
               </div>
             </div>
         </div>
+        <Footer/>
     </div>
   );
 };

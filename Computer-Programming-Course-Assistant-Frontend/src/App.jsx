@@ -63,7 +63,6 @@ function App() {
     <div className="App">
       <GoogleOAuthProvider clientId={clientId}>
         <>
-          <Navbar image={userData.image} />
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/courses' element={<Courses />} />
@@ -81,7 +80,6 @@ function App() {
 
             <Route path="*" element={<NoMatch />} />
           </Routes>
-          {/* <Footer/> */}
         </>
       </GoogleOAuthProvider>
     </div>

@@ -5,6 +5,8 @@ import axios from "axios";
 import { useCoursesContext } from "../hooks/useCoursesContext";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuthContex";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export const Courses = () => {
   // const [courses, setCourses] = useState([]);
@@ -28,10 +30,14 @@ export const Courses = () => {
   }, []);
 
   return (
-    <div className=" mt-4 mx-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div>
+      <Navbar/>
+      <div className=" mt-4 mx-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {courses && courses.map((course) => (
         <CourseCard key={course._id} course={course} />
       ))}
+    </div>
+    <Footer/>
     </div>
   );
 

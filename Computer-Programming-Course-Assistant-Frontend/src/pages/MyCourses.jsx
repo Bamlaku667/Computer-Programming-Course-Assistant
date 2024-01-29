@@ -3,6 +3,8 @@ import MainLayout from "../components/dashboard/common/MainLayout";
 import { useAuth } from "../hooks/useAuthContex";
 import axios from "axios";
 import CourseCard from '../components/CourseCard'
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const MyCourses = () => {
   const {user} = useAuth();
@@ -79,7 +81,9 @@ const MyCourses = () => {
   }, []);
 
   return (
-    <MainLayout>
+    <div>
+      <Navbar/>
+      <MainLayout>
       <div className="container mx-auto">
         <div className="bg-gradient-to-r from-white to-[#66C5DB]">
           <h1 className="p-12 text-4xl">{`${name ? name: 'Student'}'s`} Courses</h1>
@@ -115,6 +119,8 @@ const MyCourses = () => {
         </div>
       </div>
     </MainLayout>
+    <Footer/>
+    </div>
   );
 };
 
