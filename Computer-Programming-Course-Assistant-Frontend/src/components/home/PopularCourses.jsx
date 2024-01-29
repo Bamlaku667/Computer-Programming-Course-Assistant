@@ -52,7 +52,6 @@ export default function PopularCourses() {
           reviews: 150
         }
       },
-      // Add more courses as needed
     ];
   return (
     <div className='flex gap-10 h-screen bg-[#E7F6F9] rounded-tl-[50px] items-center'>

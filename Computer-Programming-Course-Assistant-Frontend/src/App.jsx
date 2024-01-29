@@ -14,7 +14,8 @@ import { CourseDetails } from "./pages/CourseDetails";
 import { useAuth } from "./hooks/useAuthContex";
 import { Courses } from "./pages/Courses";
 
-import InstructorDashboard from "./components/Instructor/Instructor";
+import { InstructorDashboard } from "./pages/InstructorDashboard";
+import CreateCourse from "./components/Instructor/Instructor";
 import AdminDashboard from "./pages/AdminDashboard";
 
 
@@ -68,14 +69,15 @@ function App() {
             <Route path='/courses' element={<Courses />} />
             <Route path='/register' element={<RegistrationForm />} />
             <Route path='/login' element={<StudentLogin />} />
-            <Route path='/dashboard' element={ user ? <Dashboard userData={userData} />: <StudentLogin/>} />
+            <Route path='/student-dashboard' element={ user ? <Dashboard userData={userData} />: <StudentLogin/>} />
             <Route path='/myCourses' element={ user ? <MyCourses /> : <StudentLogin/>} />
             <Route path='/myCourses/:_id' element={ user ? <CourseDetails /> : <StudentLogin/>} />
             <Route path='/profile' element={ user ? <Profile />: <StudentLogin/>}/>
 
-            <Route path='/instructor' element={ user ? <InstructorDashboard/> : <StudentLogin/>}/>
-            <Route path='/admin/instructors/create' element={user ? <AdminDashboard/> : <StudentLogin/>}/>
-            <Route path="/admin/instructors" element={user ? <InstructorList/>: <StudentLogin/>}/>
+            <Route path='/instructor-dashboard' element={ user ? <InstructorDashboard/> : <StudentLogin/>}/>
+            <Route path='/instructor/create-course' element={ user ? <CreateCourse/> : <StudentLogin/>}/>
+            <Route path='/admin-dashboard' element={user ? <AdminDashboard/> : <StudentLogin/>}/>
+
 
             <Route path="*" element={<NoMatch />} />
           </Routes>

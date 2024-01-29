@@ -21,14 +21,12 @@ const useStudentLogin = () => {
       console.log("Login successful:", response.data);
       localStorage.setItem("user", JSON.stringify(response.data));
       dispatch({ type: "LOGIN", payload: response.data });
-      // navigate(redirectPath, { replace: true });
       if (userRole === "Instructor") {
-        navigate("/instructor", { replace: true });
+        navigate("/instructor-dashboard", { replace: true });
       } else {
-        navigate("/dashboard", { replace: true });
+        navigate("/student-dashboard", { replace: true });
       }
 
-      // console.log(user);
     } catch (error) {
       console.error(
         "Login failed:",

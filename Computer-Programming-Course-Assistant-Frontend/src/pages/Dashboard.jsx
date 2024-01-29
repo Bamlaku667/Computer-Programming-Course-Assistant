@@ -10,6 +10,7 @@ const Dashboard = () => {
   const {user} = useAuth();
   const [noOfCompletedCourses, setNoOfCompletedCourses] = useState(0);
   const [noOfInProgressCourses, setNoOfInProgressCourses] = useState(0);
+  const [name, setName] = useState(0)
   const [error, setError] = useState('')
   useEffect(() => {
     const fetchUserData = async () => {
@@ -22,6 +23,7 @@ const Dashboard = () => {
           });
           setNoOfCompletedCourses(response.data.completedCourses.length);
           setNoOfInProgressCourses(response.data.inProgressCourses.length)
+          setName(response.data.firstName)
         }
       } catch (error) {
         setError(error)
@@ -42,10 +44,10 @@ const Dashboard = () => {
     <MainLayout>
       <div className="container mx-auto">
         <div className='bg-gradient-to-r from-white to-[#66C5DB]'>
-          <h1 className='p-12 text-4xl'>Ysihak's Dashboard - let's jump back in.</h1>
+          <h1 className='p-12 text-4xl'>{`${name ? name : 'Student'}'s`} Dashboard - let's jump back in.</h1>
           <div className='px-8 text-gray-700'>
             <NavLink to={''} style={navLinkStyles}>
-              <button className="text-2xl font-bold border-b-2 border-[#66C5DB]">Overview</button>
+              <div className="text-2xl font-bold border-b-2 border-[#66C5DB]">Overview</div>
             </NavLink>
           </div>
         </div>
