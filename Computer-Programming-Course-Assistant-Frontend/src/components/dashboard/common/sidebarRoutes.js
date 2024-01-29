@@ -1,48 +1,60 @@
-// export const sideBarRoutes = ({user}) => {
-//     const SidebarItems = [
-//         {
-//             id: 1, name: "Dashboard",
-//             link: user.role"/dashboard",
-//             icon: MdOutlineDashboard
-//         },
-//         {
-//             id: 2, name: "MyCourses",
-//             link: "/myCourses", icon:
-//                 MdLibraryBooks
-//         },
-//         {
-//             id: 3,
-//             name: "Notes",
-//             link: "/notes",
-//             icon: CiStickyNote
-//         },
-//         { 
-//             id: 4, name: "Messages",
-//              link: "/messages", 
-//              icon: TiMessages },
-//         {
-//             id: 5,
-//             name: "Profile",
-//             link: "/profile",
-//             icon: MdOutlineDashboard,
-//         },
-//         {
-//             id: 6,
-//             name: "Admin Dashboard",
-//             link: "/admin-dashboard",
-//             icon: IoThermometerOutline,
-//         },
-//         {
-//             id: 7,
-//             name: "Other attributes",
-//             link: "/otherAttributes",
-//             icon: IoThermometerOutline,
-//         },
-//     ];
-// }
+import { MdOutlineDashboard, MdLibraryBooks } from "react-icons/md";
+import { IoThermometerOutline } from "react-icons/io5";
 
-// export const UserRole = {
-//     USER: "User",
-//     INSTRUCTOR: "Instructor",
-//     ADMIN: "Admin"
-// }
+export const sideBarRoutes = (user) => {
+    const name = user
+    const SidebarItems = [
+        
+        {
+            id: 0,
+            name: "Profile",
+            link: "/profile",
+            icon: MdOutlineDashboard,
+            show: user!== UserRole.admin ? true:false
+        },
+        {
+            id: 1, name: `${name}-Dashboard`,
+            link: `/${name}-dashboard`,
+            icon: MdOutlineDashboard,
+            show: true
+        },
+        {
+            id: 2, name:"MyCourses",
+            link: "/myCourses", 
+            icon:MdLibraryBooks,
+            show: true
+        },
+        {
+            id: 3, name:"Create course",
+            link: "/instructor", 
+            icon:IoThermometerOutline,
+            show: name!== UserRole.instructor ? false:true
+        },
+        {
+            id: 3, name:"create Instructor",
+            link: "/admin/instructor/create", 
+            icon:IoThermometerOutline,
+            // show: name!== UserRole.instructor ? false:true
+            show: true
+        },
+        {
+            id: 4, name:"Admin Dashboard",
+            link: "/admin/instructors", 
+            icon:IoThermometerOutline,
+            // show: name!== UserRole.instructor ? false:true
+            show: true
+        },
+
+
+        
+       
+    ];
+
+    return SidebarItems.filter(item => item.show === true)
+}
+
+export const UserRole = {
+    student: "Student",
+    instructor: "Instructor",
+    admin: "Admin"
+}

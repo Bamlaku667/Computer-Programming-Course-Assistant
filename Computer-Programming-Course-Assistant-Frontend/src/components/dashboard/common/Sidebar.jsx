@@ -1,41 +1,16 @@
 // Sidebar.js
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { MdOutlineDashboard, MdLibraryBooks } from "react-icons/md";
-import { CiStickyNote } from "react-icons/ci";
-import { TiMessages } from "react-icons/ti";
-import { IoThermometerOutline } from "react-icons/io5";
 import { images } from "../../../constants";
 import { useAuth } from "../../../hooks/useAuthContex";
 import { IoIosLogOut } from "react-icons/io";
+import { sideBarRoutes } from "./sidebarRoutes";
 
-const SidebarItems = [
-  { id: 1, name: "Dashboard", link: "/dashboard", icon: MdOutlineDashboard },
-  { id: 2, name: "MyCourses", link: "/myCourses", icon: MdLibraryBooks },
-  { id: 3, name: "Notes", link: "/notes", icon: CiStickyNote },
-  { id: 4, name: "Messages", link: "/messages", icon: TiMessages },
-  {
-    id: 5,
-    name: "Profile",
-    link: "/profile",
-    icon: MdOutlineDashboard,
-  },
-  {
-    id: 6,
-    name: "Admin Dashboard",
-    link: "/admin-dashboard",
-    icon: IoThermometerOutline,
-  },
-  {
-    id: 7,
-    name: "Other attributes",
-    link: "/otherAttributes",
-    icon: IoThermometerOutline,
-  },
-];
 
 const Sidebar = ({image}) => {
   const { user, dispatch } = useAuth();
+  console.log(user.role)
+  const SidebarItems = sideBarRoutes(user.role)
   const navigate = useNavigate();
   const navLinkStyles = ({ isActive }) => {
     return {
