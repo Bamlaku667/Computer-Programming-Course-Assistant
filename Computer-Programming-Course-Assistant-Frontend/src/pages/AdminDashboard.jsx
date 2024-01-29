@@ -5,13 +5,19 @@ import { useAuth } from '../hooks/useAuthContex'
 import { useState } from 'react'
 import { UserRole } from '../components/dashboard/common/sidebarRoutes'
 import { useLocation } from 'react-router-dom';
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 const AdminDashboard = () => {
     const { user } = useAuth()
     return (
-        <MainLayout>
-            <AdminForm token={user.token}/>
-        </MainLayout>
+        <div>
+            <Navbar/>
+            <MainLayout>
+                <AdminForm token={user.token}/>
+            </MainLayout>
+            <Footer/>
+        </div>
     )
 }
 

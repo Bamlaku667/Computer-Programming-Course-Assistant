@@ -5,6 +5,8 @@ import { AiFillEye } from 'react-icons/ai';
 import { FaGlobe, FaGraduationCap, FaMapMarker, FaStar } from 'react-icons/fa';
 import { MdTitle } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const courses = [
     {
@@ -166,11 +168,12 @@ export const CourseDetails = () => {
 
   return (
     <div className=''>
+      <Navbar/>
         <div className='bg-[#27323d] text-white p-8 flex gap-5'>
             <div className=''>
                 <h1 className='font-bold text-xl p-4 w-60'>Course Content</h1>
                 <div className='w-60 h-[450px] overflow-y-auto hide-scrollbar'>
-                    {courseData.map((course) =>
+                    {courses.map((course) =>
                     course.modules.map((item) => (
                         displayModule({item, handleLessonClick})
                     ))
@@ -204,15 +207,15 @@ export const CourseDetails = () => {
             <div className='flex flex-col gap-5'>
               <div className='flex gap-10 items-center'>
                   <div className='flex flex-col gap-2'>
-                      <div className='flex gap-2 items-center'><AiFillEye className='text-blue-500 text-4xl'/><span>{courseData[0].views}</span></div>
+                      <div className='flex gap-2 items-center'><AiFillEye className='text-blue-500 text-4xl'/><span>{courses[0].views}</span></div>
                       <h2>Course view</h2>
                   </div>
                   <div className='flex flex-col gap-2'>
-                      <p>{courseData[0].level}</p>
+                      <p>{courses[0].level}</p>
                       <h2>Course Level</h2>
                   </div>
                   <div className='flex flex-col gap-2'>
-                      <div className='flex gap-2 items-center'><FaStar className='text-yellow-500 text-4xl'/><span>{courseData[0].rating}</span></div>
+                      <div className='flex gap-2 items-center'><FaStar className='text-yellow-500 text-4xl'/><span>{courses[0].rating}</span></div>
                       <h2>Course Rating</h2>
                   </div>
               </div>
@@ -255,6 +258,7 @@ export const CourseDetails = () => {
               </div>
             </div>
         </div>
+        <Footer/>
     </div>
   );
 };
