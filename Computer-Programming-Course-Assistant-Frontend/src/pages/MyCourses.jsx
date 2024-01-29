@@ -1,129 +1,92 @@
 import React, { useEffect, useState } from "react";
-import CourseCard from "../components/CourseCard";
-import { images } from "../constants";
 import MainLayout from "../components/dashboard/common/MainLayout";
-import { NavLink } from "react-router-dom";
-
-const tabs = [
-  {
-    id: 1,
-    label: "Course In Progress",
-    content: "Course In Progress",
-  },
-  {
-    id: 2,
-    label: "Completed Courses",
-    content: "Completed Courses",
-  },
-  {
-    id: 3,
-    label: "Recently Watched",
-    content: "Recently Watched",
-  },
-];
+import { useAuth } from "../hooks/useAuthContex";
+import axios from "axios";
+import CourseCard from '../components/CourseCard'
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const MyCourses = () => {
-  // State to store the list of courses
-  const [courses, setCourses] = useState([]);
+  const {user} = useAuth();
+  const [tabs, setTabs] = useState([
+    {
+      id: 1,
+      label: "Course In Progress",
+      courses: []
+    },
+    {
+      id: 2,
+      label: "Completed Courses",
+      courses: []
+    },
+    {
+      id: 3,
+      label: "Recently Watched",
+      courses: []
+    },
+  ])
   const [activeTab, setActiveTab] = useState(1);
+  const [error, setError] = useState('')
+  const [name, setName] = useState('')
 
   const handleTabClick = (id) => {
     setActiveTab(id);
   };
 
-  // useEffect to fetch courses from the backend when the component mounts
   useEffect(() => {
-    // Replace this with actual API calls to fetch courses
-    // For simplicity, I'll use mock data
-    const courses = [
-      {
-        _id: "1",
-        title: "Web Development Fundamentals",
-        instructor: "John Doe",
-        description: "Learn the basics of HTML,CSS and Javascript",
-        moduleNo: 8,
-        enrolledStudents: 50,
-        image: images.jsImage,
-        views: 2500,
-        level: "Beginner",
-        rating: 4.2,
-        modules: [
-          {
-            title: "HTML Basics",
-            lessons: [
-              { title: "Introduction to HTML", imageUrl: images.jsImage },
-              { title: "HTML Elements and Tags", imageUrl: images.jsImage },
-              { title: "Structuring HTML Documents", imageUrl: images.jsImage },
-            ],
-          },
-          {
-            title: "CSS Styling",
-            lessons: [
-              { title: "Introduction to CSS", imageUrl: images.jsImage },
-              {
-                title: "CSS Selectors and Properties",
-                imageUrl: images.jsImage,
-              },
-              { title: "Styling Layouts with CSS", imageUrl: images.jsImage },
-            ],
-          },
-          {
-            title: "JavaScript Basics",
-            lessons: [
-              { title: "Introduction to JavaScript", imageUrl: images.jsImage },
-              {
-                title: "JavaScript Variables and Data Types",
-                imageUrl: images.jsImage,
-              },
-              {
-                title: "Control Flow and Functions in JavaScript",
-                imageUrl: images.jsImage,
-              },
-            ],
-          },
-          {
-            title: "Responsive Web Design",
-            lessons: [
-              {
-                title: "Introduction to Responsive Design",
-                imageUrl: images.jsImage,
-              },
-              { title: "Media Queries and Flexbox", imageUrl: images.jsImage },
-              {
-                title: "Building a Responsive Website",
-                imageUrl: images.jsImage,
-              },
-            ],
-          },
-          {
-            title: "Introduction to Frontend Frameworks",
-            lessons: [
-              {
-                title: "Overview of Frontend Frameworks",
-                imageUrl: images.jsImage,
-              },
-              { title: "React.js Fundamentals", imageUrl: images.jsImage },
-              { title: "Vue.js Basics", imageUrl: images.jsImage },
-            ],
-          },
-        ],
-      },
-    ];
+    const fetchUserData = async () => {
+      try {
+        if (user.token) {
+          const response = await axios.get('https://courseassistant.vercel.app/api/v1/student/courses', {
+            headers: {
+              'Authorization': `Bearer ${user.token}`
+            }
+          });
+          const inProgressCourses = response.data;
+          setTabs(prevTabs => [
+            {
+              ...prevTabs[0],
+              courses: inProgressCourses,
+            },
+            ...prevTabs.slice(1)
+          ]);
+        }
+      } catch (error) {
+        setError(error)
+        console.error('Error fetching data:', error);
+      }
+    };
 
-    setCourses(courses);
+    fetchUserData();
+  }, []); 
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        if (user.token) {
+          const response = await axios.get('https://courseassistant.vercel.app/api/v1/student/profile', {
+            headers: {
+              'Authorization': `Bearer ${user.token}`
+            }
+          });
+          setName(response.data.firstName)
+        }
+      } catch (error) {
+        setError(error)
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchUserData();
   }, []);
 
-  const navLinkStyles = ({ isActive }) => {
-    return {
-      borderBottom: isActive ? "#66C5DB" : "gray",
-    };
-  };
-
   return (
-    <MainLayout>
+    <div>
+      <Navbar/>
+      <MainLayout>
       <div className="container mx-auto">
         <div className="bg-gradient-to-r from-white to-[#66C5DB]">
-          <h1 className="p-12 text-4xl">Ysihak's Courses</h1>
+          <h1 className="p-12 text-4xl">{`${name ? name: 'Student'}'s`} Courses</h1>
           <div className="px-8 text-gray-700">
             <div className="flex gap-6 px-6 text-gray-700 text-md">
               {tabs.map((tab) => (
@@ -146,23 +109,18 @@ const MyCourses = () => {
           {tabs.map((tab) => (
             <div
               key={tab.id}
-              className={`${tab.id === activeTab ? "" : "hidden"}`}>
-              {/* {tab.content.map((content) => (
-                // <CourseCard key={content._id} course={content} />
-
-              
-              ))} */}
+              className={`${tab.id === activeTab ? "" : "hidden"} grid grid-cols-3`}>
+              {tab.courses.length > 0 ? (tab.courses.map((course) => (
+                <CourseCard key={course._id} course={course} />
+              ))):(`No ${tab.label} yet!!!`)}
               {tab.content}
             </div>
           ))}
         </div>
-        {/* <div ">
-          {courses.map((course) => (
-            <CourseCard key={course._id} course={course} />
-          ))}
-        </div> */}
       </div>
     </MainLayout>
+    <Footer/>
+    </div>
   );
 };
 

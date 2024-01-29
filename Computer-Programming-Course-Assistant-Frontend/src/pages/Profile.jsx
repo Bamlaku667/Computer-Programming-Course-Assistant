@@ -4,11 +4,13 @@ import axios from "axios";
 import { useAuth } from "../hooks/useAuthContex";
 import { images } from "../constants";
 import MainLayout from "../components/dashboard/common/MainLayout";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export const Profile = ({image}) => {
   const { user, dispatch } = useAuth();
   const [error, setError] = useState("");
-  const [userData, setUserData] = useState({
+  const [updatedUserData, setUpdatedUserData] = useState({
     firstName: '',
     lastName: '',
     address: '',
@@ -18,6 +20,7 @@ export const Profile = ({image}) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // setUpdatedUserData(userData);
     const fetchUserData = async () => {
       try {
         if (user.token) {
@@ -26,7 +29,7 @@ export const Profile = ({image}) => {
               'Authorization': `Bearer ${user.token}`
             }
           });
-          setUserData(response.data)
+          setUpdatedUserData(response.data)
           console.log(response.data)
         }
       } catch (error) {
@@ -36,7 +39,7 @@ export const Profile = ({image}) => {
     };
 
     fetchUserData();
-  }, [user.token]);
+  }, []);
 
   const logout = () => {
     dispatch({type: 'LOGOUT'})
@@ -45,7 +48,7 @@ export const Profile = ({image}) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUserData((prevData) => ({
+    setUpdatedUserData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -57,7 +60,7 @@ export const Profile = ({image}) => {
       try {
         if (user.token) {
           const response = await axios.patch('https://courseassistant.vercel.app/api/v1/student/profile',
-          userData,
+          updatedUserData,
           {
             headers: {
               'Authorization': `Bearer ${user.token}`
@@ -80,7 +83,9 @@ export const Profile = ({image}) => {
   }
 
   return (
-    <MainLayout>
+    <div>
+      <Navbar/>
+      <MainLayout>
       <div className="container mx-auto">
         <div className='p-12 bg-gradient-to-r from-white to-[#66C5DB]'>
           <h1 className="text-2xl font-bold">Account</h1>
@@ -118,11 +123,11 @@ export const Profile = ({image}) => {
               <div className="flex item-center justify-between">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="" className="text-base text-gray-500">First name</label>
-                  <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" name="firstName" value={userData.firstName} onChange={handleInputChange} />
+                  <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" name="firstName" value={updatedUserData.firstName} onChange={handleInputChange} />
                 </div>
                 <div className="flex flex-col gap-2">
                   <label htmlFor="" className="text-base text-gray-500">Last name</label>
-                  <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" name="lastName" value={userData.lastName} onChange={handleInputChange}/>
+                  <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" name="lastName" value={updatedUserData.lastName} onChange={handleInputChange}/>
                 </div>
               </div>
             </div>
@@ -134,11 +139,11 @@ export const Profile = ({image}) => {
               <div className="flex item-center justify-between">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="" className="text-base text-gray-500">Address</label>
-                  <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" name="address" value={userData.address} onChange={handleInputChange}/>
+                  <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" name="address" value={updatedUserData.address} onChange={handleInputChange}/>
                 </div>
                 <div className="flex flex-col gap-2">
                   <label htmlFor="" className="text-base text-gray-500" >Phone</label>
-                  <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" name="phone" value={userData.phone} onChange={handleInputChange}/>
+                  <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" name="phone" value={updatedUserData.phone} onChange={handleInputChange}/>
                 </div>
               </div>
             </div>
@@ -150,7 +155,7 @@ export const Profile = ({image}) => {
               <div className="flex item-center justify-between">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="" className="text-base text-gray-500">Current password</label>
-                  <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md" value={userData.password} readOnly/>
+                  <input type="text" className="w-96 px-2 py-1 border-2 text-sm focus:outline-none rounded-md"/>
                 </div>
                 <div className="flex flex-col gap-2">
                   <label htmlFor="" className="text-base text-gray-500">New password</label>
@@ -172,5 +177,7 @@ export const Profile = ({image}) => {
         </div>
       </div>
     </MainLayout>
+    <Footer/>
+    </div>
   );
 };

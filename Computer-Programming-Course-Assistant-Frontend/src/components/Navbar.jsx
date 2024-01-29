@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaLock } from "react-icons/fa";
 import { images } from "../constants";
@@ -11,7 +11,13 @@ export default function Navbar({image}) {
     { name: "Courses", link: "/courses" },
   ];
   const { user } = useAuth();
-  console.log("User:", user);
+  let path = '/student-dashboard'
+
+  if (user && user.role === 'student') {
+    path = '/student-dashbored'
+  } else if (user && user.role === 'Instructor'){
+    path = '/instructor-dashboard'
+  }
 
   const navLinkStyles = ({ isActive }) => {
     return {
@@ -20,11 +26,11 @@ export default function Navbar({image}) {
   };
 
   return (
-    <nav className="flex justify-between py-4 pl-16 pr-4 items-center border border-b-2 sticky top-0 z-50 bg-white">
+    <nav className="flex justify-between py-4 pl-16 pr-4 items-center border border-b-2 sticky top-0 z-30 bg-white">
       <div className="">
-        <img src={images.Logo} alt="App Logo" />
+        <img src={images.Logo}alt="App Logo"/>
       </div>
-      <div className="relative">
+      <div className="relative hidden lg:flex">
         <input
           type="text"
           className="text-base focus:outline-none border py-2 pl-4 w-96"
@@ -41,7 +47,7 @@ export default function Navbar({image}) {
           </NavLink>
         ))}
         {user && (
-          <NavLink style={navLinkStyles} to={"/dashboard"}>
+          <NavLink style={navLinkStyles} to={path}>
             <div className="flex items-center">
               <div className="w-10 h-10 bg-gray-300 rounded-full mr-2 overflow-hidden">
                 {!image ? (
@@ -53,7 +59,6 @@ export default function Navbar({image}) {
                 ) :
                 (<img src={image} className="w-10 h-10" alt="Profile" />)}
               </div>
-              <div className="">{user.email}</div>
             </div>
           </NavLink>
         )}
