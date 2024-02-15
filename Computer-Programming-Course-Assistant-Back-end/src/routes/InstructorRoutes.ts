@@ -20,7 +20,7 @@ import config from '../config/firebase.config';
 //     measurementId: "G-6XHBR1V7MT"
 //   };
 
-  firebase.initializeApp(config.firebaseConfig); 
+firebase.initializeApp(config.firebaseConfig); 
 
 const upload = multer({ storage: multer.memoryStorage() });
 // const images = multer({storage: multer.memoryStorage()}).array("files", 10);
