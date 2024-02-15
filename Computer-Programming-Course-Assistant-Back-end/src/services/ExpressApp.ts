@@ -26,13 +26,13 @@ const App = async (app: Application) => {
   
   
   // Use /tmp directory for temporary image storage
-  const imagesPath = path.join(__dirname, '../public/images');
-  if (!fs.existsSync(imagesPath)) {
-    fs.mkdirSync(imagesPath);
-  }
+  // const imagesPath = path.join(__dirname, '../public/images');
+  // if (!fs.existsSync(imagesPath)) {
+  //   fs.mkdirSync(imagesPath);
+  // }
   
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-  app.use('/images', express.static(imagesPath));
+  // app.use('/images', express.static(imagesPath));
   app.use('/api/v1/auth', AuthRoutes);
   app.use('/api/v1/student', StudentRoutes);
   app.use('/api/v1/admin', AdminRoutes);
