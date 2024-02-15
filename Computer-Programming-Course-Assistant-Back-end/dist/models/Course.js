@@ -19,7 +19,8 @@ const courseSchema = new mongoose_1.Schema({
         enrolledAt: { type: Date, default: Date.now },
     },
     instructors: [{ type: mongoose_1.Schema.Types.ObjectId, ref: "Instructor", required: true }],
-    images: [{ type: String }], // Array of image URLs
+    images: [String],
+    // images: [{ type: String }], // Array of image URLs
 });
 exports.Course = (0, mongoose_1.model)("Course", courseSchema);
 //# sourceMappingURL=Course.js.map

@@ -19,7 +19,6 @@ const cors_1 = __importDefault(require("cors"));
 const AdminRoutes_1 = require("../routes/AdminRoutes");
 const middlewares_1 = require("../middlewares");
 const path_1 = __importDefault(require("path"));
-const fs_1 = __importDefault(require("fs"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const yamljs_1 = __importDefault(require("yamljs"));
 const morgan_1 = __importDefault(require("morgan"));
@@ -36,12 +35,12 @@ const App = (app) => __awaiter(void 0, void 0, void 0, function* () {
     app.use((0, morgan_1.default)('dev'));
     app.use(express_1.default.urlencoded({ extended: true }));
     // Use /tmp directory for temporary image storage
-    const imagesPath = path_1.default.join(__dirname, '../public/images');
-    if (!fs_1.default.existsSync(imagesPath)) {
-        fs_1.default.mkdirSync(imagesPath);
-    }
+    // const imagesPath = path.join(__dirname, '../public/images');
+    // if (!fs.existsSync(imagesPath)) {
+    //   fs.mkdirSync(imagesPath);
+    // }
     app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocument));
-    app.use('/images', express_1.default.static(imagesPath));
+    // app.use('/images', express.static(imagesPath));
     app.use('/api/v1/auth', routes_1.AuthRoutes);
     app.use('/api/v1/student', routes_1.StudentRoutes);
     app.use('/api/v1/admin', AdminRoutes_1.AdminRoutes);

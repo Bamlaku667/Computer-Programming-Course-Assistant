@@ -18,6 +18,7 @@ const Instructor_1 = require("../models/Instructor");
 const PasswordUtility_1 = require("../utility/PasswordUtility");
 const http_status_codes_1 = require("http-status-codes");
 const Course_1 = require("../models/Course");
+const storage_1 = require("firebase/storage");
 const InstructorLogin = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const newLoginInstance = (0, class_transformer_1.plainToClass)(Instructor_dto_1.InstructorLoginInputs, req.body);
     const loginValidationErrors = yield (0, class_validator_1.validate)(newLoginInstance);
@@ -152,6 +153,13 @@ const DeleteCourse = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     throw new Error('error during course deletion');
 });
 exports.DeleteCourse = DeleteCourse;
+const giveCurrentDateTime = () => {
+    const today = new Date();
+    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const dateTime = date + ' ' + time;
+    return dateTime;
+};
 const UploadCourseImages = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const courseId = req.params.courseId;
     const instructorId = req.user._id;
@@ -160,24 +168,29 @@ const UploadCourseImages = (req, res, next) => __awaiter(void 0, void 0, void 0,
     if (!course) {
         throw new errors_1.NotFoundError('Course not found or you are not authorized to upload images for this course');
     }
-    // --> sample file
-    // fieldname: 'files',
-    // originalname: 'image1.jpeg',
-    // encoding: '7bit',
-    // mimetype: 'image/jpeg',
-    // destination: 'src/images',
-    // filename: '2024-01-03T17:24:15.952Z-image1.jpeg',
-    // path: 'src/images/2024-01-03T17:24:15.952Z-image1.jpeg',
-    // size: 6457
+    const dateTime = giveCurrentDateTime();
     const files = req.files;
-    const images = files.map((file) => file.filename);
-    // Update the course document with the new image URLs
-    const updatedCourse = yield Course_1.Course.findByIdAndUpdate(courseId, { $push: { images: { $each: images } } }, { new: true });
+    const storage = (0, storage_1.getStorage)();
+    const filesPromises = files.map((file) => __awaiter(void 0, void 0, void 0, function* () {
+        const storageRef = (0, storage_1.ref)(storage, `files/${file.originalname + "       " + dateTime}`);
+        // Create file metadata including the content type
+        const metadata = {
+            contentType: file.mimetype,
+        };
+        // Upload the file in the bucket storage
+        const snapshot = yield (0, storage_1.uploadBytesResumable)(storageRef, file.buffer, metadata);
+        // Grab the public url
+        const downloadURL = yield (0, storage_1.getDownloadURL)(snapshot.ref);
+        console.log('File successfully uploaded:', file.originalname);
+        return downloadURL;
+    }));
+    const uploadedFiles = yield Promise.all(filesPromises);
+    const updatedCourse = yield Course_1.Course.findByIdAndUpdate(courseId, { $push: { images: { $each: uploadedFiles } } }, { new: true });
     if (updatedCourse) {
         res.json(updatedCourse);
     }
     else {
-        throw new errors_1.NotFoundError('course not found');
+        throw new errors_1.NotFoundError('Course not found');
     }
 });
 exports.UploadCourseImages = UploadCourseImages;
